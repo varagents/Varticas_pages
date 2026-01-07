@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TerminalCode from "./TerminalCode";
+import ArrowNarrowRightIcon from "./ui/ArrowNarrowRightIcon";
 
 const Hero = () => {
   // Target: 1 month from 2025-12-31T21:45:56+05:30 -> 2026-01-31T21:45:56+05:30
-  const targetDate = new Date("2026-01-31T21:45:56+05:30").getTime();
+  const targetDate = new Date("2026-02-10T21:45:56+05:30").getTime();
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
 
   useEffect(() => {
@@ -72,10 +73,21 @@ const Hero = () => {
         >
           Reinventing Browsing Experience<br />
           <span className="text-primary/40 text-sm">
-            Preview will be available on 20th January
+            Preview will be available on 25th January
           </span>
         </motion.p>
-
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center mb-8"
+        >
+          <div className="inline-flex items-center gap-3 px-8 py-3 rounded-full border border-primary/30 bg-primary/5 text-primary text-xl font-medium">
+            <a href="https://forms.gle/fkgCnCuRMSgH6YqbA" target="_blank"><span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              Join the waitlist</a>
+            <ArrowNarrowRightIcon />
+          </div>
+        </motion.div>
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -109,6 +121,7 @@ const Hero = () => {
             <span className="text-xs text-muted-foreground uppercase tracking-wider mt-1">Mins</span>
           </div>
         </motion.div>
+
 
       </div>
     </section>
