@@ -1,62 +1,48 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
-const CTA = () => {
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGPktKklvIE6gO0_Ln4YE3DJiJVPfEmmDUDI6dRlowr4YuQw/viewform";
+
+export default function CTA() {
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-primary/15 rounded-full blur-[150px]" />
-      </div>
+    <section className="py-32 px-4 relative overflow-hidden bg-[#07080A] text-center">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="font-display text-4xl md:text-6xl font-bold mb-4">
-            Ready to build the
-          </h2>
-          <h2 className="font-display text-4xl md:text-6xl font-bold text-gradient mb-8">
-            impossible?
-          </h2>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10">
-            Join 10,000+ developers pushing the boundaries of what AI can
-            do. No credit card required for free-tier services.
-          </p>
+      <div className="max-w-4xl mx-auto relative z-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5 text-brand-red text-sm font-medium mb-8">
+          <Sparkles className="w-4 h-4" />
+          <span>Limited space in beta</span>
+        </div>
 
-          {/* Email Input */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto mb-6"
+        <h2 className="text-4xl md:text-7xl font-display font-bold mb-8 tracking-tight text-white">
+          Your work starts <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-orange">automating today.</span>
+        </h2>
+
+        <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+          Join the 1,000+ users saving 20+ hours a week. No credit card required.
+        </p>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <a
+            href={GOOGLE_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all"
           >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full sm:flex-1 px-4 py-3 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-            />
-            <Button variant="hero" size="lg" className="w-full sm:w-auto whitespace-nowrap">
-              Get Access
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </motion.div>
-
-          <p className="text-sm text-muted-foreground">
-            By signing up, you agree to our{" "}
-            <a href="#" className="text-primary hover:underline">
-              Terms of Service
-            </a>
-          </p>
-        </motion.div>
+            Install Extension
+          </a>
+          <a
+            href={GOOGLE_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-lg font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-2 group"
+          >
+            Request Early Access
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
       </div>
     </section>
   );
-};
-
-export default CTA;
+}
