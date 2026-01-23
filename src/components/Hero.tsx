@@ -68,8 +68,8 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.95] tracking-tight mb-8 animate-fade-in-up [animation-delay:200ms]">
-          Your browser just<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-400">learned to work.</span>
+          LLM Thinks<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-400">Varticas Executes</span>
         </h1>
 
         <div className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-10 animate-fade-in-up [animation-delay:400ms] font-light leading-relaxed">
@@ -82,19 +82,26 @@ export default function Hero() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col md:flex-row items-center gap-4 animate-fade-in-up [animation-delay:600ms]">
-          <a
-            href={GOOGLE_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
-          >
-            Download for Chrome
-            <div className="flex gap-1">
-              <span className="text-xs bg-[#CCCCCC] px-1.5 py-0.5 rounded text-gray-600 font-mono">⌘</span>
-              <span className="text-xs bg-[#CCCCCC] px-1.5 py-0.5 rounded text-gray-600 font-mono">K</span>
-            </div>
-          </a>
+        <div className="flex flex-col items-center gap-6 animate-fade-in-up [animation-delay:600ms]">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
+            >
+              Download for Chrome
+            </a>
+
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
+            >
+              Download for Mac
+            </a>
+          </div>
 
           {/* Watch Video Button - Transparent with Animated Border */}
           <button
