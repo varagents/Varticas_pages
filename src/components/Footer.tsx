@@ -1,4 +1,5 @@
 import { Twitter, Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -33,7 +34,7 @@ export default function Footer() {
               <li><a href="#" className="hover:text-brand-red transition-colors">About</a></li>
               <li><a href="#" className="hover:text-brand-red transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-brand-red transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-brand-red transition-colors">Contact</a></li>
+              <li><Link to="/contact" className="hover:text-brand-red transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -59,8 +60,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-sm text-gray-600">
           <div>&copy; 2024 Varticas AI Inc. All rights reserved.</div>
           <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-400 transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
+            <Link to="/terms-and-conditions" className="hover:text-gray-400 transition-colors">Terms and Conditions</Link>
           </div>
         </div>
       </div>
