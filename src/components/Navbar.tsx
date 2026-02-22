@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGPktKklvIE6gO0_Ln4YE3DJiJVPfEmmDUDI6dRlowr4YuQw/viewform";
+import { ArrowRight, User, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Navbar() {
+  const { user, signOut } = useAuth();
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
       <div
@@ -17,14 +18,14 @@ export default function Navbar() {
       >
 
         {/* Logo Section */}
-        <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <img
             src="/logo.png"
             alt="Varticas Logo"
             className="w-8 h-8 rounded-lg shrink-0"
           />
           <span className="font-display font-bold text-white text-lg tracking-tight">Varticas</span>
-        </div>
+        </Link>
 
         {/* Links - Hidden on Mobile */}
         <div className="hidden md:flex items-center gap-8">
@@ -34,12 +35,12 @@ export default function Navbar() {
           >
             Features
           </a>
-          <a
-            href="#use-cases"
+          <Link
+            to="/pricing"
             className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
           >
-            Use Cases
-          </a>
+            Pricing
+          </Link>
           <Link
             to="/iota"
             className="px-4 py-1.5 rounded-full text-sm font-bold text-white hover:scale-105 transition-all shadow-[0_0_10px_rgba(216,76,152,0.15)]"
@@ -54,16 +55,33 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* CTA Button */}
-        <a
-          href={GOOGLE_FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-white text-black hover:bg-gray-200 transition-colors px-5 py-2.5 rounded-full text-sm font-bold flex items-center gap-2"
-        >
-          Request Early Access
-          <ArrowRight className="w-4 h-4" />
-        </a>
+        {/* CTA / Auth Button */}
+        {user ? (
+          <div className="flex items-center gap-2">
+            <Link
+              to="/dashboard"
+              className="bg-white/10 hover:bg-white/15 text-white transition-colors px-4 py-2.5 rounded-full text-sm font-medium flex items-center gap-2"
+            >
+              <User className="w-4 h-4" />
+              <span className="hidden md:inline">Dashboard</span>
+            </Link>
+            <button
+              onClick={signOut}
+              className="p-2.5 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+              title="Sign out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-white text-black hover:bg-gray-200 transition-colors px-5 py-2.5 rounded-full text-sm font-bold flex items-center gap-2"
+          >
+            Sign In
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        )}
       </div>
     </nav>
   );
