@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import AuthCallback from "./pages/AuthCallback";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import HashRedirectHandler from "./components/HashRedirectHandler";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <HashRedirectHandler />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/iota" element={<Iota />} />
