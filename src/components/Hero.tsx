@@ -151,7 +151,7 @@ export default function Hero() {
             loop
             muted
             playsInline
-            src="/videos/demo.mp4"
+            src="/videos/Varticas_shoot.mp4"
           />
 
           {/* Overlay Gradient */}
