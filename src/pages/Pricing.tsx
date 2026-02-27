@@ -1,20 +1,26 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Check, ArrowRight, Sparkles, Zap, Shield, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Check, ArrowRight, Sparkles, Zap, Shield, Users, Loader2 } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
 
 const tiers = [
     {
         name: "Starter",
-        price: "$0",
+        price: "₹0",
         period: "/mo",
         description: "Perfect for individuals exploring agent automation.",
         features: [
+            "100,000 monthly tokens",
+            "50 daily requests",
+            "Limited MCP connections",
             "Limited agent tasks",
             "Limited workflows",
             "Community support",
-            "Limited MCP integrations in Swagstore",
         ],
         cta: "Get Started",
         ctaLink: "/login?plan=starter",
@@ -28,17 +34,18 @@ const tiers = [
     },
     {
         name: "Pro",
-        price: "$20",
+        price: "₹499",
         period: "/mo",
         description: "To unlock more connections and workflows",
         features: [
+            "500,000 monthly tokens",
+            "100 daily requests",
+            "Unlimited MCP connections",
             "Unlimited agent tasks",
-            "50 workflows",
+            "Unlimited workflows",
             "Priority support",
-            "Early access to new features",
-            "All MCP integrations in Swagstore",
         ],
-        cta: "Start Free Trial",
+        cta: "Upgrade to Pro",
         ctaLink: "/login?plan=pro",
         highlighted: true,
         icon: Sparkles,
@@ -47,6 +54,29 @@ const tiers = [
         bgClass: "bg-[#141517]",
         buttonClass:
             "bg-green-500 hover:bg-green-600 text-white font-bold shadow-lg hover:shadow-green-500/20",
+    },
+    {
+        name: "Enterprise",
+        price: "Custom",
+        period: "",
+        description: "For organizations requiring maximum scale.",
+        features: [
+            "5,000,000 monthly tokens",
+            "1000 daily requests",
+            "Unlimited MCP connections",
+            "Unlimited agent tasks",
+            "Unlimited workflows",
+            "Instant priority support",
+        ],
+        cta: "Contact Us",
+        ctaLink: "mailto:soumyajit@varticas.com",
+        highlighted: false,
+        icon: Shield,
+        checkColor: "text-brand-orange",
+        borderClass: "border-white/10 hover:border-brand-orange/30",
+        bgClass: "bg-[#1A110D]",
+        buttonClass:
+            "bg-white hover:bg-gray-200 text-black font-bold",
     }
 ];
 
@@ -83,6 +113,150 @@ const item = {
 };
 
 export default function PricingPage() {
+    const { user, session } = useAuth();
+    const navigate = useNavigate();
+    const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+    const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+    const [planLoading, setPlanLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPlan = async () => {
+            if (!user) {
+                setPlanLoading(false);
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("user_plans")
+                .select("plan, pro_until")
+                .eq("user_id", user.id)
+                .single();
+
+            if (!error && data) {
+                // Check expiry
+                if (
+                    data.plan === "pro" &&
+                    data.pro_until &&
+                    new Date(data.pro_until) > new Date()
+                ) {
+                    setCurrentPlan("pro");
+                } else {
+                    setCurrentPlan("free");
+                }
+            } else {
+                setCurrentPlan("free");
+            }
+
+            setPlanLoading(false);
+        };
+
+        fetchPlan();
+    }, [user]);
+
+    const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+            if (window.Razorpay) {
+                resolve(true);
+                return;
+            }
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+    const handleProUpgrade = async () => {
+        if (!user || !session) {
+            navigate("/login?plan=pro");
+            return;
+        }
+
+        setLoadingPlan("Pro");
+        try {
+            const isLoaded = await loadRazorpayScript();
+            if (!isLoaded) {
+                toast.error("Failed to load Razorpay. Please check your connection.");
+                return;
+            }
+
+            // 1. Create Order
+            const createOrderRes = await fetch(
+                `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/payments/create-order`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${session.access_token}`,
+                    },
+                    body: JSON.stringify({
+                        user_id: user.id,
+                        amount: 499 * 100, // ₹499
+                    }),
+                }
+            );
+
+            const orderData = await createOrderRes.json();
+            if (!createOrderRes.ok) throw new Error(orderData.error || "Failed to create order");
+
+            // 2. Open Razorpay Checkout
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: 499 * 100,
+                currency: "INR",
+                name: "Varticas",
+                description: "Upgrade to Pro",
+                order_id: orderData.order_id,
+                prefill: {
+                    name: user.user_metadata?.full_name || "Varticas User",
+                    email: user.email,
+                },
+                theme: {
+                    color: "#22c55e",
+                },
+                handler: async function (response: any) {
+                    try {
+                        const verifyRes = await fetch(
+                            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/payments/verify-payment`,
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: `Bearer ${session.access_token}`,
+                                },
+                                body: JSON.stringify({
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_signature: response.razorpay_signature,
+                                }),
+                            }
+                        );
+
+                        const verifyData = await verifyRes.json();
+                        if (!verifyRes.ok) throw new Error(verifyData.error || "Payment verification failed");
+
+                        toast.success("Your membership has been upgraded to Pro 🎉");
+                        navigate("/dashboard");
+                    } catch (error: any) {
+                        toast.error(error.message || "Payment verification failed");
+                    }
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.on("payment.failed", function (response: any) {
+                toast.error(response.error.description || "Payment failed");
+            });
+            rzp.open();
+
+        } catch (error: any) {
+            toast.error(error.message || "Something went wrong. Please try again.");
+        } finally {
+            setLoadingPlan(null);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#07080A] text-white overflow-x-hidden selection:bg-brand-red selection:text-white">
             <Navbar />
@@ -123,7 +297,7 @@ export default function PricingPage() {
             {/* Pricing Cards */}
             <section className="pb-32 px-4 relative">
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
                     variants={container}
                     initial="hidden"
                     animate="show"
@@ -184,18 +358,83 @@ export default function PricingPage() {
                                 ))}
                             </div>
 
-                            <Link
-                                to={tier.ctaLink}
-                                className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
-                            >
-                                {tier.cta}
-                                {tier.highlighted && (
-                                    <ArrowRight className="w-4 h-4 inline ml-2" />
-                                )}
-                            </Link>
+                            {tier.name === "Pro" ? (
+                                currentPlan === "pro" ? (
+                                    <button
+                                        disabled
+                                        className="w-full py-3 rounded-lg font-medium text-sm transition-all text-center block bg-gray-700 hover:bg-gray-700 text-gray-400 cursor-not-allowed border border-white/5"
+                                    >
+                                        Pro Mode 🎉
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleProUpgrade}
+                                        disabled={loadingPlan === tier.name || planLoading}
+                                        className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center flex items-center justify-center ${tier.buttonClass}`}
+                                    >
+                                        {loadingPlan === tier.name ? (
+                                            <Loader2 className="w-5 h-5 animate-spin" />
+                                        ) : (
+                                            <>
+                                                {tier.cta}
+                                                {tier.highlighted && (
+                                                    <ArrowRight className="w-4 h-4 inline ml-2" />
+                                                )}
+                                            </>
+                                        )}
+                                    </button>
+                                )
+                            ) : tier.name === "Starter" ? (
+                                currentPlan === "free" ? (
+                                    <button
+                                        disabled
+                                        className="w-full py-3 rounded-lg font-medium text-sm transition-all text-center block bg-gray-800 text-gray-400 cursor-not-allowed border border-white/5"
+                                    >
+                                        Free Mode
+                                    </button>
+                                ) : currentPlan === "pro" ? (
+                                    <button
+                                        disabled
+                                        className="w-full py-3 rounded-lg text-xs transition-all text-center block bg-transparent text-gray-500 cursor-default"
+                                    >
+                                        Currently on Pro
+                                    </button>
+                                ) : (
+                                    <Link
+                                        to={tier.ctaLink}
+                                        className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
+                                    >
+                                        {tier.cta}
+                                        {tier.highlighted && (
+                                            <ArrowRight className="w-4 h-4 inline ml-2" />
+                                        )}
+                                    </Link>
+                                )
+                            ) : (
+                                <a
+                                    href={tier.ctaLink}
+                                    className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
+                                >
+                                    {tier.cta}
+                                    {tier.highlighted && (
+                                        <ArrowRight className="w-4 h-4 inline ml-2" />
+                                    )}
+                                </a>
+                            )}
                         </motion.div>
                     ))}
                 </motion.div>
+
+                {/* Explore Button */}
+                <div className="mt-16 text-center w-full flex justify-center pb-20">
+                    <Link
+                        to="#"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg font-medium text-sm transition-all"
+                    >
+                        Explore Varticas
+                        <ArrowRight className="w-4 h-4" />
+                    </Link>
+                </div>
             </section>
 
             {/* Feature Comparison */}
@@ -223,16 +462,19 @@ export default function PricingPage() {
                                     <th className="text-center py-4 px-4 text-green-400 font-medium">
                                         Pro
                                     </th>
+                                    <th className="text-center py-4 px-4 text-brand-orange font-medium">
+                                        Enterprise
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="text-gray-400">
                                 {[
-                                    ["Agent tasks", "Limited", "Unlimited"],
-                                    ["Workflows", "Limited", "50"],
-                                    ["MCP Integrations", "Limited", "Unlimited"],
-                                    ["Support", "Community", "Priority"],
-                                    ["Early access", "—", "✓"]
-                                ].map(([feature, starter, pro]) => (
+                                    ["Agent tasks", "Limited", "Unlimited", "Unlimited"],
+                                    ["Workflows", "Limited", "50", "Unlimited"],
+                                    ["MCP Integrations", "Limited", "Unlimited", "Unlimited"],
+                                    ["Support", "Community", "Priority", "Instant Priority"],
+                                    ["Theme", "Dark", "Dark", "Customizable"] // Just an example feature where it differs
+                                ].map(([feature, starter, pro, enterprise]) => (
                                     <tr key={feature} className="border-b border-white/5">
                                         <td className="py-4 pr-8 text-white font-medium">
                                             {feature}
@@ -240,6 +482,9 @@ export default function PricingPage() {
                                         <td className="text-center py-4 px-4">{starter}</td>
                                         <td className="text-center py-4 px-4 text-green-400">
                                             {pro}
+                                        </td>
+                                        <td className="text-center py-4 px-4 text-brand-orange">
+                                            {enterprise}
                                         </td>
                                     </tr>
                                 ))}

@@ -15,9 +15,48 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function Dashboard() {
     const { user, metadata, signOut } = useAuth();
+    const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+    const [planLoading, setPlanLoading] = useState(true);
+    const [proUntil, setProUntil] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchPlan = async () => {
+            if (!user) {
+                setPlanLoading(false);
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from("user_plans")
+                .select("plan, pro_until")
+                .eq("user_id", user.id)
+                .single();
+
+            if (!error && data) {
+                if (
+                    data.plan === "pro" &&
+                    data.pro_until &&
+                    new Date(data.pro_until) > new Date()
+                ) {
+                    setCurrentPlan("pro");
+                    setProUntil(data.pro_until);
+                } else {
+                    setCurrentPlan("free");
+                }
+            } else {
+                setCurrentPlan("free");
+            }
+
+            setPlanLoading(false);
+        };
+
+        fetchPlan();
+    }, [user]);
 
     const handleSignOut = async () => {
         await signOut();
@@ -59,30 +98,71 @@ export default function Dashboard() {
                         </Button>
                     </div>
 
-                    {/* Premium Badge Card */}
+                    {/* Premium/Free Badge Card */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="p-6 rounded-2xl bg-gradient-to-br from-[#141517] to-[#0F1012] border border-green-500/20 mb-8 relative overflow-hidden"
+                        className={`p-6 rounded-2xl bg-gradient-to-br ${currentPlan === 'pro'
+                            ? 'from-[#141517] to-[#0F1012] border-green-500/20'
+                            : 'from-[#12161A] to-[#0F1012] border-white/5'
+                            } border mb-8 relative overflow-hidden`}
                     >
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[60px] rounded-full" />
-                        <div className="relative z-10 flex items-start gap-4">
-                            <div className="p-3 bg-green-500/10 rounded-xl border border-green-500/20">
-                                <Crown className="w-6 h-6 text-green-500" />
-                            </div>
-                            <div>
-                                <div className="flex items-center gap-2 mb-1">
-                                    <h2 className="text-xl font-bold text-white">Premium Member</h2>
-                                    <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wider">
-                                        Active
-                                    </span>
+                        {currentPlan === 'pro' && (
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[60px] rounded-full" />
+                        )}
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div className="flex items-start gap-4">
+                                <div className={`p-3 rounded-xl border ${currentPlan === 'pro'
+                                    ? 'bg-green-500/10 border-green-500/20'
+                                    : 'bg-white/5 border-white/5'
+                                    }`}>
+                                    <Crown className={`w-6 h-6 ${currentPlan === 'pro' ? 'text-green-500' : 'text-gray-400'}`} />
                                 </div>
-                                <p className="text-gray-400 text-sm">
-                                    You've secured early adopter access. Your premium features
-                                    will be automatically unlocked when we launch.
-                                </p>
+                                <div className="flex flex-col justify-center">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <h2 className="text-xl font-bold text-white">
+                                            {planLoading ? "Loading..." : currentPlan === "pro" ? "Pro Member" : "Free Plan"}
+                                        </h2>
+                                        {!planLoading && currentPlan === "pro" && (
+                                            <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wider">
+                                                Active
+                                            </span>
+                                        )}
+                                    </div>
+                                    <div className="text-gray-400 text-sm">
+                                        {planLoading ? (
+                                            "Fetching your subscription details..."
+                                        ) : currentPlan === "pro" ? (
+                                            <>
+                                                <p>You've unlocked full automation bandwidth and unlimited workflows.</p>
+                                                {proUntil && (
+                                                    <p className="mt-1 text-green-400/80 font-medium">
+                                                        Valid until: {new Date(proUntil).toLocaleString('en-US', {
+                                                            day: 'numeric',
+                                                            month: 'short',
+                                                            year: 'numeric',
+                                                            hour: 'numeric',
+                                                            minute: '2-digit'
+                                                        })}
+                                                    </p>
+                                                )}
+                                            </>
+                                        ) : (
+                                            "You are currently on the Starter plan with limited tasks."
+                                        )}
+                                    </div>
+                                </div>
                             </div>
+
+                            {!planLoading && currentPlan !== "pro" && (
+                                <Link
+                                    to="/pricing"
+                                    className="px-6 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-lg font-bold text-sm transition-all shadow-lg hover:shadow-green-500/20 whitespace-nowrap"
+                                >
+                                    Upgrade to Pro
+                                </Link>
+                            )}
                         </div>
                     </motion.div>
 
@@ -146,7 +226,7 @@ export default function Dashboard() {
                                         </p>
                                         <p className="text-gray-500 text-xs mt-1">
                                             We're putting the finishing touches on Varticas. As a
-                                            premium member, you'll get first access.
+                                            early member, you'll get first access.
                                         </p>
                                     </div>
                                 </div>

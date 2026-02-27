@@ -41,16 +41,16 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-6 text-white text-sm">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              <a href="https://x.com/varticas59689" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              <a href="https://github.com/varagents" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              <a href="https://www.linkedin.com/company/varticas" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              <a href="" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-sm text-gray-600">
-          <div>&copy; 2024 Varticas AI Inc. All rights reserved.</div>
+          <div>&copy; 2026 Varticas All rights reserved.</div>
           <div className="flex gap-8 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
             <Link to="/terms-and-conditions" className="hover:text-gray-400 transition-colors">Terms and Conditions</Link>
