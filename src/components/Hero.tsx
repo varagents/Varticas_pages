@@ -90,16 +90,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
             >
-              Download for Chrome
-            </a>
-
-            <a
-              href={GOOGLE_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
-            >
-              Download for Mac
+              Get Started
             </a>
           </div>
 
