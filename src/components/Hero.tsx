@@ -1,8 +1,56 @@
-import { Play, Command, Sparkles } from "lucide-react";
-
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGPktKklvIE6gO0_Ln4YE3DJiJVPfEmmDUDI6dRlowr4YuQw/viewform";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Command, Sparkles } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import PromoCodePopup from "@/components/PromoCodePopup";
+import { toast } from "sonner";
+import { applyPromoCode, checkPremiumAccess } from "@/lib/codeService";
 
 export default function Hero() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [showPromo, setShowPromo] = useState(false);
+  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+
+  const handleGetStartedClick = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    setIsCheckingAccess(true);
+    try {
+      const accessResult = await checkPremiumAccess();
+      if (accessResult.success === true) {
+        navigate("/redirecting");
+      } else {
+        setShowPromo(true);
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to verify access.";
+      toast.error(message);
+    } finally {
+      setIsCheckingAccess(false);
+    }
+  };
+
+  const handlePromoSubmit = async (code: string) => {
+    try {
+      const result = await applyPromoCode(code);
+      if (result.success === true) {
+        toast.success("Access code verified.");
+        setShowPromo(false);
+        navigate("/redirecting");
+        return;
+      }
+
+      throw new Error(String(result.message || "Invalid access code."));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to verify access code.";
+      toast.error(message);
+    }
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 bg-[#07080A]">
 
@@ -83,19 +131,11 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col items-center gap-6 animate-fade-in-up [animation-delay:600ms]">
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <a
-              href={GOOGLE_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center gap-3"
-            >
-              Get Started
-            </a>
-          </div>
-
-          {/* Watch Video Button - Transparent with Animated Border */}
+          {/* Get Started Button - Animated Border */}
           <button
+            type="button"
+            onClick={handleGetStartedClick}
+            disabled={isCheckingAccess}
             className="relative px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-lg font-medium text-lg transition-all flex items-center gap-2 overflow-hidden group"
             style={{
               border: '1px solid transparent',
@@ -106,8 +146,7 @@ export default function Hero() {
               animation: 'border-shine 4s linear infinite'
             }}
           >
-            <Play className="w-5 h-5 fill-current" />
-            Watch video
+            {isCheckingAccess ? "Checking Access..." : "Get Started"}
           </button>
         </div>
       </div>
@@ -152,6 +191,12 @@ export default function Hero() {
         {/* Glow effect */}
         <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-40 bg-brand-red/15 blur-[100px] -z-10 rounded-full" />
       </div>
+
+      <PromoCodePopup
+        isOpen={showPromo}
+        onClose={() => setShowPromo(false)}
+        onSubmit={handlePromoSubmit}
+      />
     </div>
   );
 }

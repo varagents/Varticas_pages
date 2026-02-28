@@ -17,6 +17,7 @@ import AuthCallback from "./pages/AuthCallback";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import HashRedirectHandler from "./components/HashRedirectHandler";
+import Redirecting from "./pages/Redirecting";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/redirecting"
+              element={
+                <ProtectedRoute>
+                  <Redirecting />
                 </ProtectedRoute>
               }
             />
