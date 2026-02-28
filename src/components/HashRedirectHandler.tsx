@@ -8,36 +8,23 @@ import { useAuth } from "@/contexts/AuthContext";
  * Supabase redirects to the root URL with tokens in the hash.
  */
 export default function HashRedirectHandler() {
-    const { user, loading, metadata } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         const hash = window.location.hash;
 
+        // Prevent infinite redirects if already on the callback route
+        if (location.pathname === '/auth/callback') return;
+
         // Check if the hash contains an access_token from Supabase OAuth
         if (hash && hash.includes("access_token=")) {
-            // Supabase JS client automatically picks up the hash tokens
-            // and establishes the session. We just need to wait for the
-            // auth state to update, then redirect.
-            const checkAndRedirect = () => {
-                if (!loading && user) {
-                    // Clear the hash from the URL
-                    window.history.replaceState(null, "", window.location.pathname);
-
-                    if (metadata.onboarding_complete) {
-                        navigate("/dashboard", { replace: true });
-                    } else {
-                        navigate("/onboarding", { replace: true });
-                    }
-                }
-            };
-
-            // Small delay to let Supabase process the hash
-            const timeout = setTimeout(checkAndRedirect, 500);
-            return () => clearTimeout(timeout);
+            // Immediately navigate to the auth callback route with the hash.
+            // This prevents race conditions with Supabase stripping the hash
+            // and lets the centralized AuthCallback page handle the loading state.
+            navigate(`/auth/callback${hash}`, { replace: true });
         }
-    }, [loading, user, metadata, navigate, location]);
+    }, [navigate, location]);
 
     return null;
 }
