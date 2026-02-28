@@ -218,6 +218,9 @@ Create a `.env.local` file in the project root:
 ```env
 VITE_SUPABASE_URL=https://<your-project>.supabase.co
 VITE_SUPABASE_ANON_KEY=<your-anon-key>
+VITE_CODE_SERVICE_URL=https://codeservice.varticas.com
+VITE_PRODUCT_APP_URL=https://product.varticas.com
+VITE_CODE_SERVICE_PROXY_TARGET=https://<your-railway-service>.up.railway.app
 ```
 
 ### Development
@@ -226,7 +229,12 @@ VITE_SUPABASE_ANON_KEY=<your-anon-key>
 npm run dev
 ```
 
-App runs at `http://localhost:5173`.
+App runs at `http://localhost:8080`.
+
+In development, API calls to the code service are proxied through Vite at
+`/codeservice/*` to avoid browser CORS preflight blocks from localhost.
+If your custom domain is down and you see `502 Bad Gateway`, set
+`VITE_CODE_SERVICE_PROXY_TARGET` to your Railway direct URL.
 
 ### Build
 
