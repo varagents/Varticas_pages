@@ -6,7 +6,7 @@ const CODE_SERVICE_URL = import.meta.env.DEV
   : import.meta.env.VITE_CODE_SERVICE_URL || "https://codeservice.varticas.com";
 const DEFAULT_PRODUCT_APP_URL = import.meta.env.DEV
   ? "https://product.varticas.com"
-  :  "http://localhost:5001";
+  : "https://product.varticas.com";
 const configuredProductUrl = import.meta.env.VITE_PRODUCT_APP_URL;
 const PRODUCT_APP_URL =
   configuredProductUrl && configuredProductUrl.includes("codeservice.varticas.com")
