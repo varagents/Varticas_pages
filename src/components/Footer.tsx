@@ -61,7 +61,7 @@ export default function Footer() {
           <div>&copy; 2026 Varticas All rights reserved.</div>
           <div className="flex gap-8 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-            <Link to="/terms-and-conditions" className="hover:text-gray-400 transition-colors">Terms and Conditions</Link>
+            <Link to="/terms-and-conditions" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

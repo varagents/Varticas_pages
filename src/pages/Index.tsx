@@ -1,4 +1,6 @@
 import Hero from "@/components/Hero";
+import AboutInfo from "@/components/AboutInfo";
+import GoogleIntegrations from "@/components/GoogleIntegrations";
 import Navbar from "@/components/Navbar";
 import BentoGrid from "@/components/BentoGrid";
 import Architecture from "@/components/Architecture";
@@ -13,6 +15,8 @@ const Index = () => {
     <div className="min-h-screen bg-[#07080A] text-white overflow-x-hidden selection:bg-brand-red selection:text-white">
       <Navbar />
       <Hero />
+      <AboutInfo />
+      <GoogleIntegrations />
       <BentoGrid />
       <Architecture />
       <WorkflowBuilder />

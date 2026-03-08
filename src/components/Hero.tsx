@@ -130,7 +130,15 @@ export default function Hero() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col items-center gap-6 animate-fade-in-up [animation-delay:600ms]">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up [animation-delay:600ms]">
+          {/* Primary CTA - Try Varticas */}
+          <a
+            href="https://product.varticas.com"
+            className="px-8 py-4 bg-[#FF3B30] hover:bg-[#FF3B30]/90 text-white rounded-lg font-medium text-lg transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(255,59,48,0.3)] hover:shadow-[0_0_40px_rgba(255,59,48,0.5)] transform hover:-translate-y-1"
+          >
+            Try Varticas
+          </a>
+
           {/* Get Started Button - Animated Border */}
           <button
             type="button"
