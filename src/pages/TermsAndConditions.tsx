@@ -123,10 +123,14 @@ export default function TermsAndConditions() {
                             <li>Technical information (IP address, browser type, device information)</li>
                         </ul>
 
-                        <h3>5.2 AI Model Training</h3>
-                        <div className="bg-white/5 border border-white/10 rounded-lg p-6 my-6">
-                            <p className="m-0 text-gray-300"><strong>Important:</strong> Your conversations and interactions may be used to improve our AI models and services. If you do not consent to this use, please contact us to opt out.</p>
-                        </div>
+                        <h3>5.2 AI Model Training and Data Use</h3>
+                        <p>Varticas may use anonymized and aggregated interaction data to improve the overall functionality and quality of the platform.</p>
+                        <p>However, any data obtained from Google APIs (such as Gmail messages, Google Calendar events, or other Google Workspace data) is used solely to provide the user-requested functionality within the application.</p>
+                        <p>Google user data is NOT used to train, fine-tune, or improve generalized artificial intelligence or machine learning models.</p>
+                        <p>All use of Google API data complies with the Google API Services User Data Policy, including the Limited Use requirements.</p>
+
+                        <h3>5.3 Google API Compliance</h3>
+                        <p>Varticas’ use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy.</p>
                     </section>
 
                     <section>
