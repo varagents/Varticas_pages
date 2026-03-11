@@ -58,20 +58,20 @@ export default function SocialProof() {
                             </p>
 
                             {/* User */}
-                            <div className="flex items-center gap-3 pt-6 border-t border-white/5">
+                            {/* <div className="flex items-center gap-3 pt-6 border-t border-white/5">
                                 <div className="w-8 h-8 rounded-full bg-white/10 border border-white/5" />
                                 <div>
                                     <div className="font-medium text-white text-sm">{useCase.user}</div>
                                     <div className="text-xs text-gray-500">{useCase.role}</div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     ))}
                 </div>
             </div>
 
             {/* Improving Agent Badge */}
-            <div className="flex justify-center mb-20">
+            {/* <div className="flex justify-center mb-20">
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02]">
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
@@ -81,10 +81,10 @@ export default function SocialProof() {
                         Improving agent everyday
                     </span>
                 </div>
-            </div>
+            </div> */}
 
             {/* Coming Soon Marquee - Same style as before with company names */}
-            <div className="relative flex flex-col gap-8 opacity-30 hover:opacity-50 transition-all duration-700">
+            {/* <div className="relative flex flex-col gap-8 opacity-30 hover:opacity-50 transition-all duration-700">
                 <div className="flex overflow-hidden gap-24 mask-gradient-x justify-center">
                     <div className="font-display text-2xl font-bold text-brand-orange tracking-widest flex gap-24 items-center animate-pulse">
                         <span className="flex items-center gap-3"><Sparkles className="w-5 h-5" /> COMING SOON</span>
@@ -97,7 +97,7 @@ export default function SocialProof() {
                         <span className="flex items-center gap-3"><Sparkles className="w-5 h-5" /> COMING SOON</span>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </section>
     );
 }

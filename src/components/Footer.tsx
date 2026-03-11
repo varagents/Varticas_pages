@@ -44,13 +44,13 @@ export default function Footer() {
               <a href="https://x.com/varticas59689" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://github.com/varagents" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              {/* <a href="https://github.com/varagents" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Github className="w-5 h-5" />
-              </a>
+              </a> */}
               <a href="https://www.linkedin.com/company/varticas" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
+              <a href="mailto:soumyajit@varticas.com" className="p-2 rounded-lg hover:bg-white/5 transition-colors text-gray-500 hover:text-white">
                 <Mail className="w-5 h-5" />
               </a>
             </div>

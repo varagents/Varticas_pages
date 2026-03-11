@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Command, Sparkles } from "lucide-react";
+import { Command, Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import PromoCodePopup from "@/components/PromoCodePopup";
+import BetaUserModal from "@/components/BetaUserModal";
 import { toast } from "sonner";
 import { applyPromoCode, checkPremiumAccess } from "@/lib/codeService";
 
@@ -10,6 +11,7 @@ export default function Hero() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [showPromo, setShowPromo] = useState(false);
+  const [showBetaModal, setShowBetaModal] = useState(false);
   const [isCheckingAccess, setIsCheckingAccess] = useState(false);
 
   const handleGetStartedClick = async () => {
@@ -128,19 +130,46 @@ export default function Hero() {
             Combined with an <strong className="text-white font-semibold">MCP-powered workflow engine</strong>.
           </p>
         </div>
+        {/* Beta Access Box */}
+        <div className="relative w-full max-w-4xl mx-auto mt-32 mb-10 px-4 z-10 animate-fade-in-up [animation-delay:1000ms]">
+          <div className="rounded-2xl border border-white/10 bg-[#0F1012] p-8 md:p-12 text-center relative overflow-hidden group hover:border-brand-red/30 transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+              <Sparkles className="w-4 h-4 text-brand-red" />
+              <span className="text-sm text-gray-300">Join 120+ early users testing Varticas</span>
+            </div>
+
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
+              Get Early Access to AI Workflow Automation
+            </h2>
+            
+            <p className="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+              Join the Varticas beta and automate apps like Gmail, Notion, Slack and GitHub with AI agents.
+            </p>
+
+            <button
+              onClick={() => setShowBetaModal(true)}
+              className="px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white rounded-lg font-medium text-lg transition-all flex items-center justify-center gap-2 mx-auto shadow-[0_0_20px_rgba(255,59,48,0.2)] hover:shadow-[0_0_30px_rgba(255,59,48,0.4)] transform hover:-translate-y-0.5"
+            >
+              Apply for Beta Access
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up [animation-delay:600ms]">
           {/* Primary CTA - Try Varticas */}
-          <a
+          {/* <a
             href="https://product.varticas.com"
             className="px-8 py-4 bg-[#FF3B30] hover:bg-[#FF3B30]/90 text-white rounded-lg font-medium text-lg transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(255,59,48,0.3)] hover:shadow-[0_0_40px_rgba(255,59,48,0.5)] transform hover:-translate-y-1"
           >
             Try Varticas
-          </a>
+          </a> */}
 
           {/* Get Started Button - Animated Border */}
-          <button
+          {/* <button
             type="button"
             onClick={handleGetStartedClick}
             disabled={isCheckingAccess}
@@ -155,7 +184,7 @@ export default function Hero() {
             }}
           >
             {isCheckingAccess ? "Checking Access..." : "Get Started"}
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -172,14 +201,14 @@ export default function Hero() {
 
           {/* Input Bar */}
           <div className="absolute top-16 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl z-20">
-            <div className="h-16 bg-[#1A1B1E]/90 backdrop-blur-sm rounded-xl border border-white/5 shadow-2xl flex items-center px-6 gap-4">
+            {/* <div className="h-16 bg-[#1A1B1E]/90 backdrop-blur-sm rounded-xl border border-white/5 shadow-2xl flex items-center px-6 gap-4">
               <Command className="w-6 h-6 text-gray-500" />
               <div className="h-6 w-[2px] bg-brand-red animate-pulse" />
               <span className="text-xl text-gray-400 font-light">Research competitor pricing...</span>
               <div className="ml-auto flex gap-2">
                 <span className="px-2 py-1 rounded bg-white/5 text-xs text-gray-500 font-mono">AI Agent</span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Video Player - Local video file */}
@@ -204,6 +233,10 @@ export default function Hero() {
         isOpen={showPromo}
         onClose={() => setShowPromo(false)}
         onSubmit={handlePromoSubmit}
+      />
+      <BetaUserModal
+        isOpen={showBetaModal}
+        onClose={() => setShowBetaModal(false)}
       />
     </div>
   );

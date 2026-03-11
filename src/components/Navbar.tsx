@@ -41,7 +41,7 @@ export default function Navbar() {
           >
             Pricing
           </Link>
-          <Link
+          {/* <Link
             to="/iota"
             className="px-4 py-1.5 rounded-full text-sm font-bold text-white hover:scale-105 transition-all shadow-[0_0_10px_rgba(216,76,152,0.15)]"
             style={{
@@ -52,7 +52,7 @@ export default function Navbar() {
             }}
           >
             .iota
-          </Link>
+          </Link> */}
         </div>
 
         {/* CTA / Auth Button */}

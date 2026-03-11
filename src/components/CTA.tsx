@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
+import BetaUserModal from "@/components/BetaUserModal";
 
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGPktKklvIE6gO0_Ln4YE3DJiJVPfEmmDUDI6dRlowr4YuQw/viewform";
 
 export default function CTA() {
+  const [showBetaModal, setShowBetaModal] = useState(false);
+
   return (
     <section className="py-32 px-4 relative overflow-hidden bg-[#07080A] text-center">
       {/* Background Glow */}
@@ -24,25 +28,28 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <a
+          {/* <a
             href={GOOGLE_FORM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 bg-[#E6E6E6] hover:bg-white text-[#2F3031] rounded-lg font-bold text-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all"
           >
             Install Extension
-          </a>
-          <a
-            href={GOOGLE_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 rounded-lg font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-2 group"
+          </a> */}
+          <button
+            onClick={() => setShowBetaModal(true)}
+            className="px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white rounded-lg font-medium text-lg transition-all flex items-center justify-center gap-2 mx-auto shadow-[0_0_20px_rgba(255,59,48,0.2)] hover:shadow-[0_0_30px_rgba(255,59,48,0.4)] transform hover:-translate-y-0.5"
           >
-            Request Early Access
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+            Apply for Beta Access
+            <ArrowRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
+
+      <BetaUserModal
+        isOpen={showBetaModal}
+        onClose={() => setShowBetaModal(false)}
+      />
     </section>
   );
 }
