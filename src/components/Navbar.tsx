@@ -34,13 +34,13 @@ export default function Navbar() {
         {/* Center Links - Desktop */}
         <div className="hidden md:flex items-center gap-8">
           <a
-            href="#about"
+            href="/#about"
             className="text-sm font-body text-gray-400 hover:text-white transition-colors"
           >
             About
           </a>
           <a
-            href="#features"
+            href="/#features"
             className="text-sm font-body text-gray-400 hover:text-white transition-colors"
           >
             Features
@@ -99,14 +99,14 @@ export default function Navbar() {
         <div className="absolute top-24 left-4 right-4 bg-[#1C1C1E]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 animate-in fade-in slide-in-from-top-4">
           <div className="flex flex-col gap-6">
             <a
-              href="#about"
+              href="/#about"
               onClick={() => setMobileOpen(false)}
               className="text-lg font-body text-white/80 hover:text-white"
             >
               About
             </a>
             <a
-              href="#features"
+              href="/#features"
               onClick={() => setMobileOpen(false)}
               className="text-lg font-body text-white/80 hover:text-white"
             >

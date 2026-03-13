@@ -22,19 +22,17 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Product</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium">
-              <li><a href="#features" className="hover:text-black transition-colors">Features</a></li>
+              <li><a href="/#features" className="hover:text-black transition-colors">Features</a></li>
               <li><Link to="/pricing" className="hover:text-black transition-colors">Pricing</Link></li>
-              <li><a href="#" className="hover:text-black transition-colors">Changelog</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Docs</a></li>
+            
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium">
-              <li><a href="#about" className="hover:text-black transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-black transition-colors">Careers</a></li>
+              <li><a href="/#about" className="hover:text-black transition-colors">About</a></li>
+              <li><Link to="/blog" className="hover:text-black transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="hover:text-black transition-colors">Contact</Link></li>
             </ul>
           </div>
