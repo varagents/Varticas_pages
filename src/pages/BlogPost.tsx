@@ -129,11 +129,11 @@ export default function BlogPostPage() {
 
             {/* Cover image */}
             {post.image_url && (
-              <div className="w-full rounded-2xl overflow-hidden mb-10 shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+              <div className="w-full flex justify-center mb-10">
                 <img
                   src={post.image_url}
                   alt={post.title}
-                  className="w-full max-h-[480px] object-cover"
+                  className="w-full max-w-2xl h-auto rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
                 />
               </div>
             )}
