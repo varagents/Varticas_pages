@@ -99,9 +99,9 @@ export default function Hero() {
           className="absolute -right-4 md:right-[5%] bottom-[25%] md:bottom-[30%] z-30"
         >
           <div className="bg-black text-[#F3ECD8] rounded-3xl px-6 py-6 font-display font-black text-3xl leading-[1.1] tracking-tight shadow-2xl skew-x-[-2deg] rotate-3 hover:rotate-0 transition-transform">
-            YOU SLEEP,<br />
-            VARTICAS<br />
-            DON'T
+            CONNECT,<br />
+            COMMAND<br />
+            CONNECT
           </div>
         </motion.div>
 
