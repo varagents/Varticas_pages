@@ -1,27 +1,27 @@
 import Hero from "@/components/Hero";
-import AboutInfo from "@/components/AboutInfo";
-import GoogleIntegrations from "@/components/GoogleIntegrations";
 import Navbar from "@/components/Navbar";
+import Features from "@/components/Features";
+import About from "@/components/About";
+
 import BentoGrid from "@/components/BentoGrid";
-import Architecture from "@/components/Architecture";
-import WorkflowBuilder from "@/components/WorkflowBuilder";
-import SocialProof from "@/components/SocialProof";
-import ComparisonTable from "@/components/ComparisonTable";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import MarkedTag from "@/components/MarkedTag";
 
+// Removed ThreeBackground as it doesn't align with the clean minimal light theme screenshot
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#07080A] text-white overflow-x-hidden selection:bg-brand-red selection:text-white">
+    <div className="min-h-screen bg-[#dfdfdf] text-black overflow-x-hidden selection:bg-black selection:text-white relative font-body">
       <Navbar />
       <Hero />
-      <AboutInfo />
-      <GoogleIntegrations />
+
+      {/* Marked Tag Section */}
+      <MarkedTag />
+
+      <Features />
+      <About />
+
       <BentoGrid />
-      <Architecture />
-      <WorkflowBuilder />
-      <SocialProof />
-      <ComparisonTable />
       <CTA />
       <Footer />
     </div>

@@ -1,242 +1,129 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Command, Sparkles, ArrowRight } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
-import PromoCodePopup from "@/components/PromoCodePopup";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import BetaUserModal from "@/components/BetaUserModal";
-import { toast } from "sonner";
-import { applyPromoCode, checkPremiumAccess } from "@/lib/codeService";
+
+const appIcons = [
+  "/svgs/atlassian.svg",
+  "/svgs/gmail.svg",
+  "/svgs/google-calendar.svg",
+  "/svgs/google-meet.svg",
+  "/svgs/google-sheets.svg",
+  "/svgs/google-slides.svg",
+  "/svgs/linear.svg",
+  "/svgs/slack.svg",
+  "/svgs/telegram.svg"
+];
+
+const scrollingTrack = [...appIcons, ...appIcons, ...appIcons, ...appIcons];
 
 export default function Hero() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [showPromo, setShowPromo] = useState(false);
-  const [showBetaModal, setShowBetaModal] = useState(false);
-  const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleGetStartedClick = async () => {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-    setIsCheckingAccess(true);
-    try {
-      const accessResult = await checkPremiumAccess();
-      if (accessResult.success === true) {
-        navigate("/redirecting");
-      } else {
-        setShowPromo(true);
-      }
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to verify access.";
-      toast.error(message);
-    } finally {
-      setIsCheckingAccess(false);
-    }
-  };
-
-  const handlePromoSubmit = async (code: string) => {
-    try {
-      const result = await applyPromoCode(code);
-      if (result.success === true) {
-        toast.success("Access code verified.");
-        setShowPromo(false);
-        navigate("/redirecting");
-        return;
-      }
-
-      throw new Error(String(result.message || "Invalid access code."));
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to verify access code.";
-      toast.error(message);
-    }
-  };
+  // Moves the icon track to the left as you scroll down
+  const xOffset = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 bg-[#07080A]">
+    <div ref={containerRef} className="relative min-h-[140vh] w-full bg-[#dfdfdf] flex flex-col items-center pt-48 overflow-hidden">
 
-      {/* Aurora/Gradient Mesh Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
-        {/* Animated Gradient Orbs */}
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#FF3B30] rounded-full blur-[150px] opacity-30 animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-[10%] right-[-10%] w-[40%] h-[40%] bg-[#FF6B47] rounded-full blur-[120px] opacity-25 animate-[pulse_6s_ease-in-out_infinite_1s]" />
-        <div className="absolute bottom-[-10%] left-[20%] w-[60%] h-[40%] bg-[#FF4D45] rounded-full blur-[180px] opacity-20 animate-[pulse_10s_ease-in-out_infinite_2s]" />
-        <div className="absolute top-[40%] left-[30%] w-[30%] h-[30%] bg-[#FF9E5E] rounded-full blur-[100px] opacity-15 animate-[pulse_7s_ease-in-out_infinite_0.5s]" />
-
-        {/* RODS with Disappear/Shine Animation */}
-        <div className="absolute inset-0" style={{ transform: 'rotate(25deg)' }}>
-          <div className="absolute top-[5%] left-[-20%] w-[140%] h-[3px] bg-gradient-to-r from-transparent via-[#FF9E5E] to-transparent rounded-full animate-[glow_6s_ease-in-out_infinite]" />
-          <div className="absolute top-[18%] left-[-20%] w-[140%] h-[4px] bg-gradient-to-r from-transparent via-[#FF6B47] to-transparent rounded-full animate-[glow_8s_ease-in-out_infinite_1s]" />
-          <div className="absolute top-[32%] left-[-20%] w-[140%] h-[3px] bg-gradient-to-r from-transparent via-[#FF9E5E] to-transparent rounded-full animate-[glow_7s_ease-in-out_infinite_2s]" />
-          <div className="absolute top-[48%] left-[-20%] w-[140%] h-[3px] bg-gradient-to-r from-transparent via-[#FF6B47] to-transparent rounded-full animate-[glow_9s_ease-in-out_infinite_0.5s]" />
-          <div className="absolute top-[62%] left-[-20%] w-[140%] h-[4px] bg-gradient-to-r from-transparent via-[#FF9E5E] to-transparent rounded-full animate-[glow_6.5s_ease-in-out_infinite_3s]" />
-          <div className="absolute top-[78%] left-[-20%] w-[140%] h-[3px] bg-gradient-to-r from-transparent via-[#FF6B47] to-transparent rounded-full animate-[glow_8.5s_ease-in-out_infinite_1.5s]" />
-          <div className="absolute top-[92%] left-[-20%] w-[140%] h-[3px] bg-gradient-to-r from-transparent via-[#FF9E5E] to-transparent rounded-full animate-[glow_7.5s_ease-in-out_infinite_4s]" />
-        </div>
-
-        {/* Subtle Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px'
-          }}
-        />
-
-        {/* Grain Texture */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] opacity-40" />
-
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#07080A_70%)]" />
-      </div>
-
-      {/* Animations */}
-      <style>{`
-        @keyframes glow {
-          0%, 100% { opacity: 0; filter: blur(2px); }
-          50% { opacity: 0.6; filter: blur(0px); }
-        }
-        @keyframes border-shine {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 300% 50%; }
-        }
-      `}</style>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center max-w-5xl mx-auto px-4 text-center">
-
-        {/* Beta Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/20 backdrop-blur-md mb-8 animate-fade-in-up hover:bg-brand-red/20 transition-colors cursor-pointer group">
-          <Sparkles className="w-3.5 h-3.5 text-brand-red" />
-          <span className="text-sm font-semibold text-brand-red">Beta Coming Soon</span>
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-6xl md:text-8xl font-display font-bold leading-[0.95] tracking-tight mb-8 animate-fade-in-up [animation-delay:200ms]">
-          LLM Thinks<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-gray-400">Varticas Executes</span>
+      {/* Massive Tight Black Headline */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-20 flex flex-col items-center text-center -mb-[120px] md:-mb-[180px] pointer-events-none"
+      >
+        <h1 className="font-display-hero text-[clamp(4rem,15vw,12rem)] leading-[0.75] text-black w-full mix-blend-normal">
+          <span className="block -mb-4 md:-mb-8 tracking-[-0.07em]">Autonomous</span>
+          <span className="block tracking-[-0.07em] text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-900 pb-4">Coworker</span>
         </h1>
+      </motion.div>
 
-        <div className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-10 animate-fade-in-up [animation-delay:400ms] font-light leading-relaxed">
-          <p>
-            An autonomous agent that researches, navigates, and executes.
-          </p>
-          <p>
-            Combined with an <strong className="text-white font-semibold">MCP-powered workflow engine</strong>.
-          </p>
-        </div>
-        {/* Beta Access Box */}
-        <div className="relative w-full max-w-4xl mx-auto mt-32 mb-10 px-4 z-10 animate-fade-in-up [animation-delay:1000ms]">
-          <div className="rounded-2xl border border-white/10 bg-[#0F1012] p-8 md:p-12 text-center relative overflow-hidden group hover:border-brand-red/30 transition-colors">
-            <div className="absolute inset-0 bg-gradient-to-b from-brand-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
-              <Sparkles className="w-4 h-4 text-brand-red" />
-              <span className="text-sm text-gray-300">Join 120+ early users testing Varticas</span>
-            </div>
+      {/* Main Container for Mockup & Floating Elements */}
+      <div className="relative w-full max-w-6xl mt-12 px-6 pb-40 z-10 flex justify-center">
 
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
-              Get Early Access to AI Workflow Automation
-            </h2>
-            
-            <p className="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-              Join the Varticas beta and automate apps like Gmail, Notion, Slack and GitHub with AI agents.
-            </p>
+        {/* Diagonal Scrolling App Icons Behind Card */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-visible">
+          {/* Slanted Container */}
+          <div className="absolute w-[200vw] -rotate-12 translate-y-24 flex flex-col gap-12">
 
-            <button
-              onClick={() => setShowBetaModal(true)}
-              className="px-8 py-4 bg-brand-red hover:bg-brand-red/90 text-white rounded-lg font-medium text-lg transition-all flex items-center justify-center gap-2 mx-auto shadow-[0_0_20px_rgba(255,59,48,0.2)] hover:shadow-[0_0_30px_rgba(255,59,48,0.4)] transform hover:-translate-y-0.5"
+            {/* Scrolling Track */}
+            <motion.div
+              className="flex gap-8 px-8 items-center justify-start translate-x-[20%]"
+              style={{ x: xOffset }}
             >
-              Apply for Beta Access
+              {scrollingTrack.map((src, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 bg-white rounded-3xl md:rounded-[2.5rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.08)] flex items-center justify-center relative overflow-hidden group"
+                >
+                  {/* Inward shadow to give it that app icon feel */}
+                  <div className="absolute inset-0 rounded-[inherit] shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-4px_6px_rgba(0,0,0,0.04)] pointer-events-none" />
+                  <img src={src} alt="App Icon" className="w-full h-full object-contain filter drop-shadow-sm transition-transform duration-500 group-hover:scale-110" />
+                </div>
+              ))}
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* Apply for Beta Access Button replacing Video */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative z-20 mt-32 md:mt-40 flex flex-col items-center"
+        >
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="group relative inline-flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-full text-lg font-bold font-body overflow-hidden transition-transform hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
+          >
+            <span>Apply for Beta access</span>
+            <div className="bg-white/20 p-2 rounded-full group-hover:bg-white text-white group-hover:text-black transition-colors">
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </div>
+          </button>
+        </motion.div>
+
+        {/* YOU SLEEP VARTICAS DON'T badge */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="absolute -right-4 md:right-[5%] bottom-[25%] md:bottom-[30%] z-30"
+        >
+          <div className="bg-black text-[#F3ECD8] rounded-3xl px-6 py-6 font-display font-black text-3xl leading-[1.1] tracking-tight shadow-2xl skew-x-[-2deg] rotate-3 hover:rotate-0 transition-transform">
+            YOU SLEEP,<br />
+            VARTICAS<br />
+            DON'T
           </div>
-        </div>
+        </motion.div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up [animation-delay:600ms]">
-          {/* Primary CTA - Try Varticas */}
-          {/* <a
-            href="https://product.varticas.com"
-            className="px-8 py-4 bg-[#FF3B30] hover:bg-[#FF3B30]/90 text-white rounded-lg font-medium text-lg transition-all flex items-center gap-2 shadow-[0_0_30px_rgba(255,59,48,0.3)] hover:shadow-[0_0_40px_rgba(255,59,48,0.5)] transform hover:-translate-y-1"
-          >
-            Try Varticas
-          </a> */}
+        {/* 24/7 Living Coworker badge */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="absolute -left-4 md:left-[5%] bottom-[45%] md:bottom-[50%] z-30"
+        >
+          <div className="bg-black text-[#F3ECD8] rounded-3xl px-6 py-6 font-display font-black text-3xl leading-[1.1] tracking-tight shadow-2xl skew-x-[2deg] -rotate-12 hover:rotate-0 transition-transform">
+            24/7<br />
+            AI  NATIVE<br />
+            COWORKER
+          </div>
+        </motion.div>
 
-          {/* Get Started Button - Animated Border */}
-          {/* <button
-            type="button"
-            onClick={handleGetStartedClick}
-            disabled={isCheckingAccess}
-            className="relative px-8 py-4 bg-white/5 hover:bg-white/10 text-white rounded-lg font-medium text-lg transition-all flex items-center gap-2 overflow-hidden group"
-            style={{
-              border: '1px solid transparent',
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)), linear-gradient(90deg, transparent 0%, transparent 30%, #FF9E5E 45%, #FF6B47 50%, #FF9E5E 55%, transparent 70%, transparent 100%)`,
-              backgroundOrigin: 'border-box',
-              backgroundClip: 'padding-box, border-box',
-              backgroundSize: '100% 100%, 300% 100%',
-              animation: 'border-shine 4s linear infinite'
-            }}
-          >
-            {isCheckingAccess ? "Checking Access..." : "Get Started"}
-          </button> */}
-        </div>
       </div>
 
-      {/* Floating Window Mockup with Video */}
-      <div className="relative w-full max-w-6xl mt-24 px-4 animate-fade-in-up [animation-delay:800ms] perspective-1000">
-        <div className="relative rounded-2xl border border-white/10 bg-[#0F1012] shadow-2xl overflow-hidden aspect-[16/9] transform hover:rotate-x-1 transition-transform duration-700 ease-out group">
-
-          {/* Window Controls */}
-          <div className="absolute top-4 left-4 flex gap-2 z-20">
-            <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-            <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
-            <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-          </div>
-
-          {/* Input Bar */}
-          <div className="absolute top-16 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl z-20">
-            {/* <div className="h-16 bg-[#1A1B1E]/90 backdrop-blur-sm rounded-xl border border-white/5 shadow-2xl flex items-center px-6 gap-4">
-              <Command className="w-6 h-6 text-gray-500" />
-              <div className="h-6 w-[2px] bg-brand-red animate-pulse" />
-              <span className="text-xl text-gray-400 font-light">Research competitor pricing...</span>
-              <div className="ml-auto flex gap-2">
-                <span className="px-2 py-1 rounded bg-white/5 text-xs text-gray-500 font-mono">AI Agent</span>
-              </div>
-            </div> */}
-          </div>
-
-          {/* Video Player - Local video file */}
-          <video
-            className="absolute inset-0 w-full h-full object-cover z-0"
-            autoPlay
-            loop
-            muted
-            playsInline
-            src="/videos/Varticas_shoot.mp4"
-          />
-
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#07080A] via-transparent to-[#07080A]/50 pointer-events-none z-10" />
-        </div>
-
-        {/* Glow effect */}
-        <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-40 bg-brand-red/15 blur-[100px] -z-10 rounded-full" />
-      </div>
-
-      <PromoCodePopup
-        isOpen={showPromo}
-        onClose={() => setShowPromo(false)}
-        onSubmit={handlePromoSubmit}
-      />
       <BetaUserModal
-        isOpen={showBetaModal}
-        onClose={() => setShowBetaModal(false)}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </div>
   );

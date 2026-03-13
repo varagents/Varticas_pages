@@ -1,65 +1,81 @@
+@import url('https://fonts.cdnfonts.com/css/aileron');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Manrope:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Raycast-inspired base colors */
-    --background: 220 13% 4%;
-    /* #07080A */
-    --foreground: 0 0% 100%;
-    /* #FFFFFF */
+    /* Minimalist Light Theme matching the screenshot */
+    --background: 0 0% 86%;
+    /* #dbdbdb close to the light gray in the image */
+    --foreground: 0 0% 0%;
+    /* Black text for main elements */
 
-    --card: 220 13% 6%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
 
-    --popover: 220 13% 6%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 220 13% 4%;
+    --primary: 0 0% 0%;
+    /* Black primary */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 220 13% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 40%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 0 100% 60%;
-    /* Raycast Red */
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 100%;
+    --border: 0 0% 80%;
+    --input: 0 0% 80%;
+    --ring: 0 0% 0%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
+  /* Keeping Dark mode variables identical for now to enforce the light look, 
+     but actually we will just use light mode everywhere based on the design. */
   .dark {
-    --background: 220 13% 4%;
-    --foreground: 0 0% 100%;
-    /* ... repeat variables if needed, but we are forcing dark mode */
+    --background: 0 0% 86%;
+    --foreground: 0 0% 0%;
   }
 }
 
+@font-face {
+  font-family: 'JA Jayagiri Sans';
+  src: local('JA Jayagiri Sans'), local('JA-Jayagiri-Sans');
+  font-weight: 900;
+  font-style: normal;
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
-    background-color: #07080A;
+    @apply bg-background text-foreground antialiased;
+    background-color: #dfdfdf;
+    /* Light grayish-beige from screenshot */
+    font-family: 'Aileron', 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* Raycast Red selection */
   ::selection {
-    background-color: #FF6363;
-    color: #FFFFFF;
+    background-color: #000;
+    color: #fff;
   }
 
   h1,
@@ -68,21 +84,19 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-tight text-white;
+    color: #000;
   }
 }
 
 @layer utilities {
-  .glass-panel {
-    @apply bg-[#141517]/50 backdrop-blur-xl border border-white/5 shadow-2xl;
+  .font-display-hero {
+    font-family: 'JA Jayagiri Sans', 'Outfit', 'Aileron', system-ui, sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    /* Very tight tracking like the screenshot */
   }
 
-  .beam {
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(255, 99, 99, 0.5), transparent);
-    opacity: 0.3;
-    transform: rotate(-45deg);
+  .mockup-gradient {
+    background: linear-gradient(135deg, #f0f0f0 0%, #b0b0b0 40%, #1a1a1a 100%);
   }
 }

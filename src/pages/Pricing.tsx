@@ -26,11 +26,11 @@ const tiers = [
         ctaLink: "/login?plan=starter",
         highlighted: false,
         icon: Zap,
-        checkColor: "text-gray-600",
-        borderClass: "border-white/5 hover:border-white/10",
-        bgClass: "bg-[#0F1012]",
+        checkColor: "text-gray-400",
+        borderClass: "border-black/5 hover:border-black/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+        bgClass: "bg-white",
         buttonClass:
-            "bg-white/5 hover:bg-white/10 text-white border border-white/5",
+            "bg-[#f5f5f5] hover:bg-[#e5e5e5] text-black border border-black/5",
     },
     {
         name: "Pro",
@@ -50,10 +50,10 @@ const tiers = [
         highlighted: true,
         icon: Sparkles,
         checkColor: "text-green-500",
-        borderClass: "border-green-500/50",
-        bgClass: "bg-[#141517]",
+        borderClass: "border-green-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.08)]",
+        bgClass: "bg-white",
         buttonClass:
-            "bg-green-500 hover:bg-green-600 text-white font-bold shadow-lg hover:shadow-green-500/20",
+            "bg-black hover:bg-gray-900 text-white font-bold shadow-lg",
     },
     {
         name: "Enterprise",
@@ -72,11 +72,11 @@ const tiers = [
         ctaLink: "mailto:soumyajit@varticas.com",
         highlighted: false,
         icon: Shield,
-        checkColor: "text-brand-orange",
-        borderClass: "border-white/10 hover:border-brand-orange/30",
-        bgClass: "bg-[#1A110D]",
+        checkColor: "text-yellow-500",
+        borderClass: "border-black/5 hover:border-yellow-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+        bgClass: "bg-[#fafafa]",
         buttonClass:
-            "bg-white hover:bg-gray-200 text-black font-bold",
+            "bg-black hover:bg-gray-900 text-white font-bold",
     }
 ];
 
@@ -257,14 +257,15 @@ export default function PricingPage() {
         }
     };
 
+    // ...existing code...
     return (
-        <div className="min-h-screen bg-[#07080A] text-white overflow-x-hidden selection:bg-brand-red selection:text-white">
+        <div className="min-h-screen bg-[#dfdfdf] text-black overflow-x-hidden selection:bg-black selection:text-white">
             <Navbar />
 
             {/* Hero */}
             <section className="pt-36 pb-16 px-4 relative">
-                {/* Background glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-green-500/5 blur-[150px] rounded-full pointer-events-none" />
+                {/* Background glow removed for light theme cleanup */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/40 blur-[150px] rounded-full pointer-events-none" />
 
                 <motion.div
                     className="max-w-4xl mx-auto text-center relative z-10"
@@ -279,15 +280,15 @@ export default function PricingPage() {
                         </span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6">
+                    <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 text-black">
                         Simple pricing.
                         <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400">
                             Serious power.
                         </span>
                     </h1>
 
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-xl text-gray-600 font-body max-w-2xl mx-auto leading-relaxed">
                         Start for free, scale when you need to. Lock in early adopter rates
                         before our public launch.
                     </p>
@@ -315,38 +316,38 @@ export default function PricingPage() {
 
                             <div className="flex items-center gap-3 mb-4">
                                 <div
-                                    className={`p-2 rounded-lg ${tier.highlighted
-                                        ? "bg-green-500/10 border border-green-500/20"
-                                        : "bg-white/5 border border-white/5"
+                                    className={`p-3 rounded-xl ${tier.highlighted
+                                        ? "bg-green-50 border border-green-200"
+                                        : "bg-[#f5f5f5] border border-black/5"
                                         }`}
                                 >
                                     <tier.icon
-                                        className={`w-5 h-5 ${tier.highlighted ? "text-green-500" : "text-gray-400"
+                                        className={`w-5 h-5 ${tier.highlighted ? "text-green-600" : "text-gray-500"
                                             }`}
                                     />
                                 </div>
-                                <h3 className="text-xl font-bold text-white">{tier.name}</h3>
+                                <h3 className="text-xl font-bold font-display text-black">{tier.name}</h3>
                             </div>
 
                             <div className="mb-6 flex items-baseline gap-1">
-                                <span className="text-4xl font-bold text-white">
+                                <span className="text-4xl font-bold text-black font-display">
                                     {tier.price}
                                 </span>
                                 {tier.period && (
-                                    <span className="text-gray-500 text-sm">{tier.period}</span>
+                                    <span className="text-gray-500 text-sm font-body">{tier.period}</span>
                                 )}
                             </div>
 
                             <p
-                                className={`${tier.highlighted ? "text-gray-300" : "text-gray-400"
-                                    } mb-8 text-sm leading-relaxed`}
+                                className={`${tier.highlighted ? "text-gray-600" : "text-gray-500"
+                                    } mb-8 text-sm leading-relaxed font-body`}
                             >
                                 {tier.description}
                             </p>
 
                             <div
-                                className={`space-y-4 text-sm ${tier.highlighted ? "text-gray-300" : "text-gray-400"
-                                    } mb-8 flex-1`}
+                                className={`space-y-4 text-sm ${tier.highlighted ? "text-gray-700" : "text-gray-600"
+                                    } mb-8 flex-1 font-body`}
                             >
                                 {tier.features.map((feature) => (
                                     <div key={feature} className="flex gap-3 items-start">
@@ -362,7 +363,7 @@ export default function PricingPage() {
                                 currentPlan === "pro" ? (
                                     <button
                                         disabled
-                                        className="w-full py-3 rounded-lg font-medium text-sm transition-all text-center block bg-gray-700 hover:bg-gray-700 text-gray-400 cursor-not-allowed border border-white/5"
+                                        className="w-full py-3 rounded-xl font-medium font-body text-sm transition-all text-center block bg-gray-100 text-gray-400 cursor-not-allowed border border-black/5"
                                     >
                                         Pro Mode 🎉
                                     </button>
@@ -370,7 +371,7 @@ export default function PricingPage() {
                                     <button
                                         onClick={handleProUpgrade}
                                         disabled={loadingPlan === tier.name || planLoading}
-                                        className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center flex items-center justify-center ${tier.buttonClass}`}
+                                        className={`w-full py-3 rounded-xl font-medium font-body text-sm transition-all text-center flex items-center justify-center ${tier.buttonClass}`}
                                     >
                                         {loadingPlan === tier.name ? (
                                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -388,14 +389,14 @@ export default function PricingPage() {
                                 currentPlan === "free" ? (
                                     <button
                                         disabled
-                                        className="w-full py-3 rounded-lg font-medium text-sm transition-all text-center block bg-gray-800 text-gray-400 cursor-not-allowed border border-white/5"
+                                        className="w-full py-3 rounded-xl font-medium font-body text-sm transition-all text-center block bg-gray-100 text-gray-400 cursor-not-allowed border border-black/5"
                                     >
                                         Free Mode
                                     </button>
                                 ) : currentPlan === "pro" ? (
                                     <button
                                         disabled
-                                        className="w-full py-3 rounded-lg text-xs transition-all text-center block bg-transparent text-gray-500 cursor-default"
+                                        className="w-full py-3 rounded-xl text-xs font-body transition-all text-center block bg-transparent text-gray-400 cursor-default"
                                     >
                                         Currently on Pro
                                     </button>
@@ -429,7 +430,7 @@ export default function PricingPage() {
                 <div className="mt-16 text-center w-full flex justify-center pb-20">
                     <Link
                         to="#"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-lg font-medium text-sm transition-all"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#f5f5f5] text-black border border-black/5 shadow-sm rounded-full font-medium text-sm transition-all font-body"
                     >
                         Explore Varticas
                         <ArrowRight className="w-4 h-4" />
@@ -438,7 +439,7 @@ export default function PricingPage() {
             </section>
 
             {/* Feature Comparison */}
-            <section className="py-20 px-4 border-t border-white/5">
+            <section className="py-20 px-4 border-t border-black/5">
                 <div className="max-w-4xl mx-auto">
                     <motion.h2
                         className="text-3xl md:text-4xl font-display font-bold text-center mb-16"
@@ -450,24 +451,24 @@ export default function PricingPage() {
                     </motion.h2>
 
                     <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
+                        <table className="w-full text-sm font-body">
                             <thead>
-                                <tr className="border-b border-white/5">
-                                    <th className="text-left py-4 pr-8 text-gray-400 font-medium">
+                                <tr className="border-b border-black/5">
+                                    <th className="text-left py-4 pr-8 text-gray-500 font-medium">
                                         Feature
                                     </th>
-                                    <th className="text-center py-4 px-4 text-gray-400 font-medium">
+                                    <th className="text-center py-4 px-4 text-gray-500 font-medium">
                                         Starter
                                     </th>
-                                    <th className="text-center py-4 px-4 text-green-400 font-medium">
+                                    <th className="text-center py-4 px-4 text-green-600 font-medium">
                                         Pro
                                     </th>
-                                    <th className="text-center py-4 px-4 text-brand-orange font-medium">
+                                    <th className="text-center py-4 px-4 text-yellow-500 font-medium">
                                         Enterprise
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="text-gray-400">
+                            <tbody className="text-gray-600">
                                 {[
                                     ["Agent tasks", "Limited", "Unlimited", "Unlimited"],
                                     ["Workflows", "Limited", "50", "Unlimited"],
@@ -475,15 +476,15 @@ export default function PricingPage() {
                                     ["Support", "Community", "Priority", "Instant Priority"],
                                     ["Theme", "Dark", "Dark", "Customizable"] // Just an example feature where it differs
                                 ].map(([feature, starter, pro, enterprise]) => (
-                                    <tr key={feature} className="border-b border-white/5">
-                                        <td className="py-4 pr-8 text-white font-medium">
+                                    <tr key={feature} className="border-b border-black/5">
+                                        <td className="py-4 pr-8 text-black font-medium">
                                             {feature}
                                         </td>
                                         <td className="text-center py-4 px-4">{starter}</td>
-                                        <td className="text-center py-4 px-4 text-green-400">
+                                        <td className="text-center py-4 px-4 text-green-600 font-medium">
                                             {pro}
                                         </td>
-                                        <td className="text-center py-4 px-4 text-brand-orange">
+                                        <td className="text-center py-4 px-4 text-yellow-500 font-medium">
                                             {enterprise}
                                         </td>
                                     </tr>
@@ -495,10 +496,10 @@ export default function PricingPage() {
             </section>
 
             {/* FAQ */}
-            <section className="py-20 px-4 border-t border-white/5">
+            <section className="py-20 px-4 border-t border-black/5">
                 <div className="max-w-3xl mx-auto">
                     <motion.h2
-                        className="text-3xl md:text-4xl font-display font-bold text-center mb-16"
+                        className="text-3xl md:text-4xl font-display font-bold text-center mb-16 text-black"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -506,17 +507,17 @@ export default function PricingPage() {
                         Frequently asked questions
                     </motion.h2>
 
-                    <div className="space-y-6">
+                    <div className="space-y-6 list-none font-body">
                         {faqs.map((faq) => (
                             <motion.div
                                 key={faq.q}
-                                className="p-6 rounded-2xl bg-[#0F1012] border border-white/5 hover:border-white/10 transition-colors"
+                                className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all"
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <h3 className="text-white font-bold mb-2">{faq.q}</h3>
-                                <p className="text-gray-400 text-sm leading-relaxed">
+                                <h3 className="text-black font-bold mb-3 text-lg">{faq.q}</h3>
+                                <p className="text-gray-600 text-sm leading-relaxed">
                                     {faq.a}
                                 </p>
                             </motion.div>
@@ -527,7 +528,7 @@ export default function PricingPage() {
 
             {/* Bottom CTA */}
             <section className="py-24 px-4 relative overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/40 blur-[120px] rounded-full pointer-events-none" />
 
                 <motion.div
                     className="max-w-3xl mx-auto text-center relative z-10"
@@ -535,16 +536,16 @@ export default function PricingPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
+                    <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-black">
                         Ready to automate?
                     </h2>
-                    <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
+                    <p className="text-lg text-gray-600 font-body mb-8 max-w-xl mx-auto">
                         Join thousands of early adopters and lock in your pricing before our
                         public launch.
                     </p>
                     <Link
                         to="/login?plan=pro"
-                        className="inline-flex items-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-green-500/20"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                     >
                         Get Started Now
                         <ArrowRight className="w-5 h-5" />

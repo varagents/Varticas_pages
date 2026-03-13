@@ -107,13 +107,12 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-[#07080A] text-white overflow-x-hidden selection:bg-brand-red selection:text-white">
+        <div className="min-h-screen bg-[#dfdfdf] text-black overflow-x-hidden selection:bg-black selection:text-white">
             <Navbar />
 
             <div className="pt-32 pb-20 px-4 max-w-5xl mx-auto relative">
-                {/* Background glow */}
-                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-green-500/5 blur-[150px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none" />
+                {/* Background glow removed for cleaner light theme */}
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/40 blur-[150px] rounded-full pointer-events-none" />
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -129,13 +128,13 @@ export default function Dashboard() {
                                 </h1>
                                 <span className="text-2xl">👋</span>
                             </div>
-                            <p className="text-gray-400">{user?.email}</p>
+                            <p className="text-gray-600 font-body">{user?.email}</p>
                         </div>
 
                         <Button
                             variant="outline"
                             onClick={handleSignOut}
-                            className="bg-white/5 border-white/10 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-400 text-white transition-all w-fit"
+                            className="bg-white border-black/10 shadow-sm hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-black transition-all w-fit rounded-xl px-5"
                         >
                             <LogOut className="w-4 h-4 mr-2" />
                             Sign Out
@@ -147,25 +146,25 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className={`p-6 rounded-2xl bg-gradient-to-br ${currentPlan === 'pro'
-                            ? 'from-[#141517] to-[#0F1012] border-green-500/20'
-                            : 'from-[#12161A] to-[#0F1012] border-white/5'
-                            } border mb-8 relative overflow-hidden`}
+                        className={`p-6 md:p-8 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white border ${currentPlan === 'pro'
+                            ? 'border-green-500/20'
+                            : 'border-black/5'
+                            } mb-8 relative overflow-hidden`}
                     >
                         {currentPlan === 'pro' && (
                             <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-[60px] rounded-full" />
                         )}
-                        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                            <div className="flex items-start gap-4">
-                                <div className={`p-3 rounded-xl border ${currentPlan === 'pro'
-                                    ? 'bg-green-500/10 border-green-500/20'
-                                    : 'bg-white/5 border-white/5'
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div className="flex items-start gap-5">
+                                <div className={`p-4 rounded-2xl border ${currentPlan === 'pro'
+                                    ? 'bg-green-50 border-green-200'
+                                    : 'bg-[#f5f5f5] border-black/5'
                                     }`}>
-                                    <Crown className={`w-6 h-6 ${currentPlan === 'pro' ? 'text-green-500' : 'text-gray-400'}`} />
+                                    <Crown className={`w-6 h-6 ${currentPlan === 'pro' ? 'text-green-600' : 'text-gray-500'}`} />
                                 </div>
                                 <div className="flex flex-col justify-center">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <h2 className="text-xl font-bold text-white">
+                                    <div className="flex items-center gap-2 mb-1.5">
+                                        <h2 className="text-xl font-bold font-display text-black">
                                             {planLoading ? "Loading..." : currentPlan === "pro" ? "Pro Member" : "Free Plan"}
                                         </h2>
                                         {!planLoading && currentPlan === "pro" && (
@@ -174,7 +173,7 @@ export default function Dashboard() {
                                             </span>
                                         )}
                                     </div>
-                                    <div className="text-gray-400 text-sm">
+                                    <div className="text-gray-600 font-body text-sm max-w-md leading-relaxed">
                                         {planLoading ? (
                                             "Fetching your subscription details..."
                                         ) : currentPlan === "pro" ? (
@@ -200,10 +199,10 @@ export default function Dashboard() {
                             </div>
 
                             {!planLoading && currentPlan !== "pro" && (
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-3 w-full md:w-auto mt-4 md:mt-0">
                                     <Link
                                         to="/pricing"
-                                        className="px-6 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-lg font-bold text-sm transition-all shadow-lg hover:shadow-green-500/20 whitespace-nowrap"
+                                        className="px-6 py-3 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] whitespace-nowrap text-center flex-1 md:flex-none"
                                     >
                                         Upgrade to Pro
                                     </Link>
@@ -211,10 +210,9 @@ export default function Dashboard() {
                                         type="button"
                                         onClick={handleTryNowClick}
                                         disabled={isCheckingAccess}
-                                        className="relative overflow-hidden px-6 py-2.5 rounded-lg font-bold text-sm whitespace-nowrap text-white bg-gradient-to-r from-brand-red to-[#FF6B47] shadow-lg shadow-brand-red/20 transition-all hover:shadow-brand-red/35 disabled:opacity-60 disabled:cursor-not-allowed"
+                                        className="relative overflow-hidden px-6 py-3 rounded-full font-bold font-body whitespace-nowrap text-black bg-[#f5f5f5] hover:bg-[#e5e5e5] border border-black/5 transition-all disabled:opacity-50 flex-1 md:flex-none"
                                     >
-                                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent animate-[splash_1.8s_linear_infinite]" />
-                                        <span className="relative z-10">{isCheckingAccess ? "Checking..." : "Try Now"}</span>
+                                        <span className="relative z-10">{isCheckingAccess ? "Checking..." : "Redeem Code"}</span>
                                     </button>
                                 </div>
                             )}
@@ -227,33 +225,33 @@ export default function Dashboard() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="p-6 rounded-2xl bg-[#0F1012] border border-white/5 hover:border-white/10 transition-colors"
+                            className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all"
                         >
-                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                                <User className="w-5 h-5 text-gray-400" />
+                            <h3 className="text-xl font-bold font-display mb-6 flex items-center gap-3">
+                                <div className="p-2 bg-[#f5f5f5] rounded-xl"><User className="w-5 h-5 text-black" /></div>
                                 Your Profile
                             </h3>
-                            <div className="space-y-3 text-sm">
+                            <div className="space-y-4 font-body">
                                 {metadata.full_name && (
-                                    <div className="flex items-center gap-3 text-gray-400">
+                                    <div className="flex items-center gap-4 text-gray-500">
                                         <User className="w-4 h-4 shrink-0" />
-                                        <span className="text-white">{metadata.full_name}</span>
+                                        <span className="text-black font-medium">{metadata.full_name}</span>
                                     </div>
                                 )}
-                                <div className="flex items-center gap-3 text-gray-400">
+                                <div className="flex items-center gap-4 text-gray-500">
                                     <Mail className="w-4 h-4 shrink-0" />
-                                    <span className="text-white">{user?.email}</span>
+                                    <span className="text-black font-medium">{user?.email}</span>
                                 </div>
                                 {metadata.company && (
-                                    <div className="flex items-center gap-3 text-gray-400">
+                                    <div className="flex items-center gap-4 text-gray-500">
                                         <Building2 className="w-4 h-4 shrink-0" />
-                                        <span className="text-white">{metadata.company}</span>
+                                        <span className="text-black font-medium">{metadata.company}</span>
                                     </div>
                                 )}
                                 {metadata.role && (
-                                    <div className="flex items-center gap-3 text-gray-400">
+                                    <div className="flex items-center gap-4 text-gray-500">
                                         <Briefcase className="w-4 h-4 shrink-0" />
-                                        <span className="text-white">{metadata.role}</span>
+                                        <span className="text-black font-medium">{metadata.role}</span>
                                     </div>
                                 )}
                             </div>
@@ -264,39 +262,38 @@ export default function Dashboard() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="p-6 rounded-2xl bg-[#0F1012] border border-white/5 hover:border-white/10 transition-colors"
+                            className="p-6 md:p-8 rounded-[2rem] bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all"
                         >
-                            <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                                <Rocket className="w-5 h-5 text-brand-red" />
+                            <h3 className="text-xl font-bold font-display mb-6 flex items-center gap-3">
+                                <div className="p-2 bg-blue-50 text-blue-600 rounded-xl"><Rocket className="w-5 h-5" /></div>
                                 Product Status
                             </h3>
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-1 p-1.5 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
-                                        <Clock className="w-4 h-4 text-yellow-500" />
+                            <div className="space-y-6 font-body">
+                                <div className="flex items-start gap-4">
+                                    <div className="mt-1 p-2 bg-yellow-100 rounded-xl border border-yellow-200">
+                                        <Clock className="w-4 h-4 text-yellow-600" />
                                     </div>
                                     <div>
-                                        <p className="text-white font-medium text-sm">
+                                        <p className="text-black font-bold text-base">
                                             Launching Soon
                                         </p>
-                                        <p className="text-gray-500 text-xs mt-1">
+                                        <p className="text-gray-600 text-sm mt-1 leading-relaxed">
                                             We're putting the finishing touches on Varticas. As a
                                             early member, you'll get first access.
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Sparkles className="w-4 h-4 text-brand-orange" />
-                                        <span className="text-sm font-medium text-white">
+                                <div className="p-5 rounded-2xl bg-[#f8f9fa] border border-black/5">
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <Sparkles className="w-4 h-4 text-yellow-500" />
+                                        <span className="text-sm font-bold text-black uppercase tracking-wider">
                                             What's coming
                                         </span>
                                     </div>
-                                    <ul className="space-y-1.5 text-xs text-gray-400">
+                                    <ul className="space-y-2 text-sm text-gray-600">
                                         <li>• AI agent task execution</li>
                                         <li>• MCP-powered workflow builder</li>
-                                        <li>• Chrome extension</li>
                                         <li>• Desktop app for macOS</li>
                                     </ul>
                                 </div>
@@ -309,23 +306,23 @@ export default function Dashboard() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4 }}
-                        className="mt-8 flex flex-wrap gap-3"
+                        className="mt-10 flex flex-wrap gap-3"
                     >
                         <Link
                             to="/"
-                            className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-sm text-gray-400 hover:text-white transition-all"
+                            className="px-5 py-2.5 rounded-full bg-white shadow-sm border border-black/5 text-sm font-medium text-gray-600 font-body hover:text-black hover:shadow-md transition-all"
                         >
                             ← Back to Homepage
                         </Link>
                         <Link
                             to="/pricing"
-                            className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-sm text-gray-400 hover:text-white transition-all"
+                            className="px-5 py-2.5 rounded-full bg-white shadow-sm border border-black/5 text-sm font-medium text-gray-600 font-body hover:text-black hover:shadow-md transition-all"
                         >
                             View Plans
                         </Link>
                         <Link
                             to="/contact"
-                            className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-sm text-gray-400 hover:text-white transition-all"
+                            className="px-5 py-2.5 rounded-full bg-white shadow-sm border border-black/5 text-sm font-medium text-gray-600 font-body hover:text-black hover:shadow-md transition-all"
                         >
                             Contact Support
                         </Link>

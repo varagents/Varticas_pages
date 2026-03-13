@@ -10,6 +10,7 @@ import {
     Mail,
     Lock,
     Eye,
+    // ...existing code...
     EyeOff,
     Loader2,
     Sparkles,
@@ -17,6 +18,7 @@ import {
 import { motion } from "framer-motion";
 
 export default function Login() {
+    // ...existing code...
     const { signInWithGoogle, signInWithGithub, signInWithEmail, signUpWithEmail } =
         useAuth();
     const navigate = useNavigate();
@@ -59,28 +61,32 @@ export default function Login() {
         }
     };
 
+    // ...existing code...
+    // ...existing code...
     if (emailSent) {
         return (
-            <div className="min-h-screen bg-[#07080A] text-white selection:bg-brand-red selection:text-white">
+            <div className="min-h-screen bg-[#dfdfdf] text-black selection:bg-black selection:text-white font-body">
                 <Navbar />
                 <div className="pt-36 pb-20 px-4 max-w-md mx-auto text-center">
+// ...existing code...
+                    // ...existing code...
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="p-8 rounded-2xl bg-[#0F1012] border border-white/5"
+                        className="p-8 rounded-2xl bg-white border border-gray-200 shadow-xl"
                     >
                         <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center">
                             <Mail className="w-8 h-8 text-green-500" />
                         </div>
-                        <h2 className="text-2xl font-bold mb-3">Check your email</h2>
-                        <p className="text-gray-400 mb-6">
+                        <h2 className="text-3xl font-display font-black mb-4">Check your email</h2>
+                        <p className="text-gray-600 mb-8 font-medium">
                             We've sent a confirmation link to{" "}
-                            <span className="text-white font-medium">{email}</span>. Click it
+                            <span className="text-black font-medium">{email}</span>. Click it
                             to verify your account.
                         </p>
                         <Button
                             variant="outline"
-                            className="w-full bg-white/5 border-white/10 hover:bg-white/10 text-white"
+                            className="w-full bg-black hover:bg-gray-800 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg"
                             onClick={() => setEmailSent(false)}
                         >
                             Back to login
@@ -92,17 +98,15 @@ export default function Login() {
         );
     }
 
+    // ...existing code...
     return (
-        <div className="min-h-screen bg-[#07080A] text-white selection:bg-brand-red selection:text-white">
+        <div className="min-h-screen bg-[#dfdfdf] text-black selection:bg-black selection:text-white font-body">
             <Navbar />
 
             <div className="pt-36 pb-20 px-4 max-w-md mx-auto relative">
-                {/* Background glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none" />
-
                 <Link
                     to={plan ? "/pricing" : "/"}
-                    className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group relative z-10"
+                    className="inline-flex items-center gap-2 text-gray-500 hover:text-black transition-colors mb-8 group relative z-10 font-bold"
                 >
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                     {plan ? "Back to Pricing" : "Back to Home"}
@@ -111,32 +115,35 @@ export default function Login() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="relative z-10"
+                    transition={{ duration: 0.5 }}
+                    className="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative z-10"
                 >
+                    <div className="text-center mb-8">
+                        <h1 className="text-3xl font-display font-black mb-2 tracking-tight">
+                            {isSignUp ? "Create an account" : "Welcome back"}
+                        </h1>
+                        <p className="text-gray-500 font-medium">
+                            {isSignUp
+                                ? "Sign up to start automating with Varticas."
+                                : "Sign in to your Varticas account."}
+                        </p>
+                    </div>
+
                     {/* Plan context badge */}
                     {plan && (
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
-                            <Sparkles className="w-3.5 h-3.5 text-green-500" />
-                            <span className="text-sm font-semibold text-green-400">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-100 border border-green-200 mb-6">
+                            <Sparkles className="w-3.5 h-3.5 text-green-600" />
+                            <span className="text-sm font-semibold text-green-600">
                                 {plan === "pro" ? "Pro Plan" : plan === "starter" ? "Starter Plan" : "Team Plan"} selected
                             </span>
                         </div>
                     )}
 
-                    <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">
-                        {isSignUp ? "Create your account" : "Welcome back"}
-                    </h1>
-                    <p className="text-gray-400 mb-8">
-                        {isSignUp
-                            ? "Sign up to start automating with Varticas."
-                            : "Sign in to your Varticas account."}
-                    </p>
-
                     {/* OAuth Buttons */}
                     <div className="space-y-3 mb-6">
                         <button
                             onClick={signInWithGoogle}
-                            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
+                            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-black border border-gray-200 px-4 py-3 rounded-xl transition-all font-bold shadow-sm"
                         >
                             <svg className="w-5 h-5" viewBox="0 0 24 24">
                                 <path
@@ -161,7 +168,7 @@ export default function Login() {
 
                         {/* <button
                             onClick={signInWithGithub}
-                            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
+                            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-black border border-gray-200 px-4 py-3 rounded-xl transition-all font-bold shadow-sm"
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -170,31 +177,32 @@ export default function Login() {
                         </button> */}
                     </div>
 
-                    {/* Divider */}
-                    <div className="flex items-center gap-4 mb-6">
-                        <div className="flex-1 h-px bg-white/10" />
-                        <span className="text-gray-500 text-xs uppercase tracking-wider">
-                            or continue with email
-                        </span>
-                        <div className="flex-1 h-px bg-white/10" />
-                    </div>
+                    {/* Divider
+                    <div className="relative my-8">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-200"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="px-3 bg-white text-gray-400 font-bold">Or continue with email</span>
+                        </div>
+                    </div> */}
 
-                    {/* Email Form */}
+                    {/* Email Form
                     <form onSubmit={handleEmailAuth} className="space-y-4">
                         <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <Input
                                 type="email"
                                 placeholder="you@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-gray-500 h-12 focus:border-brand-red/50 focus:ring-brand-red/20"
+                                className="pl-11 bg-gray-50 border-gray-200 text-black placeholder:text-gray-400 h-14 focus:border-black focus:ring-black rounded-xl font-medium"
                             />
                         </div>
 
                         <div className="relative">
-                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <Input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Password"
@@ -202,12 +210,12 @@ export default function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 minLength={6}
-                                className="pl-10 pr-10 bg-white/5 border-white/10 text-white placeholder:text-gray-500 h-12 focus:border-brand-red/50 focus:ring-brand-red/20"
+                                className="pl-11 pr-11 bg-gray-50 border-gray-200 text-black placeholder:text-gray-400 h-14 focus:border-black focus:ring-black rounded-xl font-medium"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
                             >
                                 {showPassword ? (
                                     <EyeOff className="w-4 h-4" />
@@ -227,49 +235,35 @@ export default function Login() {
                             </motion.p>
                         )}
 
-                        <Button
+                        <button
                             type="submit"
                             disabled={loading}
-                            className="w-full h-12 bg-white hover:bg-gray-100 text-black font-bold text-base transition-all"
+                            className="w-full bg-black hover:bg-gray-800 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2 mt-4"
                         >
                             {loading ? (
                                 <Loader2 className="w-5 h-5 animate-spin" />
-                            ) : isSignUp ? (
-                                "Create Account"
                             ) : (
-                                "Sign In"
+                                isSignUp ? "Create account" : "Sign in"
                             )}
-                        </Button>
-                    </form>
+                        </button>
+                    </form> */}
 
-                    {/* Toggle */}
-                    <p className="text-center text-gray-500 text-sm mt-6">
+                    <p className="mt-8 text-center text-gray-500 text-sm font-medium">
                         {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
                         <button
                             onClick={() => {
                                 setIsSignUp(!isSignUp);
                                 setError("");
                             }}
-                            className="text-white hover:text-brand-red transition-colors font-medium"
+                            className="text-black hover:underline transition-colors font-bold ml-1"
                         >
                             {isSignUp ? "Sign in" : "Sign up"}
                         </button>
                     </p>
 
-                    {/* Terms */}
-                    <p className="text-center text-gray-600 text-xs mt-4">
+                    <p className="mt-8 text-center text-xs text-gray-400 font-medium">
                         By continuing, you agree to our{" "}
-                        <Link
-                            to="/terms-and-conditions"
-                            className="text-gray-400 hover:text-white underline"
-                        >
-                            Terms
-                        </Link>{" "}
-                        and{" "}
-                        <Link
-                            to="/privacy-policy"
-                            className="text-gray-400 hover:text-white underline"
-                        >
+                        <Link to="/privacy-policy" className="text-black hover:underline transition-colors font-bold">
                             Privacy Policy
                         </Link>
                         .
@@ -278,6 +272,6 @@ export default function Login() {
             </div>
 
             <Footer />
-        </div>
+        </div >
     );
 }
