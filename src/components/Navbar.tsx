@@ -46,6 +46,12 @@ export default function Navbar() {
             Features
           </a>
           <Link
+            to="/blog"
+            className="text-sm font-body text-gray-400 hover:text-white transition-colors"
+          >
+            Blogs
+          </Link>
+          <Link
             to="/pricing"
             className="text-sm font-body text-gray-400 hover:text-white transition-colors"
           >
@@ -112,6 +118,13 @@ export default function Navbar() {
             >
               Features
             </a>
+            <Link
+              to="/blog"
+              onClick={() => setMobileOpen(false)}
+              className="text-lg font-body text-white/80 hover:text-white"
+            >
+              Blog
+            </Link>
             <Link
               to="/pricing"
               onClick={() => setMobileOpen(false)}

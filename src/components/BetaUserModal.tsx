@@ -204,7 +204,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               placeholder="John Doe"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="mt-2"
+              className="mt-2 bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
               autoFocus
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
             />
@@ -220,7 +220,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               placeholder="john@example.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="mt-2"
+              className="mt-2 bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
               autoFocus
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
             />
@@ -252,6 +252,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   placeholder="Please specify your profession"
                   value={formData.otherProfession}
                   onChange={(e) => setFormData({ ...formData, otherProfession: e.target.value })}
+                  className="bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
                   autoFocus
                   onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                 />
@@ -293,7 +294,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               placeholder="e.g. Acme Corp or Stanford University"
               value={formData.organization}
               onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-              className="mt-2"
+              className="mt-2 bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
               autoFocus
               onKeyDown={(e) => e.key === 'Enter' && handleNext()}
             />
@@ -327,6 +328,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   placeholder="Please specify how you heard about us"
                   value={formData.otherSource}
                   onChange={(e) => setFormData({ ...formData, otherSource: e.target.value })}
+                  className="bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
                   autoFocus
                   onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                 />
@@ -362,6 +364,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   placeholder="Please specify other apps"
                   value={formData.otherIntegration}
                   onChange={(e) => setFormData({ ...formData, otherIntegration: e.target.value })}
+                  className="bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
                   autoFocus
                   onKeyDown={(e) => e.key === 'Enter' && handleNext()}
                 />
@@ -378,7 +381,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               placeholder="Example: Automate GitHub issues, manage Gmail with AI agents, sync Notion tasks with Slack, etc."
               value={formData.useCase}
               onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
-              className="mt-2 min-h-[120px]"
+              className="mt-2 min-h-[120px] bg-white/10 border-white/15 text-white placeholder:text-gray-500 focus:border-white/40"
               autoFocus
             />
           </div>
