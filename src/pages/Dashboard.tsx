@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PromoCodePopup from "@/components/PromoCodePopup";
+import BetaUserModal from "@/components/BetaUserModal";
 import {
     LogOut,
     Crown,
@@ -28,6 +29,7 @@ export default function Dashboard() {
     const [planLoading, setPlanLoading] = useState(true);
     const [proUntil, setProUntil] = useState<string | null>(null);
     const [showPromo, setShowPromo] = useState(false);
+    const [showBeta, setShowBeta] = useState(false);
     const [isCheckingAccess, setIsCheckingAccess] = useState(false);
 
     useEffect(() => {
@@ -326,6 +328,13 @@ export default function Dashboard() {
                         >
                             Contact Support
                         </Link>
+                        <button
+                            type="button"
+                            onClick={() => setShowBeta(true)}
+                            className="px-5 py-2.5 rounded-full bg-white shadow-sm border border-black/5 text-sm font-medium text-gray-600 font-body hover:text-black hover:shadow-md transition-all"
+                        >
+                            Apply for Beta User
+                        </button>
                     </motion.div>
                 </motion.div>
             </div>
@@ -334,6 +343,11 @@ export default function Dashboard() {
                 isOpen={showPromo}
                 onClose={() => setShowPromo(false)}
                 onSubmit={handlePromoSubmit}
+            />
+
+            <BetaUserModal
+                isOpen={showBeta}
+                onClose={() => setShowBeta(false)}
             />
 
             <style>{`

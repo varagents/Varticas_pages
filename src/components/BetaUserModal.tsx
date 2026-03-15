@@ -60,7 +60,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -88,7 +88,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
     if (step === 7 && formData.integrations.length === 0) return toast.error("Please select at least one app");
     if (step === 7 && formData.integrations.includes("Other") && !formData.otherIntegration) return toast.error("Please specify the other app");
     if (step === 8 && !formData.useCase) return toast.error("Please briefly explain your use case");
-    
+
     setStep((prev) => Math.min(prev + 1, totalSteps));
   };
 
@@ -110,7 +110,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
         ...formData,
         profession: formData.profession === "Other" ? formData.otherProfession : formData.profession,
         source: formData.source === "Other" ? formData.otherSource : formData.source,
-        integrations: formData.integrations.includes("Other") 
+        integrations: formData.integrations.includes("Other")
           ? [...formData.integrations.filter(i => i !== "Other"), formData.otherIntegration].filter(Boolean)
           : formData.integrations
       };
@@ -184,7 +184,7 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
           <p className="text-gray-400 max-w-[280px]">
             Thanks for applying to the Varticas Beta! We'll review your application and contact you soon.
           </p>
-          <Button 
+          <Button
             onClick={resetAndClose}
             className="mt-6 bg-white text-black hover:bg-gray-200"
           >
@@ -236,9 +236,9 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               className="mt-4 grid grid-cols-2 gap-3"
             >
               {PROFESSION_OPTIONS.map((profession) => (
-                <div 
-                  key={profession} 
-                  className={`flex flex-col items-start justify-center border rounded-xl p-4 cursor-pointer transition-all ${formData.profession === profession ? "border-brand-red bg-brand-red/10" : "border-white/10 hover:bg-white/5"}`} 
+                <div
+                  key={profession}
+                  className={`flex flex-col items-start justify-center border rounded-xl p-4 cursor-pointer transition-all ${formData.profession === profession ? "border-brand-red bg-brand-red/10" : "border-white/10 hover:bg-white/5"}`}
                   onClick={() => setFormData({ ...formData, profession })}
                 >
                   <RadioGroupItem value={profession} id={`prof-${profession}`} className="sr-only" />
@@ -270,9 +270,9 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
               className="mt-4 grid grid-cols-2 gap-3"
             >
               {EXPERIENCE_OPTIONS.map((exp) => (
-                <div 
-                  key={exp} 
-                  className={`flex flex-col items-start justify-center border rounded-xl p-4 cursor-pointer transition-all ${formData.experience === exp ? "border-brand-red bg-brand-red/10" : "border-white/10 hover:bg-white/5"}`} 
+                <div
+                  key={exp}
+                  className={`flex flex-col items-start justify-center border rounded-xl p-4 cursor-pointer transition-all ${formData.experience === exp ? "border-brand-red bg-brand-red/10" : "border-white/10 hover:bg-white/5"}`}
                   onClick={() => setFormData({ ...formData, experience: exp })}
                 >
                   <RadioGroupItem value={exp} id={`exp-${exp}`} className="sr-only" />
@@ -311,11 +311,10 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   <button
                     key={source}
                     onClick={() => setFormData({ ...formData, source })}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      isSelected 
-                        ? 'bg-brand-red text-white border-brand-red' 
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isSelected
+                        ? 'bg-brand-red text-white border-brand-red'
                         : 'bg-white/5 text-gray-400 border-white/10 hover:text-white hover:border-white/20'
-                    } border`}
+                      } border`}
                   >
                     {source}
                   </button>
@@ -347,11 +346,10 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   <button
                     key={integration}
                     onClick={() => handleIntegrationToggle(integration)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      isSelected 
-                        ? 'bg-brand-red text-white border-brand-red shadow-[0_0_15px_rgba(255,59,48,0.3)]' 
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isSelected
+                        ? 'bg-brand-red text-white border-brand-red shadow-[0_0_15px_rgba(255,59,48,0.3)]'
                         : 'bg-white/5 text-gray-400 border-white/10 hover:text-white hover:border-white/20'
-                    } border`}
+                      } border`}
                   >
                     {integration} {isSelected && "✓"}
                   </button>
@@ -397,13 +395,13 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
         <div className="p-6">
           {!isSuccess && (
             <DialogHeader className="mb-6">
-              <DialogTitle className="text-2xl pt-2">Join Varticas Beta</DialogTitle>
+              <DialogTitle className="text-2xl pt-2 text-white">Join Varticas Beta</DialogTitle>
               <DialogDescription className="text-gray-400">
                 Step {step} of {totalSteps}
               </DialogDescription>
               {/* Progress Bar */}
               <div className="w-full h-1.5 bg-white/10 rounded-full mt-4 overflow-hidden">
-                <motion.div 
+                <motion.div
                   className="h-full bg-brand-red rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${(step / totalSteps) * 100}%` }}
@@ -449,8 +447,8 @@ export default function BetaUserModal({ isOpen, onClose }: BetaUserModalProps) {
                   Next <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               ) : (
-                <Button 
-                  onClick={handleSubmit} 
+                <Button
+                  onClick={handleSubmit}
                   disabled={isLoading}
                   className="bg-brand-red hover:bg-brand-red/90 text-white min-w-[120px]"
                 >

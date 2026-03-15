@@ -1,5 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/aileron');
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Manrope:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=League+Spartan:wght@700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -55,6 +55,20 @@
   src: local('JA Jayagiri Sans'), local('JA-Jayagiri-Sans');
   font-weight: 900;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lovelace';
+  src: local('Lovelace'), local('Lovelace-Regular');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lovelace';
+  src: local('Lovelace Italic'), local('Lovelace-Italic');
+  font-weight: 400;
+  font-style: italic;
 }
 
 @layer base {

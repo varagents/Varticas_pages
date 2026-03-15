@@ -7,6 +7,7 @@ import BentoGrid from "@/components/BentoGrid";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import MarkedTag from "@/components/MarkedTag";
+import WhatWeDo from "@/components/WhatWeDo";
 
 // Removed ThreeBackground as it doesn't align with the clean minimal light theme screenshot
 const Index = () => {
@@ -17,6 +18,9 @@ const Index = () => {
 
       {/* Marked Tag Section */}
       <MarkedTag />
+
+      {/* What We Do Section */}
+      <WhatWeDo />
 
       <Features />
       <About />
