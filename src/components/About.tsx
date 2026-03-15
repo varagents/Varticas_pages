@@ -1,86 +1,71 @@
 import { motion } from "framer-motion";
 import { Plug, Terminal, Workflow } from "lucide-react";
 
-const pillars = [
-    {
-        icon: Plug,
-        title: "Connect",
-        description: "Integrate with Gmail, Slack, Notion, GitHub, and 50+ more tools.",
-    },
-    {
-        icon: Terminal,
-        title: "Command",
-        description: "Give natural language instructions. Varticas builds a plan of action.",
-    },
-    {
-        icon: Workflow,
-        title: "Automate",
-        description: "Run complex multi-step workflows autonomously.",
-    },
+const stats = [
+  { value: "10+", label: "Integrated Tools" },
+  { value: "10x", label: "Faster Workflows" },
+  { value: "24/7", label: "Always Running" },
+  { value: "0", label: "Lines of Code Needed" },
 ];
 
 export default function About() {
-    return (
-        <section id="about" className="py-32 px-4 relative bg-[#dfdfdf]">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-24"
-                >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 mb-8 shadow-sm">
-                        <span className="text-sm text-black font-bold">About Varticas</span>
-                    </div>
-                    <h2 className="text-5xl md:text-7xl font-display font-black mb-8 tracking-tight text-black leading-[1.1]">
-                        The missing operating system
-                        <br />
-                        for your work.
-                    </h2>
-                    <p className="text-gray-600 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-body">
-                        Varticas is an autonomous AI coworker that connects to your tools,
-                        understands your commands, and executes workflows.
-                    </p>
-                </motion.div>
+  return (
+    <section id="about" className="pt-8 pb-12 md:pt-12 md:pb-16 px-4 relative bg-[#dfdfdf]">
+      <div className="max-w-6xl mx-auto">
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {pillars.map((pillar, index) => (
-                        <motion.div
-                            key={pillar.title}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.15 }}
-                            className="p-10 rounded-[2.5rem] bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
-                        >
-                            <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center mb-8">
-                                <pillar.icon className="w-7 h-7 text-white" />
-                            </div>
-                            <h3 className="font-display text-4xl font-black mb-4 text-black tracking-tight">
-                                {pillar.title}
-                            </h3>
-                            <p className="text-gray-600 text-lg leading-relaxed font-body">
-                                {pillar.description}
-                            </p>
-                        </motion.div>
-                    ))}
-                </div>
+        {/* Header — single column centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          {/* <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
+            <span className="text-sm font-bold text-black font-body">About Varticas</span>
+          </div> */}
+          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tight text-black leading-[1.05] mb-6">
+            The missing operating system
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-900">
+              for your work.
+            </span>
+          </h2>
+          <p className="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed font-body">
+            Varticas is an AI coworker built for modern teams. It connects to the apps you already
+            use and executes real work, not just suggestions  directly inside your stack.
+          </p>
+        </motion.div>
 
-                {/* Stats */}
-                <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
-                    {[
-                        { value: "10+", label: "Integrations" },
-                        { value: "50+", label: "Beta users" },
-                        { value: "10x", label: "Faster workflows" },
-                        { value: "24/7", label: "Always running" },
-                    ].map((stat) => (
-                        <div key={stat.label} className="text-center">
-                            <div className="text-5xl md:text-6xl font-display font-black text-black mb-2 tracking-tighter">{stat.value}</div>
-                            <div className="text-sm font-bold text-gray-500 uppercase tracking-wider">{stat.label}</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.1 + index * 0.08 }}
+              className="py-8 px-6 bg-white rounded-3xl border border-gray-200 shadow-sm text-center"
+            >
+              <div className="text-5xl font-display font-black text-black mb-1 tracking-tighter">
+                {stat.value}
+              </div>
+              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider font-body">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      
+      </div>
+    </section>
+  );
 }

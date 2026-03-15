@@ -30,7 +30,7 @@ export default function Hero() {
   const xOffset = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
 
   return (
-    <div ref={containerRef} className="relative min-h-[140vh] w-full bg-[#dfdfdf] flex flex-col items-center pt-48 overflow-hidden">
+    <div ref={containerRef} className="relative min-h-[125vh] w-full bg-[#dfdfdf] flex flex-col items-center pt-48 overflow-hidden">
 
       {/* Massive Tight Black Headline */}
       <motion.div
@@ -46,7 +46,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Main Container for Mockup & Floating Elements */}
-      <div className="relative w-full max-w-6xl mt-12 px-6 pb-40 z-10 flex justify-center">
+      <div className="relative w-full max-w-6xl mt-12 px-6 pb-20 z-10 flex justify-center">
 
         {/* Diagonal Scrolling App Icons Behind Card */}
         <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-visible">
@@ -96,7 +96,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="absolute -right-4 md:right-[5%] bottom-[25%] md:bottom-[30%] z-30"
+          className="absolute -right-4 md:right-[5%] bottom-[10%] md:bottom-[15%] z-30"
         >
           <div className="bg-black text-[#F3ECD8] rounded-3xl px-6 py-6 font-display font-black text-3xl leading-[1.1] tracking-tight shadow-2xl skew-x-[-2deg] rotate-3 hover:rotate-0 transition-transform">
             CONNECT,<br />
@@ -110,7 +110,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="absolute -left-4 md:left-[5%] bottom-[45%] md:bottom-[50%] z-30"
+          className="absolute -left-4 md:left-[5%] bottom-[30%] md:bottom-[35%] z-30"
         >
           <div className="bg-black text-[#F3ECD8] rounded-3xl px-6 py-6 font-display font-black text-3xl leading-[1.1] tracking-tight shadow-2xl skew-x-[2deg] -rotate-12 hover:rotate-0 transition-transform">
             24/7<br />

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function MarkedTag() {
     return (
-        <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-[#dfdfdf] isolate">
+        <section className="relative w-full h-[55vh] min-h-[350px] flex items-center justify-center overflow-hidden bg-[#dfdfdf] isolate">
             {/* Texture / Noise Overlay */}
             <div
                 className="absolute inset-0 z-20 mix-blend-overlay opacity-30 pointer-events-none"
@@ -17,7 +17,7 @@ export default function MarkedTag() {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.8 }}
                 className="relative z-30 max-w-6xl mx-auto px-4 w-full flex justify-center items-center h-full"
             >
