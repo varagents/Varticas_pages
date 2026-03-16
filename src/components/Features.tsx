@@ -101,7 +101,7 @@ export default function Features() {
           className="mt-14 text-center"
         >
           <p className="text-gray-500 font-body text-xl md:text-2xl font-medium tracking-tight">
-            ...and many more things
+            ...and many more things...
           </p>
         </motion.div>
       </div>
