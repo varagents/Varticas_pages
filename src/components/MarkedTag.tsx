@@ -28,7 +28,7 @@ export default function MarkedTag() {
                     </div>
                     <div className="flex flex-col items-start justify-center">
                         <span>SLEEP</span>
-                        <span>DONT</span>
+                        <span>DON'T</span>
                     </div>
                 </div>
             </motion.div>

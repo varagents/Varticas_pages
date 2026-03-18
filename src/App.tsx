@@ -20,10 +20,12 @@ import HashRedirectHandler from "./components/HashRedirectHandler";
 import Redirecting from "./pages/Redirecting";
 import BlogPage from "./pages/Blog";
 import BlogPostPage from "./pages/BlogPost";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+  <SmoothScroll>
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
@@ -73,6 +75,7 @@ const App = () => (
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
+  </SmoothScroll>
 );
 
 export default App;
