@@ -10,7 +10,7 @@ export default function CTA() {
 
       {/* Decorative large text behind */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-5">
-        <h2 className="font-display font-black text-[20vw] leading-none whitespace-nowrap text-black">
+        <h2 className="font-display font-black text-[17vw] leading-none whitespace-nowrap text-black">
           AUTOMATE
         </h2>
       </div>
