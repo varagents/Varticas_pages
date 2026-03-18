@@ -27,24 +27,24 @@ export default function Hero() {
 
   useEffect(() => {
     if (window.innerWidth < 768) return; // Disable on mobile for performance and UX reasons
-      gsap.to(trackRef.current, {
-        x: "-40%",
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5
-        }
-      });
-    }, []);
+    gsap.to(trackRef.current, {
+      x: "-40%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5
+      }
+    });
+  }, []);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className={styles.heroContainer}>
 
-      {/* Massive Headline */}      
+      {/* Massive Headline */}
       <div className={styles.headingLayer}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -58,7 +58,7 @@ export default function Hero() {
           </h1>
         </motion.div>
       </div>
- 
+
       {/* Floating Icons */}
       <div className={styles.backgroundLayer}>
         {/* Slanted Container */}

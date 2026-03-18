@@ -6,9 +6,9 @@
 }
 
 @media (max-width: 768px) {
-.heroContainer {
-  min-height: 100vh;
-}
+  .heroContainer {
+    min-height: 100vh;
+  }
 }
 
 
@@ -23,7 +23,7 @@
 
 
 @media (max-width: 768px) {
-  .heading{
+  .heading {
     line-height: 0.9;
   }
 }
@@ -48,15 +48,15 @@
 .rightWrapper {
   position: absolute;
   z-index: 1;
-  right: clamp(5rem, 13vw, 15rem);
+  right: clamp(7rem, 17vw, 18rem);
   top: clamp(20rem, 25vw, 30rem);
-  
+
 }
 
 .leftWrapper {
   position: absolute;
   z-index: 1;
-  left: clamp(5rem, 13vw, 15rem);
+  left: clamp(10rem, 20vw, 25rem);
   top: clamp(17rem, 22vw, 26rem);
 }
 
@@ -66,12 +66,12 @@
   border-radius: 1.5rem;
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 1.25rem; 
-  padding: 1rem; 
+  font-size: 1.25rem;
+  padding: 1rem;
   line-height: 1.1;
   margin-top: 0;
-  letter-spacing: -0.01em; 
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); 
+  letter-spacing: -0.01em;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   transition: transform 0.1s ease;
 }
 
@@ -103,13 +103,13 @@
   }
 
   .leftWrapper {
-    left: 7%;
+    left: 12%;
     top: 40%;
   }
 
   .rightWrapper {
     right: 6%;
-    top:35%;
+    top: 35%;
   }
 }
 
@@ -127,8 +127,8 @@
   z-index: 30;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  
+  justify-content: center;
+
 }
 
 .ctaWrapper {
@@ -138,7 +138,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 }
 
 
@@ -192,9 +192,9 @@
 }
 
 @media (max-width: 768px) {
-.ctaWrapper {
-  margin-top: 24rem;
-}
+  .ctaWrapper {
+    margin-top: 24rem;
+  }
 }
 
 
@@ -251,7 +251,7 @@
   position: relative;
   overflow: hidden;
 
-  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -259,8 +259,8 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.8),
-              inset 0 -4px 6px rgba(0,0,0,0.04);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.04);
 }
 
 
@@ -309,17 +309,3 @@
     flex-shrink: 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
