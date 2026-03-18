@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, LogOut, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
 
 export default function Navbar() {
   const { user, signOut } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +18,24 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        mobileOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setMobileOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileOpen]);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
@@ -93,6 +114,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
+          ref={buttonRef}
           className="md:hidden p-2 pr-4 text-white hover:opacity-70"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
@@ -102,7 +124,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="absolute top-24 left-4 right-4 bg-[#1C1C1E]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 animate-in fade-in slide-in-from-top-4">
+        <div  ref={menuRef} className="absolute top-24 left-4 right-4 bg-[#1C1C1E]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 animate-in fade-in slide-in-from-top-4">
           <div className="flex flex-col gap-6">
             <a
               href="/#about"

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import styles from "@/styles/MarkedTag.module.css";
 
 export default function MarkedTag() {
     return (
@@ -21,16 +22,19 @@ export default function MarkedTag() {
                 transition={{ duration: 0.8 }}
                 className="relative z-30 max-w-6xl mx-auto px-4 w-full flex justify-center items-center h-full"
             >
-                <div className="grid grid-cols-2 gap-x-4 md:gap-x-8 gap-y-0 text-[#fdfcf5] font-display font-black text-[14vw] md:text-[9rem] leading-[0.85] tracking-tighter uppercase whitespace-nowrap drop-shadow-sm">
-                    <div className="flex flex-col items-end justify-center">
-                        <span>YOU</span>
-                        <span>VARTICAS</span>
-                    </div>
-                    <div className="flex flex-col items-start justify-center">
-                        <span>SLEEP</span>
-                        <span>DON'T</span>
-                    </div>
-                </div>
+            <div className={styles.container}>
+              
+              <div className={styles.row}>
+                <span>YOU</span>
+                <span>SLEEP</span>
+              </div>
+            
+              <div className={styles.row}>
+                <span>VARTICAS</span>
+                <span>DON'T</span>
+              </div>
+            
+            </div>
             </motion.div>
         </section>
     );
