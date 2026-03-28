@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Check } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
 
 const benefits = [
     "Priority access to all features",
@@ -11,7 +10,7 @@ const benefits = [
 ];
 
 export default function EarlyAccess() {
-    const [showBetaModal, setShowBetaModal] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <section className="py-32 px-4 relative bg-[#dfdfdf] overflow-hidden">
@@ -52,10 +51,10 @@ export default function EarlyAccess() {
                         </div>
 
                         <button
-                            onClick={() => setShowBetaModal(true)}
+                            onClick={() => navigate("/login")}
                             className="px-8 py-4 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-transform hover:-translate-y-1 shadow-xl flex items-center gap-2"
                         >
-                            Apply for Beta Access
+                            Get Started
                             <ArrowRight className="w-5 h-5" />
                         </button>
                     </motion.div>
@@ -105,10 +104,6 @@ export default function EarlyAccess() {
                 </div>
             </div>
 
-            <BetaUserModal
-                isOpen={showBetaModal}
-                onClose={() => setShowBetaModal(false)}
-            />
         </section>
     );
 }

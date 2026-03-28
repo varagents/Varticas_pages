@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
 import styles from "@/styles/Hero.module.css";
 
 const appIcons = [
@@ -21,7 +21,7 @@ const appIcons = [
 const scrollingTrack = [...appIcons, ...appIcons, ...appIcons, ...appIcons];
 
 export default function Hero() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef(null);
 
@@ -112,21 +112,16 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className={styles.ctaWrapper}>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => navigate("/login")}
             className={styles.ctaButton}
           >
-            <span>Apply for Beta access</span>
+            <span>Get Started</span>
             <div className={styles.iconWrapper}>
               <ArrowRight className={styles.icon} />
             </div>
           </button>
         </motion.div>
       </div>
-
-      <BetaUserModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </div>
   );
 }

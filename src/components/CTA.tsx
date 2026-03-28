@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
 
 export default function CTA() {
-  const [showBetaModal, setShowBetaModal] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <section className="py-40 px-4 relative text-center bg-[#dfdfdf] overflow-hidden">
@@ -23,22 +22,17 @@ export default function CTA() {
         </h2>
 
         <p className="text-xl text-gray-600 mb-12 max-w-xl mx-auto leading-relaxed font-body">
-          Join the early users saving 20+ hours a week. Limited space in beta.
+          Join the early users saving 20+ hours a week.
         </p>
 
         <button
-          onClick={() => setShowBetaModal(true)}
+          onClick={() => navigate("/login")}
           className="px-10 py-5 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl transform hover:-translate-y-1"
         >
-          Apply for Beta Access
+          Get Started
           <ArrowRight className="w-5 h-5" />
         </button>
       </div>
-
-      <BetaUserModal
-        isOpen={showBetaModal}
-        onClose={() => setShowBetaModal(false)}
-      />
     </section>
   );
 }

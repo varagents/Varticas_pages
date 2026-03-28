@@ -1,10 +1,6 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
 
 export default function DemoSection() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section id="demo" className="pt-4 md:pt-8 pb-0 px-4 bg-[#dfdfdf]">
@@ -69,7 +65,6 @@ export default function DemoSection() {
         </motion.div>
       </div>
 
-      <BetaUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

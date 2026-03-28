@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Plug, MessageSquare, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
+import { Plug, MessageSquare, Zap, CheckCircle2 } from "lucide-react";
 
 const steps = [
   {
@@ -37,7 +35,6 @@ const steps = [
 ];
 
 export default function HowItWorks() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section id="how-it-works" className="pt-24 md:pt-32 pb-4 md:pb-8 px-4 bg-[#dfdfdf]">
@@ -128,7 +125,6 @@ export default function HowItWorks() {
 
       </div>
 
-      <BetaUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

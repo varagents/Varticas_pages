@@ -56,25 +56,25 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           <a
             href="/#about"
-            className="text-sm font-body text-white hover:text-white transition-colors"
+            className="text-sm font-body text-white/60 hover:text-white transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
           >
             About
           </a>
           <a
             href="/#features"
-            className="text-sm font-body text-white hover:text-white transition-colors"
+            className="text-sm font-body text-white/60 hover:text-white transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
           >
             Features
           </a>
           <Link
             to="/blog"
-            className="text-sm font-body text-white hover:text-white transition-colors"
+            className="text-sm font-body text-white/60 hover:text-white transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
           >
             Blogs
           </Link>
           <Link
             to="/pricing"
-            className="text-sm font-body text-white hover:text-white transition-colors"
+            className="text-sm font-body text-white/60 hover:text-white transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
           >
             Pricing
           </Link>
@@ -89,15 +89,7 @@ export default function Navbar() {
                 className="bg-white hover:bg-gray-100 text-black px-6 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 transition-colors"
               >
                 Dashboard
-                <ArrowRight className="w-4 h-4" />
               </Link>
-              <button
-                onClick={signOut}
-                className="p-2.5 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
-                title="Sign out"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
             </div>
           ) : (
             <div className="pr-1">
@@ -160,7 +152,7 @@ export default function Navbar() {
                 to="/dashboard"
                 className="bg-white text-black px-6 py-3 rounded-full text-center font-bold flex justify-center items-center gap-2"
               >
-                Dashboard <ArrowRight className="w-4 h-4" />
+                Dashboard
               </Link>
             ) : (
               <Link

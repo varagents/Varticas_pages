@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import BetaUserModal from "@/components/BetaUserModal";
 
 const examples = [
   {
@@ -75,7 +75,7 @@ function ExampleCard({ example, index }: { example: typeof examples[0]; index: n
 }
 
 export default function WorkflowExamples() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <section id="workflow-examples" className="py-24 md:py-32 px-4 bg-[#dfdfdf]">
@@ -120,7 +120,7 @@ export default function WorkflowExamples() {
           className="flex justify-center"
         >
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => navigate("/login")}
             className="group inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold font-body text-base transition-all hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
           >
             Start Automating
@@ -130,8 +130,6 @@ export default function WorkflowExamples() {
           </button>
         </motion.div>
       </div>
-
-      <BetaUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

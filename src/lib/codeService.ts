@@ -46,68 +46,6 @@ async function getUserEmailOrThrow() {
   return user.email;
 }
 
-export async function applyPromoCode(promocode: string): Promise<CodeServiceResponse> {
-  const email = await getUserEmailOrThrow();
-  const endpoint = `${CODE_SERVICE_URL}/api/promo/apply`;
-  trace("applyPromoCode:start", { endpoint, email, hasPromocode: Boolean(promocode?.trim()) });
-
-  try {
-    const response = await axios.post<CodeServiceResponse>(
-      endpoint,
-      { email, promocode },
-      { validateStatus: () => true }
-    );
-    const data = response.data || {};
-    trace("applyPromoCode:response", data);
-    trace("applyPromoCode:status", response.status);
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError<CodeServiceResponse>(error)) {
-      trace("applyPromoCode:axios-error", {
-        status: error.response?.status,
-        message: error.response?.data?.message || error.message,
-      });
-      throw new Error(error.response?.data?.message || "Invalid access code.");
-    }
-    trace("applyPromoCode:error", error);
-    throw error;
-  }
-}
-
-export async function checkPremiumAccess(): Promise<CodeServiceResponse> {
-  const session = await getSessionOrThrow();
-  const email = await getUserEmailOrThrow();
-  const endpoint = `${CODE_SERVICE_URL}/api/premium-feature`;
-  trace("checkPremiumAccess:start", { endpoint, email });
-
-  try {
-    const response = await axios.post<CodeServiceResponse>(
-      endpoint,
-      { email },
-      {
-        validateStatus: () => true,
-        headers: {
-          Authorization: `Bearer ${session.access_token}`,
-        },
-      }
-    );
-    const data = response.data || {};
-    trace("checkPremiumAccess:response", { status: response.status, body: data });
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError<CodeServiceResponse>(error)) {
-      const message = error.response?.data?.message || "Your plan is expired. Please subscribe.";
-      trace("checkPremiumAccess:axios-error", {
-        status: error.response?.status,
-        message,
-      });
-      throw new Error(message);
-    }
-    trace("checkPremiumAccess:error", error);
-    throw error;
-  }
-}
-
 export async function redirectToProductWithSession() {
   const session = await getSessionOrThrow();
   trace("redirectToProductWithSession:start", {

@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { Twitter, Linkedin, Mail } from "lucide-react";
+import { Twitter, Linkedin, Mail, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
-import BetaUserModal from "@/components/BetaUserModal";
 
 export default function Footer() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <footer className="py-20 px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
@@ -44,25 +41,25 @@ export default function Footer() {
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Get Started</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium mb-8">
               <li>
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="hover:text-black transition-colors text-left font-semibold text-black"
-                >
-                  Beta Signup
-                </button>
+                <Link to="/login" className="hover:text-black transition-colors font-semibold text-black">
+                  Start Now
+                </Link>
               </li>
             </ul>
 
             <h4 className="font-bold mb-4 text-black text-sm uppercase tracking-wider">Connect</h4>
             <div className="flex gap-4">
-              <a href="https://x.com/varticasAI" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
+              <a href="https://x.com/varticasAI" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/company/varticas" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
+              <a href="https://www.linkedin.com/company/varticas" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="mailto:soumyajit@varticas.com" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
+              <a href="mailto:soumyajit@varticas.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
                 <Mail className="w-5 h-5" />
+              </a>
+              <a href="https://www.youtube.com/@Varticas" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -77,7 +74,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <BetaUserModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </footer>
   );
 }

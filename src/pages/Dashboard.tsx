@@ -2,8 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PromoCodePopup from "@/components/PromoCodePopup";
-import BetaUserModal from "@/components/BetaUserModal";
 import {
     LogOut,
     Crown,
@@ -19,8 +17,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
-import { toast } from "sonner";
-import { applyPromoCode, checkPremiumAccess } from "@/lib/codeService";
+import { redirectToProductWithSession } from "@/lib/codeService";
 
 export default function Dashboard() {
     const { user, metadata, signOut } = useAuth();
@@ -28,9 +25,7 @@ export default function Dashboard() {
     const [currentPlan, setCurrentPlan] = useState<string | null>(null);
     const [planLoading, setPlanLoading] = useState(true);
     const [proUntil, setProUntil] = useState<string | null>(null);
-    const [showPromo, setShowPromo] = useState(false);
-    const [showBeta, setShowBeta] = useState(false);
-    const [isCheckingAccess, setIsCheckingAccess] = useState(false);
+    const [isLaunching, setIsLaunching] = useState(false);
 
     useEffect(() => {
         const fetchPlan = async () => {
@@ -70,41 +65,16 @@ export default function Dashboard() {
         await signOut();
     };
 
-    const handleTryNowClick = async () => {
+    const handleLaunchApp = async () => {
         if (!user) {
             navigate("/login");
             return;
         }
-
-        setIsCheckingAccess(true);
+        setIsLaunching(true);
         try {
-            const accessResult = await checkPremiumAccess();
-            if (accessResult.success === true) {
-                navigate("/redirecting");
-            } else {
-                setShowPromo(true);
-            }
-        } catch (error) {
-            const message = error instanceof Error ? error.message : "Unable to verify access.";
-            toast.error(message);
+            await redirectToProductWithSession();
         } finally {
-            setIsCheckingAccess(false);
-        }
-    };
-
-    const handlePromoSubmit = async (code: string) => {
-        try {
-            const result = await applyPromoCode(code);
-            if (result.success === true) {
-                toast.success("Access code verified.");
-                setShowPromo(false);
-                navigate("/redirecting");
-                return;
-            }
-            throw new Error(String(result.message || "Invalid access code."));
-        } catch (error) {
-            const message = error instanceof Error ? error.message : "Unable to verify access code.";
-            toast.error(message);
+            setIsLaunching(false);
         }
     };
 
@@ -210,11 +180,11 @@ export default function Dashboard() {
                                     </Link>
                                     <button
                                         type="button"
-                                        onClick={handleTryNowClick}
-                                        disabled={isCheckingAccess}
+                                        onClick={handleLaunchApp}
+                                        disabled={isLaunching}
                                         className="relative overflow-hidden px-6 py-3 rounded-full font-bold font-body whitespace-nowrap text-black bg-[#f5f5f5] hover:bg-[#e5e5e5] border border-black/5 transition-all disabled:opacity-50 flex-1 md:flex-none"
                                     >
-                                        <span className="relative z-10">{isCheckingAccess ? "Checking..." : "Redeem Code"}</span>
+                                        <span className="relative z-10">{isLaunching ? "Launching..." : "Launch Varticas"}</span>
                                     </button>
                                 </div>
                             )}
@@ -328,27 +298,9 @@ export default function Dashboard() {
                         >
                             Contact Support
                         </Link>
-                        <button
-                            type="button"
-                            onClick={() => setShowBeta(true)}
-                            className="px-5 py-2.5 rounded-full bg-white shadow-sm border border-black/5 text-sm font-medium text-gray-600 font-body hover:text-black hover:shadow-md transition-all"
-                        >
-                            Apply for Beta User
-                        </button>
                     </motion.div>
                 </motion.div>
             </div>
-
-            <PromoCodePopup
-                isOpen={showPromo}
-                onClose={() => setShowPromo(false)}
-                onSubmit={handlePromoSubmit}
-            />
-
-            <BetaUserModal
-                isOpen={showBeta}
-                onClose={() => setShowBeta(false)}
-            />
 
             <style>{`
                 @keyframes splash {
