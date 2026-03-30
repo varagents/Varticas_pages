@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function CTA() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   return (
     <section className="py-40 px-4 relative text-center bg-[#dfdfdf] overflow-hidden">
@@ -26,7 +28,7 @@ export default function CTA() {
         </p>
 
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate(user ? "/dashboard" : "/login")}
           className="px-10 py-5 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl transform hover:-translate-y-1"
         >
           Get Started

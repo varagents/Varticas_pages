@@ -428,13 +428,13 @@ export default function PricingPage() {
 
                 {/* Explore Button */}
                 <div className="mt-16 text-center w-full flex justify-center pb-20">
-                    <Link
-                        to="#"
+                    <button
+                        onClick={() => navigate(user ? "/dashboard" : "/login")}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#f5f5f5] text-black border border-black/5 shadow-sm rounded-full font-medium text-sm transition-all font-body"
                     >
                         Explore Varticas
                         <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </button>
                 </div>
             </section>
 
@@ -543,13 +543,13 @@ export default function PricingPage() {
                         Join thousands of early adopters and lock in your pricing before our
                         public launch.
                     </p>
-                    <Link
-                        to="/login?plan=pro"
+                    <button
+                        onClick={() => navigate(user ? "/dashboard" : "/login")}
                         className="inline-flex items-center gap-2 px-8 py-4 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                     >
                         Get Started Now
                         <ArrowRight className="w-5 h-5" />
-                    </Link>
+                    </button>
                 </motion.div>
             </section>
 

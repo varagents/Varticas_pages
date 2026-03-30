@@ -1,7 +1,10 @@
 import { Twitter, Linkedin, Mail, Youtube } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   return (
     <footer className="py-20 px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
@@ -41,9 +44,9 @@ export default function Footer() {
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Get Started</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium mb-8">
               <li>
-                <Link to="/login" className="hover:text-black transition-colors font-semibold text-black">
+                <button onClick={() => navigate(user ? "/dashboard" : "/login")} className="hover:text-black transition-colors font-semibold text-black">
                   Start Now
-                </Link>
+                </button>
               </li>
             </ul>
 
