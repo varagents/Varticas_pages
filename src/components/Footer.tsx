@@ -48,6 +48,7 @@ export default function Footer() {
                   Start Now
                 </button>
               </li>
+              <li><Link to="/login" className="hover:text-black transition-colors">Join Community</Link></li>
             </ul>
 
             <h4 className="font-bold mb-4 text-black text-sm uppercase tracking-wider">Connect</h4>

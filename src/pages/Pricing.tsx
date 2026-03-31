@@ -15,7 +15,7 @@ const tiers = [
         period: "/mo",
         description: "Perfect for individuals exploring agent automation.",
         features: [
-            "100,000 monthly tokens",
+            "Limited usage",
             "50 daily requests",
             "Limited MCP connections",
             "Limited agent tasks",
@@ -34,12 +34,12 @@ const tiers = [
     },
     {
         name: "Pro",
-        price: "₹499",
+        price: "₹999",
         period: "/mo",
         description: "To unlock more connections and workflows",
         features: [
-            "500,000 monthly tokens",
-            "100 daily requests",
+            "20x more usage",
+            "200 daily requests",
             "Unlimited MCP connections",
             "Unlimited agent tasks",
             "Unlimited workflows",
@@ -61,8 +61,8 @@ const tiers = [
         period: "",
         description: "For organizations requiring maximum scale.",
         features: [
-            "5,000,000 monthly tokens",
-            "1000 daily requests",
+            "Custom usage allocation",
+            "Custom daily requests",
             "Unlimited MCP connections",
             "Unlimited agent tasks",
             "Unlimited workflows",
@@ -192,7 +192,7 @@ export default function PricingPage() {
                     },
                     body: JSON.stringify({
                         user_id: user.id,
-                        amount: 499 * 100, // ₹499
+                        amount: 999 * 100, // ₹999
                     }),
                 }
             );
@@ -203,7 +203,7 @@ export default function PricingPage() {
             // 2. Open Razorpay Checkout
             const options = {
                 key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-                amount: 499 * 100,
+                amount: 999 * 100,
                 currency: "INR",
                 name: "Varticas",
                 description: "Upgrade to Pro",
@@ -298,7 +298,7 @@ export default function PricingPage() {
             {/* Pricing Cards */}
             <section className="pb-32 px-4 relative">
                 <motion.div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch"
                     variants={container}
                     initial="hidden"
                     animate="show"
@@ -307,7 +307,7 @@ export default function PricingPage() {
                         <motion.div
                             key={tier.name}
                             variants={item}
-                            className={`relative p-8 rounded-2xl border ${tier.borderClass} ${tier.bgClass} flex flex-col transition-all duration-300 hover:translate-y-[-4px] ${tier.highlighted
+                            className={`relative p-8 rounded-2xl border ${tier.borderClass} ${tier.bgClass} flex h-full min-h-0 flex-col transition-all duration-300 hover:translate-y-[-4px] ${tier.highlighted
                                 ? "shadow-[0_0_40px_-10px_rgba(34,197,94,0.25)] md:-translate-y-4"
                                 : ""
                                 }`}
@@ -340,14 +340,14 @@ export default function PricingPage() {
 
                             <p
                                 className={`${tier.highlighted ? "text-gray-600" : "text-gray-500"
-                                    } mb-8 text-sm leading-relaxed font-body`}
+                                    } mb-6 min-h-[3rem] text-sm leading-relaxed font-body md:min-h-[3.25rem]`}
                             >
                                 {tier.description}
                             </p>
 
                             <div
-                                className={`space-y-4 text-sm ${tier.highlighted ? "text-gray-700" : "text-gray-600"
-                                    } mb-8 flex-1 font-body`}
+                                className={`min-h-0 flex-1 space-y-4 text-sm ${tier.highlighted ? "text-gray-700" : "text-gray-600"
+                                    } font-body`}
                             >
                                 {tier.features.map((feature) => (
                                     <div key={feature} className="flex gap-3 items-start">
@@ -359,6 +359,7 @@ export default function PricingPage() {
                                 ))}
                             </div>
 
+                            <div className="mt-auto w-full shrink-0 pt-6">
                             {tier.name === "Pro" ? (
                                 currentPlan === "pro" ? (
                                     <button
@@ -422,6 +423,7 @@ export default function PricingPage() {
                                     )}
                                 </a>
                             )}
+                            </div>
                         </motion.div>
                     ))}
                 </motion.div>
@@ -470,8 +472,9 @@ export default function PricingPage() {
                             </thead>
                             <tbody className="text-gray-600">
                                 {[
+                                    ["Token usage", "Limited", "20x more", "Custom"],
                                     ["Agent tasks", "Limited", "Unlimited", "Unlimited"],
-                                    ["Workflows", "Limited", "50", "Unlimited"],
+                                    ["Workflows", "Limited", "10x more", "Unlimited"],
                                     ["MCP Integrations", "Limited", "Unlimited", "Unlimited"],
                                     ["Support", "Community", "Priority", "Instant Priority"],
                                     ["Theme", "Dark", "Dark", "Customizable"] // Just an example feature where it differs

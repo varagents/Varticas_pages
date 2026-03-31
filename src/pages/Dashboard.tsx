@@ -247,11 +247,11 @@ export default function Dashboard() {
                                     </div>
                                     <div>
                                         <p className="text-black font-bold text-base">
-                                            Launching Soon
+                                            🚀 Early Access Enabled
                                         </p>
                                         <p className="text-gray-600 text-sm mt-1 leading-relaxed">
                                             We're putting the finishing touches on Varticas. As a
-                                            early member, you'll get first access.
+                                            early member, you are getting first access.
                                         </p>
                                     </div>
                                 </div>
@@ -260,13 +260,13 @@ export default function Dashboard() {
                                     <div className="flex items-center gap-2 mb-3">
                                         <Sparkles className="w-4 h-4 text-yellow-500" />
                                         <span className="text-sm font-bold text-black uppercase tracking-wider">
-                                            What's coming
+                                            What has been cooked up
                                         </span>
                                     </div>
                                     <ul className="space-y-2 text-sm text-gray-600">
                                         <li>• AI agent task execution</li>
                                         <li>• MCP-powered workflow builder</li>
-                                        <li>• Desktop app for macOS</li>
+                                        <li>• Scheduler to work with your favorite tools</li>
                                     </ul>
                                 </div>
                             </div>

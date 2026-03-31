@@ -17,8 +17,8 @@ export default function Pricing() {
                         <p className="text-gray-400 mb-8 text-sm leading-relaxed">Perfect for individuals exploring agent automation.</p>
 
                         <div className="space-y-4 text-sm text-gray-400 mb-8 flex-1">
-                            <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> 10 agent tasks/month</div>
-                            <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> 3 workflows</div>
+                            <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Free limited token</div>
+                            <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Limited agent tasks and workflows</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Community support</div>
                         </div>
 
@@ -37,8 +37,9 @@ export default function Pricing() {
                         <p className="text-gray-300 mb-8 text-sm leading-relaxed">For power users who need serious automation bandwidth.</p>
 
                         <div className="space-y-4 text-sm text-gray-300 mb-8 flex-1">
+                            <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> 20x more usage</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> Unlimited agent tasks</div>
-                            <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> 50 workflows</div>
+                            <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> Expanded workflows</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> Priority support</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-green-500" /> Early access</div>
                         </div>
@@ -53,6 +54,7 @@ export default function Pricing() {
                         <p className="text-gray-400 mb-8 text-sm leading-relaxed">For organizations requiring security and control.</p>
 
                         <div className="space-y-4 text-sm text-gray-400 mb-8 flex-1">
+                            <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Custom token allocation</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> SSO & Audit Logs</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Custom Integrations</div>
                             <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Dedicated Success Mgr</div>
