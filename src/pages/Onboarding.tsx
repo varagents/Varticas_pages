@@ -93,6 +93,19 @@ export default function Onboarding() {
         }
     };
 
+    const handleSkip = async () => {
+        setLoading(true);
+        try {
+            await updateUserMetadata({
+                onboarding_complete: true,
+            });
+            navigate("/dashboard", { replace: true });
+        } catch {
+            // Silently handle — user can retry
+            setLoading(false);
+        }
+    };
+
     const canProceed = () => {
         switch (step) {
             case 1:
@@ -125,8 +138,17 @@ export default function Onboarding() {
                         </div>
                         <span className="font-display font-black text-xl">Varticas</span>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 font-bold bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
-                        Step {step} of {TOTAL_STEPS}
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={handleSkip}
+                            disabled={loading}
+                            className="text-sm font-bold text-gray-500 hover:text-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            Skip for now
+                        </button>
+                        <div className="flex items-center gap-2 text-sm text-gray-500 font-bold bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200">
+                            Step {step} of {TOTAL_STEPS}
+                        </div>
                     </div>
                 </div>
             </div>
