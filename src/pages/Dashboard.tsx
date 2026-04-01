@@ -171,10 +171,10 @@ export default function Dashboard() {
                             </div>
 
                             {!planLoading && currentPlan !== "pro" && (
-                                <div className="flex items-center gap-3 w-full md:w-auto mt-4 md:mt-0">
+                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto mt-4 md:mt-0">
                                     <Link
                                         to="/pricing"
-                                        className="px-6 py-3 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] whitespace-nowrap text-center flex-1 md:flex-none"
+                                        className="px-6 py-3 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] text-center w-full sm:w-auto"
                                     >
                                         Upgrade to Pro
                                     </Link>
@@ -182,7 +182,7 @@ export default function Dashboard() {
                                         type="button"
                                         onClick={handleLaunchApp}
                                         disabled={isLaunching}
-                                        className="relative overflow-hidden px-6 py-3 rounded-full font-bold font-body whitespace-nowrap text-black bg-[#f5f5f5] hover:bg-[#e5e5e5] border border-black/5 transition-all disabled:opacity-50 flex-1 md:flex-none"
+                                        className="relative overflow-hidden px-6 py-3 rounded-full font-bold font-body text-black bg-[#f5f5f5] hover:bg-[#e5e5e5] border border-black/5 transition-all disabled:opacity-50 w-full sm:w-auto"
                                     >
                                         <span className="relative z-10">{isLaunching ? "Launching..." : "Launch Varticas"}</span>
                                     </button>
@@ -242,16 +242,14 @@ export default function Dashboard() {
                             </h3>
                             <div className="space-y-6 font-body">
                                 <div className="flex items-start gap-4">
-                                    <div className="mt-1 p-2 bg-yellow-100 rounded-xl border border-yellow-200">
-                                        <Clock className="w-4 h-4 text-yellow-600" />
-                                    </div>
+                                    
                                     <div>
                                         <p className="text-black font-bold text-base">
-                                            🚀 Early Access Enabled
+                                            Early Access Enabled
                                         </p>
                                         <p className="text-gray-600 text-sm mt-1 leading-relaxed">
-                                            We're putting the finishing touches on Varticas. As a
-                                            early member, you are getting first access.
+                                            You now have early access to Varticas.
+                                            Start executing tasks and exploring workflows instantly.
                                         </p>
                                     </div>
                                 </div>
@@ -260,15 +258,20 @@ export default function Dashboard() {
                                     <div className="flex items-center gap-2 mb-3">
                                         <Sparkles className="w-4 h-4 text-yellow-500" />
                                         <span className="text-sm font-bold text-black uppercase tracking-wider">
-                                            What has been cooked up
+                                            What you can do now
                                         </span>
                                     </div>
                                     <ul className="space-y-2 text-sm text-gray-600">
-                                        <li>• AI agent task execution</li>
-                                        <li>• MCP-powered workflow builder</li>
-                                        <li>• Scheduler to work with your favorite tools</li>
+                                        <li>•  Run tasks with AI agents</li>
+                                        <li>•  Build workflows using MCP tools</li>
+                                        <li>•  Automate actions across your apps</li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div className="block md:hidden mt-5 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2">
+                                <p className="text-xs text-blue-900 font-semibold">
+                                    💻 Best experienced on desktop for full AI workspace
+                                </p>
                             </div>
                         </motion.div>
                     </div>

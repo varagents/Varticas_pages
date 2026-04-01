@@ -543,8 +543,7 @@ export default function PricingPage() {
                         Ready to automate?
                     </h2>
                     <p className="text-lg text-gray-600 font-body mb-8 max-w-xl mx-auto">
-                        Join thousands of early adopters and lock in your pricing before our
-                        public launch.
+                        Join hundreds of early adopters and lock in your pricing now
                     </p>
                     <button
                         onClick={() => navigate(user ? "/dashboard" : "/login")}
