@@ -1,4 +1,4 @@
-# Varticas — Marketing & Auth Website
+# Varticas — landing page
 
 > **"LLM Thinks. Varticas Executes."**  
 > An autonomous agent that researches, navigates, and executes — combined with an MCP-powered workflow engine.
