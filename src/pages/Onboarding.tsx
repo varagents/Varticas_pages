@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +13,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { redirectToProductWithSession } from "@/lib/codeService";
 
 const TOTAL_STEPS = 3;
 
@@ -47,7 +47,6 @@ const referralSources = [
 
 export default function Onboarding() {
     const { user, updateUserMetadata, metadata } = useAuth();
-    const navigate = useNavigate();
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
 
@@ -86,9 +85,8 @@ export default function Onboarding() {
                 onboarding_complete: true,
                 selected_plan: metadata.selected_plan || "pro",
             });
-            navigate("/dashboard", { replace: true });
+            await redirectToProductWithSession();
         } catch {
-            // Silently handle — user can retry
             setLoading(false);
         }
     };
@@ -99,9 +97,8 @@ export default function Onboarding() {
             await updateUserMetadata({
                 onboarding_complete: true,
             });
-            navigate("/dashboard", { replace: true });
+            await redirectToProductWithSession();
         } catch {
-            // Silently handle — user can retry
             setLoading(false);
         }
     };

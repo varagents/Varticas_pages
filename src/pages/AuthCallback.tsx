@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { redirectToProductWithSession } from "@/lib/codeService";
 
 export default function AuthCallback() {
     const { user, loading, metadata } = useAuth();
@@ -10,14 +11,14 @@ export default function AuthCallback() {
         if (loading) return;
 
         if (user) {
-            // If onboarding is complete, go to dashboard; otherwise onboarding
             if (metadata.onboarding_complete) {
-                navigate("/dashboard", { replace: true });
+                void redirectToProductWithSession().catch(() => {
+                    navigate("/dashboard", { replace: true });
+                });
             } else {
                 navigate("/onboarding", { replace: true });
             }
         } else {
-            // No user after callback = something went wrong
             navigate("/login", { replace: true });
         }
     }, [user, loading, metadata, navigate]);

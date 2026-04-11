@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { openVarticasProductInNewTab } from "@/lib/productUrl";
 import { ArrowRight, Sparkles, Check } from "lucide-react";
 
 const benefits = [
@@ -10,8 +10,6 @@ const benefits = [
 ];
 
 export default function EarlyAccess() {
-    const navigate = useNavigate();
-
     return (
         <section className="py-32 px-4 relative bg-[#dfdfdf] overflow-hidden">
             <div className="max-w-6xl mx-auto">
@@ -51,7 +49,8 @@ export default function EarlyAccess() {
                         </div>
 
                         <button
-                            onClick={() => navigate("/login")}
+                            type="button"
+                            onClick={openVarticasProductInNewTab}
                             className="px-8 py-4 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-transform hover:-translate-y-1 shadow-xl flex items-center gap-2"
                         >
                             Get Started

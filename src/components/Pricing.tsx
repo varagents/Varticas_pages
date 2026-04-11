@@ -1,6 +1,10 @@
 import { Check } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { VARTICAS_PRODUCT_URL, openProductCta } from "@/lib/productUrl";
 
 export default function Pricing() {
+    const { user } = useAuth();
+
     return (
         <section id="pricing" className="py-32 px-4 relative bg-[#07080A]">
             <div className="max-w-7xl mx-auto">
@@ -22,7 +26,24 @@ export default function Pricing() {
                             <div className="flex gap-3"><Check className="w-4 h-4 text-gray-600" /> Community support</div>
                         </div>
 
-                        <button className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium text-sm transition-colors border border-white/5">Get Started</button>
+                        {user ? (
+                            <button
+                                type="button"
+                                onClick={() => openProductCta(true)}
+                                className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium text-sm transition-colors border border-white/5 text-center"
+                            >
+                                Get Started
+                            </button>
+                        ) : (
+                            <a
+                                href={VARTICAS_PRODUCT_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium text-sm transition-colors border border-white/5 block text-center"
+                            >
+                                Get Started
+                            </a>
+                        )}
                     </div>
 
                     {/* Pro Tier */}

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
+import { openProductCta, VARTICAS_PRODUCT_URL } from "@/lib/productUrl";
 
 const tiers = [
     {
@@ -23,7 +24,7 @@ const tiers = [
             "Community support",
         ],
         cta: "Get Started",
-        ctaLink: "/login?plan=starter",
+        ctaLink: VARTICAS_PRODUCT_URL,
         highlighted: false,
         icon: Zap,
         checkColor: "text-gray-400",
@@ -169,7 +170,7 @@ export default function PricingPage() {
 
     const handleProUpgrade = async () => {
         if (!user || !session) {
-            navigate("/login?plan=pro");
+            openProductCta(false);
             return;
         }
 
@@ -401,16 +402,29 @@ export default function PricingPage() {
                                     >
                                         Currently on Pro
                                     </button>
-                                ) : (
-                                    <Link
-                                        to={tier.ctaLink}
+                                ) : user ? (
+                                    <button
+                                        type="button"
+                                        onClick={() => openProductCta(true)}
                                         className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
                                     >
                                         {tier.cta}
                                         {tier.highlighted && (
                                             <ArrowRight className="w-4 h-4 inline ml-2" />
                                         )}
-                                    </Link>
+                                    </button>
+                                ) : (
+                                    <a
+                                        href={tier.ctaLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
+                                    >
+                                        {tier.cta}
+                                        {tier.highlighted && (
+                                            <ArrowRight className="w-4 h-4 inline ml-2" />
+                                        )}
+                                    </a>
                                 )
                             ) : (
                                 <a
@@ -431,7 +445,8 @@ export default function PricingPage() {
                 {/* Explore Button */}
                 <div className="mt-16 text-center w-full flex justify-center pb-20">
                     <button
-                        onClick={() => navigate(user ? "/dashboard" : "/login")}
+                        type="button"
+                        onClick={() => openProductCta(!!user)}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#f5f5f5] text-black border border-black/5 shadow-sm rounded-full font-medium text-sm transition-all font-body"
                     >
                         Explore Varticas
@@ -546,7 +561,8 @@ export default function PricingPage() {
                         Join hundreds of early adopters and lock in your pricing now
                     </p>
                     <button
-                        onClick={() => navigate(user ? "/dashboard" : "/login")}
+                        type="button"
+                        onClick={() => openProductCta(!!user)}
                         className="inline-flex items-center gap-2 px-8 py-4 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                     >
                         Get Started Now

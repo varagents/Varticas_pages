@@ -51,7 +51,7 @@ export default function Login() {
                 if (signInError) {
                     setError(signInError.message);
                 } else {
-                    navigate("/onboarding");
+                    navigate("/auth/callback", { replace: true });
                 }
             }
         } catch {

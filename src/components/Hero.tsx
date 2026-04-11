@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { openProductCta } from "@/lib/productUrl";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -22,7 +22,6 @@ const appIcons = [
 const scrollingTrack = [...appIcons, ...appIcons, ...appIcons, ...appIcons];
 
 export default function Hero() {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef(null);
@@ -114,7 +113,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className={styles.ctaWrapper}>
           <button
-            onClick={() => navigate(user ? "/dashboard" : "/login")}
+            type="button"
+            onClick={() => openProductCta(!!user)}
             className={styles.ctaButton}
           >
             <span>Get Started</span>
