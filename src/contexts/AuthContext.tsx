@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
+import { requestOtp, resendOtp, verifyOtp, requestPasswordResetOtp, resendPasswordResetOtp, confirmPasswordReset } from '@/lib/emailAuth';
 import type { User, Session } from '@supabase/supabase-js';
 
 interface UserMetadata {
@@ -24,6 +25,12 @@ interface AuthContextType {
     signInWithGithub: () => Promise<void>;
     signInWithEmail: (email: string, password: string) => Promise<{ error: Error | null }>;
     signUpWithEmail: (email: string, password: string) => Promise<{ error: Error | null }>;
+    requestEmailOtp: (mode: 'signup' | 'login', email: string, password: string) => Promise<{ challengeId: string | null; error: Error | null }>;
+    resendEmailOtp: (mode: 'signup' | 'login', challengeId: string) => Promise<{ error: Error | null }>;
+    verifyEmailOtp: (email: string, password: string, otp: string, challengeId: string) => Promise<{ error: Error | null }>;
+    requestResetPasswordOtp: (email: string) => Promise<{ challengeId: string | null; error: Error | null }>;
+    resendResetPasswordOtp: (challengeId: string) => Promise<{ error: Error | null }>;
+    confirmResetPassword: (email: string, otp: string, challengeId: string, newPassword: string) => Promise<{ error: Error | null }>;
     signOut: () => Promise<void>;
     updateUserMetadata: (data: Partial<UserMetadata>) => Promise<void>;
 }
@@ -75,17 +82,82 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
 
     const signInWithEmail = useCallback(async (email: string, password: string) => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        return { error: error as Error | null };
+        void email;
+        void password;
+        return { error: new Error('Direct email/password sign-in is disabled. Use OTP flow.') };
     }, []);
 
     const signUpWithEmail = useCallback(async (email: string, password: string) => {
-        const { error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
-        });
-        return { error: error as Error | null };
+        void email;
+        void password;
+        return { error: new Error('Direct email signup is disabled. Use OTP flow.') };
+    }, []);
+
+    const requestEmailOtp = useCallback(
+        async (mode: 'signup' | 'login', email: string, password: string) => {
+            try {
+                const response = await requestOtp(mode, email, password);
+                return { challengeId: response.challengeId, error: null };
+            } catch (error) {
+                return { challengeId: null, error: error as Error };
+            }
+        },
+        []
+    );
+
+    const resendEmailOtp = useCallback(
+        async (mode: 'signup' | 'login', challengeId: string) => {
+            try {
+                await resendOtp(mode, challengeId);
+                return { error: null };
+            } catch (error) {
+                return { error: error as Error };
+            }
+        },
+        []
+    );
+
+    const verifyEmailOtp = useCallback(
+        async (email: string, password: string, otp: string, challengeId: string) => {
+            try {
+                const response = await verifyOtp(email, password, otp, challengeId);
+                const { error } = await supabase.auth.setSession({
+                    access_token: response.tokens.access_token,
+                    refresh_token: response.tokens.refresh_token,
+                });
+                return { error: error as Error | null };
+            } catch (error) {
+                return { error: error as Error };
+            }
+        },
+        []
+    );
+
+    const requestResetPasswordOtp = useCallback(async (email: string) => {
+        try {
+            const response = await requestPasswordResetOtp(email);
+            return { challengeId: response.challengeId, error: null };
+        } catch (error) {
+            return { challengeId: null, error: error as Error };
+        }
+    }, []);
+
+    const resendResetPasswordOtp = useCallback(async (challengeId: string) => {
+        try {
+            await resendPasswordResetOtp(challengeId);
+            return { error: null };
+        } catch (error) {
+            return { error: error as Error };
+        }
+    }, []);
+
+    const confirmResetPassword = useCallback(async (email: string, otp: string, challengeId: string, newPassword: string) => {
+        try {
+            await confirmPasswordReset(email, otp, challengeId, newPassword);
+            return { error: null };
+        } catch (error) {
+            return { error: error as Error };
+        }
     }, []);
 
     const signOut = useCallback(async () => {
@@ -110,6 +182,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 signInWithGithub,
                 signInWithEmail,
                 signUpWithEmail,
+                requestEmailOtp,
+                resendEmailOtp,
+                verifyEmailOtp,
+                requestResetPasswordOtp,
+                resendResetPasswordOtp,
+                confirmResetPassword,
                 signOut,
                 updateUserMetadata,
             }}
