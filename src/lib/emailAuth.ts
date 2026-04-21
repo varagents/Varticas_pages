@@ -19,11 +19,24 @@ interface PasswordResetResponse {
   message: string;
 }
 
-const EMAIL_AUTH_API_URL =
-  import.meta.env.VITE_EMAIL_AUTH_API_URL || "http://localhost:3002";
+function getEmailAuthApiUrl(): string {
+  const configured = import.meta.env.VITE_EMAIL_AUTH_API_URL?.trim();
+  if (configured) {
+    return configured.replace(/\/+$/, "");
+  }
+
+  if (import.meta.env.DEV) {
+    return "http://localhost:3002";
+  }
+
+  // In production, default to same-origin instead of localhost.
+  return window.location.origin.replace(/\/+$/, "");
+}
+
+const EMAIL_AUTH_API_URL = getEmailAuthApiUrl();
 
 function buildUrl(path: string): string {
-  return `${EMAIL_AUTH_API_URL.replace(/\/+$/, "")}${path}`;
+  return `${EMAIL_AUTH_API_URL}${path}`;
 }
 
 async function parseError(response: Response): Promise<Error> {
