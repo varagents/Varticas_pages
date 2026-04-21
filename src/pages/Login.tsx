@@ -35,6 +35,7 @@ export default function Login() {
   const [isForgotPasswordMode, setIsForgotPasswordMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [challengeId, setChallengeId] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +57,7 @@ export default function Login() {
   const handleModeToggle = () => {
     setIsSignUp(prev => !prev);
     setIsForgotPasswordMode(false);
+    setConfirmPassword("");
     resetFormState();
   };
 
@@ -63,6 +65,7 @@ export default function Login() {
     setIsSignUp(false);
     setIsForgotPasswordMode(true);
     setPassword("");
+    setConfirmPassword("");
     setShowPassword(false);
     resetFormState();
   };
@@ -70,6 +73,7 @@ export default function Login() {
   const exitForgotPasswordMode = () => {
     setIsForgotPasswordMode(false);
     setPassword("");
+    setConfirmPassword("");
     setShowPassword(false);
     resetFormState();
   };
@@ -117,6 +121,11 @@ export default function Login() {
       }
 
       if (!isOtpStep) {
+        if (isSignUp && password !== confirmPassword) {
+          setError("Passwords do not match");
+          return;
+        }
+
         const { challengeId: newChallengeId, error: requestError } =
           await requestEmailOtp(authMode, email.trim(), password);
 
@@ -282,7 +291,13 @@ export default function Login() {
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder={isForgotPasswordMode ? "New Password" : "Password"}
+                  placeholder={
+                    isForgotPasswordMode
+                      ? "New Password"
+                      : isSignUp
+                        ? "Set Password"
+                        : "Password"
+                  }
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
@@ -301,6 +316,21 @@ export default function Login() {
                     <Eye className="w-4 h-4" />
                   )}
                 </button>
+              </div>
+            )}
+
+            {isSignUp && !isForgotPasswordMode && !isOtpStep && (
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={8}
+                  className="pl-11 bg-gray-50 border-gray-200 text-black placeholder:text-gray-400 h-14 focus:border-black focus:ring-black rounded-xl font-medium"
+                />
               </div>
             )}
 
