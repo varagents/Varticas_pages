@@ -170,7 +170,7 @@ export default function PricingPage() {
 
     const handleProUpgrade = async () => {
         if (!user || !session) {
-            openProductCta(false);
+            navigate("/login?plan=pro");
             return;
         }
 
