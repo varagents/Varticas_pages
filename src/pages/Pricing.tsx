@@ -35,7 +35,7 @@ const tiers = [
     },
     {
         name: "Pro",
-        price: "₹999",
+        price: "₹499",
         period: "/mo",
         description: "To unlock more connections and workflows",
         features: [
@@ -193,7 +193,7 @@ export default function PricingPage() {
                     },
                     body: JSON.stringify({
                         user_id: user.id,
-                        amount: 999 * 100, // ₹999
+                        amount: 499 * 100, // ₹499
                     }),
                 }
             );
@@ -204,7 +204,7 @@ export default function PricingPage() {
             // 2. Open Razorpay Checkout
             const options = {
                 key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-                amount: 999 * 100,
+                amount: 499 * 100,
                 currency: "INR",
                 name: "Varticas",
                 description: "Upgrade to Pro",
