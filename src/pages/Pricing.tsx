@@ -36,7 +36,10 @@ const tiers = [
     {
         name: "Pro",
         price: "₹499",
+        originalPrice: "₹999",
         period: "/mo",
+        discountText: "(50% discount applied)",
+        offerText: "Limited Offer",
         description: "To unlock more connections and workflows",
         features: [
             "20x more usage",
@@ -328,14 +331,47 @@ export default function PricingPage() {
                                     />
                                 </div>
                                 <h3 className="text-xl font-bold font-display text-black">{tier.name}</h3>
+                                {tier.offerText && (
+                                    <span className="ml-auto rounded-full bg-gradient-to-r from-[#f7b46a] via-[#f39a4f] to-[#ec7f39] px-5 py-2 text-xs font-bold uppercase tracking-wide text-white shadow-[0_8px_20px_rgba(236,127,57,0.45)]">
+                                        {tier.offerText}
+                                    </span>
+                                )}
                             </div>
 
-                            <div className="mb-6 flex items-baseline gap-1">
-                                <span className="text-4xl font-bold text-black font-display">
-                                    {tier.price}
-                                </span>
-                                {tier.period && (
-                                    <span className="text-gray-500 text-sm font-body">{tier.period}</span>
+                            <div className="mb-6">
+                                {tier.originalPrice ? (
+                                    <>
+                                        <div className="flex items-end gap-2">
+                                            <span className="text-[2.15rem] leading-none font-semibold text-gray-400 line-through decoration-2 decoration-gray-400/80">
+                                                {tier.originalPrice}
+                                            </span>
+                                            <span className="inline-flex items-end rounded-md bg-[#f2d8a8] px-2.5 py-1 leading-none">
+                                                <span className="text-[2.15rem] leading-none font-bold text-black font-display">
+                                                    {tier.price}
+                                                </span>
+                                                {tier.period && (
+                                                    <span className="ml-1 text-base text-black/80 font-body">{tier.period}</span>
+                                                )}
+                                            </span>
+                                        </div>
+                                        {tier.discountText && (
+                                            <p className="mt-2 text-lg text-gray-700 font-body">
+                                                {tier.discountText}
+                                            </p>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div>
+                                        <div className="flex items-baseline gap-1">
+                                            <span className="text-4xl font-bold text-black font-display">
+                                                {tier.price}
+                                            </span>
+                                            {tier.period && (
+                                                <span className="text-gray-500 text-sm font-body">{tier.period}</span>
+                                            )}
+                                        </div>
+                                        <div className="mt-2 h-[28px]" aria-hidden="true" />
+                                    </div>
                                 )}
                             </div>
 
