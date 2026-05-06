@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 import { openVarticasProductInNewTab } from "@/lib/productUrl";
 import { ArrowRight, Sparkles, Check } from "lucide-react";
 
@@ -50,7 +51,10 @@ export default function EarlyAccess() {
 
                         <button
                             type="button"
-                            onClick={openVarticasProductInNewTab}
+                            onClick={() => {
+                                trackEvent("get_varticas_click", { source: "early_access" });
+                                openVarticasProductInNewTab();
+                            }}
                             className="px-8 py-4 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-transform hover:-translate-y-1 shadow-xl flex items-center gap-2"
                         >
                             Get Started

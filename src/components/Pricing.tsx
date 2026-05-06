@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { trackEvent } from "@/lib/analytics";
 import { VARTICAS_PRODUCT_URL, openProductCta } from "@/lib/productUrl";
 
 export default function Pricing() {
@@ -29,7 +30,10 @@ export default function Pricing() {
                         {user ? (
                             <button
                                 type="button"
-                                onClick={() => openProductCta(true)}
+                                onClick={() => {
+                                    trackEvent("get_varticas_click", { source: "home_pricing_starter_signed_in" });
+                                    openProductCta(true);
+                                }}
                                 className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium text-sm transition-colors border border-white/5 text-center"
                             >
                                 Get Started
@@ -39,6 +43,7 @@ export default function Pricing() {
                                 href={VARTICAS_PRODUCT_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackEvent("get_varticas_click", { source: "home_pricing_starter_signed_out" })}
                                 className="w-full py-2.5 rounded-lg bg-white/5 hover:bg-white/10 text-white font-medium text-sm transition-colors border border-white/5 block text-center"
                             >
                                 Get Started

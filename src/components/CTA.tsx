@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { trackEvent } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 
 export default function CTA() {
@@ -28,7 +29,10 @@ export default function CTA() {
 
         <button
           type="button"
-          onClick={() => openProductCta(!!user)}
+          onClick={() => {
+            trackEvent("get_varticas_click", { source: "cta_section" });
+            openProductCta(!!user);
+          }}
           className="px-10 py-5 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl transform hover:-translate-y-1"
         >
           Get Started

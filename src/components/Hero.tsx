@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { trackEvent } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -114,7 +115,10 @@ export default function Hero() {
           className={styles.ctaWrapper}>
           <button
             type="button"
-            onClick={() => openProductCta(!!user)}
+            onClick={() => {
+              trackEvent("get_varticas_click", { source: "hero" });
+              openProductCta(!!user);
+            }}
             className={styles.ctaButton}
           >
             <span>Get Started</span>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, LogOut, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect, useRef } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 
 export default function Navbar() {
@@ -36,6 +37,10 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileOpen]);
+
+  const handleSignInClick = () => {
+    trackEvent("signin_click", { source: "navbar" });
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
@@ -95,6 +100,7 @@ export default function Navbar() {
             <div className="pr-1">
               <Link
                 to="/login"
+                onClick={handleSignInClick}
                 className="bg-white hover:bg-gray-100 text-[#1C1C1E] px-6 py-2.5 rounded-full text-sm font-bold flex items-center gap-2 transition-transform hover:scale-105 active:scale-95"
               >
                 Sign In
@@ -157,6 +163,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
+                onClick={handleSignInClick}
                 className="bg-white text-black px-6 py-3 rounded-full text-center font-bold flex justify-center items-center gap-2"
               >
                 Sign In <ArrowRight className="w-4 h-4" />

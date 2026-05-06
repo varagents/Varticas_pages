@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { trackEvent } from "@/lib/analytics";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { openProductCta, VARTICAS_PRODUCT_URL } from "@/lib/productUrl";
@@ -122,6 +123,10 @@ export default function PricingPage() {
     const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
     const [currentPlan, setCurrentPlan] = useState<string | null>(null);
     const [planLoading, setPlanLoading] = useState(true);
+
+    const trackGetVarticasClick = (source: string) => {
+        trackEvent("get_varticas_click", { source });
+    };
 
     useEffect(() => {
         const fetchPlan = async () => {
@@ -441,7 +446,10 @@ export default function PricingPage() {
                                 ) : user ? (
                                     <button
                                         type="button"
-                                        onClick={() => openProductCta(true)}
+                                        onClick={() => {
+                                            trackGetVarticasClick("pricing_page_starter_signed_in");
+                                            openProductCta(true);
+                                        }}
                                         className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
                                     >
                                         {tier.cta}
@@ -454,6 +462,7 @@ export default function PricingPage() {
                                         href={tier.ctaLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={() => trackGetVarticasClick("pricing_page_starter_signed_out")}
                                         className={`w-full py-3 rounded-lg font-medium text-sm transition-all text-center block ${tier.buttonClass}`}
                                     >
                                         {tier.cta}
@@ -482,7 +491,10 @@ export default function PricingPage() {
                 <div className="mt-16 text-center w-full flex justify-center pb-20">
                     <button
                         type="button"
-                        onClick={() => openProductCta(!!user)}
+                        onClick={() => {
+                            trackGetVarticasClick("pricing_page_explore");
+                            openProductCta(!!user);
+                        }}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-[#f5f5f5] text-black border border-black/5 shadow-sm rounded-full font-medium text-sm transition-all font-body"
                     >
                         Explore Varticas
@@ -598,7 +610,10 @@ export default function PricingPage() {
                     </p>
                     <button
                         type="button"
-                        onClick={() => openProductCta(!!user)}
+                        onClick={() => {
+                            trackGetVarticasClick("pricing_page_bottom_cta");
+                            openProductCta(!!user);
+                        }}
                         className="inline-flex items-center gap-2 px-8 py-4 bg-black hover:bg-gray-900 text-white rounded-full font-bold font-body text-lg transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                     >
                         Get Started Now

@@ -1,6 +1,7 @@
 import { Twitter, Linkedin, Mail, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { trackEvent } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 
 export default function Footer() {
@@ -44,7 +45,10 @@ export default function Footer() {
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Get Started</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium mb-8">
               <li>
-                <button type="button" onClick={() => openProductCta(!!user)} className="hover:text-black transition-colors font-semibold text-black">
+                <button type="button" onClick={() => {
+                  trackEvent("get_varticas_click", { source: "footer_start_now" });
+                  openProductCta(!!user);
+                }} className="hover:text-black transition-colors font-semibold text-black">
                   Start Now
                 </button>
               </li>
