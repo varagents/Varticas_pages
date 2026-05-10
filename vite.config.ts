@@ -44,16 +44,6 @@ export default defineConfig(({ mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            'animation-vendor': ['framer-motion', 'gsap'],
-            'ui-vendor': ['@radix-ui/react-dialog', 'lucide-react']
-          }
-        }
-      }
     }
   };
 });
