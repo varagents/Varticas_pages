@@ -1,3 +1,6 @@
+/* ==============================
+   HERO CONTAINER
+   ============================== */
 .heroContainer {
   position: relative;
   width: 100%;
@@ -12,29 +15,296 @@
 }
 
 
-/*  Heading */
+/* ==============================
+   HEADING LAYER  — new hero content
+   ============================== */
 .headingLayer {
   position: relative;
   z-index: 20;
   display: flex;
   justify-content: center;
-  margin-top: 9rem;
+  margin-top: 6rem;
+  padding: 0 2rem;
 }
 
-
-@media (max-width: 768px) {
-  .heading {
-    line-height: 0.9;
+@media (min-width: 769px) {
+  .headingLayer {
+    margin-top: 9.5rem;
   }
 }
 
+.heroContent {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 1180px;
+  width: 100%;
+}
+
+/* ─── Display heading (screenshot style) ─── */
+.display {
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6.4vw, 96px);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  margin: 0 0 16px;
+  color: #0A0A0A;
+  text-wrap: balance;
+}
+
+.nb {
+  white-space: nowrap;
+  color: #000;
+}
+
+.em {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1e3a8a;
+}
+
+/* ─── Subtitle ─── */
+.heroSub {
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #2A2A2A;
+  max-width: 700px;
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+
+.heroSub strong {
+  color: #0A0A0A;
+  font-weight: 600;
+}
+
+/* ─── CTA buttons row ─── */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.pillBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0A0A0A;
+  color: #F2F2F0;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.pillBtn:hover {
+  transform: translateY(-1px);
+  background: #1f1f1f;
+}
+
+.ghostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 10, 10, 0.06);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 15px;
+  font-weight: 500;
+  color: #0A0A0A;
+  cursor: pointer;
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.ghostBtn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(10, 10, 10, 0.12);
+  transform: translateY(-1px);
+}
+
+.arr {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.pillBtn:hover .arr,
+.cmdPill:hover .arr {
+  transform: translateX(2px);
+}
+
+/* ─── Social proof ─── */
+.socialRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #4A4A46;
+  font-size: 13.5px;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(10, 10, 10, 0.06);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.avatarStack {
+  display: inline-flex;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+
+.avatar + .avatar {
+  margin-left: -8px;
+}
+
+.socialText {
+  color: #4A4A46;
+}
+
+.socialText strong {
+  color: #0A0A0A;
+  font-weight: 600;
+}
+
+/* ─── Command input bar ─── */
+.cmdBar {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0A0A0A;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 3px solid #3b82f6;
+  border-radius: 16px;
+  padding: 10px 10px 10px 22px;
+  box-shadow:
+    0 4px 24px -4px rgba(59, 130, 246, 0.25),
+    0 22px 50px -28px rgba(10, 10, 10, 0.4);
+  position: relative;
+}
+
+.slash {
+  font-family: 'JetBrains Mono', monospace;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.cmdInput {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: #F2F2F0;
+  padding: 10px 6px;
+  min-width: 0;
+}
+
+.cmdInput::placeholder {
+  color: #7A7A78;
+}
+
+.cmdPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: #0A0A0A;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+  transition: transform 0.15s, background 0.15s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.cmdPill:hover {
+  transform: translateY(-1px);
+  background: #E8E8E6;
+}
+
+/* ─── Hint row below command bar ─── */
+.cmdHint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  color: #6B6B66;
+  font-size: 12.5px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  font-family: 'Geist', 'Aileron', system-ui, sans-serif;
+}
+
+.ck {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ck::before {
+  content: "✓";
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: #FBFBF9;
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  border-bottom-width: 2px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: #1A1A1A;
+}
+
+.kbdGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
 
 
-
-
-
-
-/* Cards */
+/* ==============================
+   SIDE CARDS (kept as-is)
+   ============================== */
 .cardsLayer {
   position: absolute;
   inset: 0;
@@ -47,17 +317,16 @@
 
 .rightWrapper {
   position: absolute;
-  z-index: 1;
-  right: clamp(7rem, 17vw, 18rem);
-  top: clamp(20rem, 25vw, 30rem);
-
+  z-index: 5;
+  right: clamp(0.5rem, 2vw, 2rem);
+  top: clamp(12rem, 16vw, 18rem);
 }
 
 .leftWrapper {
   position: absolute;
-  z-index: 1;
-  left: clamp(10rem, 20vw, 25rem);
-  top: clamp(17rem, 22vw, 26rem);
+  z-index: 5;
+  left: clamp(0.5rem, 2vw, 2rem);
+  top: clamp(10.625rem, 13.8vw, 15.625rem);
 }
 
 .card {
@@ -114,96 +383,9 @@
 }
 
 
-
-
-
-
-
-
-
-
-/* 4. CTA */
-.ctaLayer {
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
-
-.ctaWrapper {
-  position: relative;
-  z-index: 20;
-  margin-top: 15rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-}
-
-
-.ctaButton {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  background-color: black;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 9999px;
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: var(--font-body);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-
-.ctaButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
-
-
-.iconWrapper {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 0.5rem;
-  border-radius: 9999px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-
-.icon {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-
-.ctaButton:hover .iconWrapper {
-  background-color: white;
-  color: black;
-}
-
-@media (max-width: 768px) {
-  .ctaWrapper {
-    margin-top: 24rem;
-  }
-}
-
-
-
-
-
-
-
-/* Background Slanted Icons */
+/* ==============================
+   SCROLLING ICON TRACK (kept as-is)
+   ============================== */
 .backgroundLayer {
   position: absolute;
   inset: 0;
@@ -226,12 +408,12 @@
   align-items: center;
 }
 
-
 .track {
   display: flex;
   gap: 2rem;
   padding: 2rem;
   transform: translateX(20%);
+  will-change: transform; /* Hint to the browser to allocate GPU RAM */
 }
 
 

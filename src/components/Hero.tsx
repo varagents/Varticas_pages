@@ -1,10 +1,10 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { trackEvent } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import styles from "@/styles/Hero.module.css";
 
@@ -22,15 +22,26 @@ const appIcons = [
 
 const scrollingTrack = [...appIcons, ...appIcons, ...appIcons, ...appIcons];
 
+const placeholders = [
+  "Schedule a product review tomorrow at 10am, send invite to team@company.com, and attach the Q2 deck from Drive",
+  "File the bug Sarah mentioned in #dev-standup as a Linear ticket and assign it to the backend team",
+  "Every weekday at 8:45am, email me a summary of unread Slack mentions, open Jira tickets, and today's meetings",
+  "Find everyone who didn't reply to last week's outreach and send them a follow-up by EOD",
+];
+
 export default function Hero() {
   const { user } = useAuth();
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [placeholder, setPlaceholder] = useState("");
 
+  // Scroll-triggered icon track
   useEffect(() => {
-    if (window.innerWidth < 768) return; // Disable on mobile for performance and UX reasons
+    if (window.innerWidth < 768) return;
     gsap.to(trackRef.current, {
-      x: "-40%",
+      xPercent: -40, // More optimized than x: "-40%"
+      force3D: true, // Forces GPU acceleration
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -41,31 +52,117 @@ export default function Hero() {
     });
   }, []);
 
+  // Typewriter placeholder effect
+  useEffect(() => {
+    let pi = 0, ci = 0, dir = 1;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    function tick() {
+      const t = placeholders[pi];
+      if (dir === 1) {
+        ci++;
+        setPlaceholder(t.slice(0, ci));
+        if (ci >= t.length) { dir = -1; timeout = setTimeout(tick, 1800); return; }
+      } else {
+        ci -= 2;
+        if (ci <= 0) { ci = 0; dir = 1; pi = (pi + 1) % placeholders.length; }
+        setPlaceholder(t.slice(0, ci));
+      }
+      timeout = setTimeout(tick, dir === 1 ? 30 : 18);
+    }
+    timeout = setTimeout(tick, 800);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // ⌘K to focus
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className={styles.heroContainer}>
 
-      {/* Massive Headline */}
+      {/* ─── Heading + Subtitle + Buttons + Command Bar ─── */}
       <div className={styles.headingLayer}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-20 flex flex-col items-center text-center -mb-[80px] md:-mb-[180px] pointer-events-none"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className={styles.heroContent}
         >
-          <h1 className="font-display-hero text-[clamp(4rem,11vw,12rem)] leading-[0.9] md:leading-[0.75] text-black w-full mix-blend-normal">
-            <span className="block -mb-4 md:-mb-8 tracking-[-0.07em]">Autonomous</span>
-            <span className="block tracking-[-0.07em] text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-900 pb-4">Coworker</span>
+          <h1 className={styles.display}>
+            <span className={styles.nb}>Your boring work is now</span>
+            <br />
+            <span className={styles.em}>someone else's</span> job.
           </h1>
+
+          <p className={styles.heroSub}>
+            Connect Gmail, Slack, Notion, Jira, and <strong>20+ tools</strong>. Type one command.
+            Varticas executes the work — <strong>automatically </strong>
+          </p>
+
+          {/* Social proof row */}
+          <div className={styles.socialRow}>
+            <span className={styles.avatarStack}>
+              <span className={styles.avatar} style={{ background: "linear-gradient(135deg,#FFB07C,#E07856)" }} />
+              <span className={styles.avatar} style={{ background: "linear-gradient(135deg,#9DB7FF,#1A56FF)" }} />
+              <span className={styles.avatar} style={{ background: "linear-gradient(135deg,#C8F0C0,#16A34A)" }} />
+              <span className={styles.avatar} style={{ background: "linear-gradient(135deg,#1A1A1A,#444)" }} />
+            </span>
+            <span className={styles.socialText}>
+              <strong>100+ professionals</strong> · saving 10+ hours a week
+            </span>
+          </div>
+
+          {/* Command bar */}
+          <form
+            className={styles.cmdBar}
+            onSubmit={(e) => {
+              e.preventDefault();
+              inputRef.current?.blur();
+              trackEvent("workflow_command", { source: "hero" });
+              openProductCta(!!user);
+            }}
+          >
+            <span className={styles.slash}>/workflow</span>
+            <input
+              ref={inputRef}
+              type="text"
+              autoComplete="off"
+              placeholder={placeholder}
+              className={styles.cmdInput}
+            />
+            <button type="submit" className={styles.cmdPill}>
+              Start for free <span className={styles.arr}>→</span>
+            </button>
+          </form>
+
+          {/* Hints below command bar */}
+          <div className={styles.cmdHint}>
+            <span className={styles.ck}>No credit card</span>
+            <span className={styles.ck}>50 free runs / month</span>
+            <span className={styles.ck}>Setup in &lt; 3 min</span>
+            <span className={styles.kbdGroup}>
+              <kbd className={styles.kbd}>⌘</kbd>
+              <kbd className={styles.kbd}>K</kbd>
+              {" "}to focus
+            </span>
+          </div>
         </motion.div>
       </div>
 
-      {/* Floating Icons */}
+      {/* ─── Floating Scrolling Icons (kept as-is) ─── */}
       <div className={styles.backgroundLayer}>
-        {/* Slanted Container */}
         <div className={styles.slantedContainer}>
-          {/* Scrolling Track */}
           <div ref={trackRef} className={styles.track}>
             {scrollingTrack.map((src, i) => (
               <div key={i} className={styles.iconBox}>
@@ -77,57 +174,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Card layer */}
-      <div className={styles.cardsLayer}>
-        {/* Right card */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className={styles.rightWrapper}>
-          <div className={`${styles.card} ${styles.cardRight}`}>
-            CONNECT,<br />
-            COMMAND<br />
-            CONNECT
-          </div>
-        </motion.div>
 
-        {/* left card */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className={styles.leftWrapper}>
-          <div className={`${styles.card} ${styles.cardLeft}`}>
-            24/7<br />
-            AI  NATIVE<br />
-            COWORKER
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Apply for Beta Access Button */}
-      <div className={styles.ctaLayer}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className={styles.ctaWrapper}>
-          <button
-            type="button"
-            onClick={() => {
-              trackEvent("get_varticas_click", { source: "hero" });
-              openProductCta(!!user);
-            }}
-            className={styles.ctaButton}
-          >
-            <span>Get Started</span>
-            <div className={styles.iconWrapper}>
-              <ArrowRight className={styles.icon} />
-            </div>
-          </button>
-        </motion.div>
-      </div>
     </div>
   );
 }

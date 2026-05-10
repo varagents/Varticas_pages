@@ -1,16 +1,22 @@
+import { Suspense, lazy } from "react";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import HowItWorks from "@/components/HowItWorks";
-import Features from "@/components/Features";
-import WorkflowExamples from "@/components/WorkflowExamples";
-import WhatWeDo from "@/components/WhatWeDo";
-import About from "@/components/About";
-import MarkedTag from "@/components/MarkedTag";
-import DemoSection from "@/components/DemoSection";
-import BentoGrid from "@/components/BentoGrid";
-import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
-import ScheduleWorkflowAnimation from "@/components/ScheduleWorkflowAnimation";
+
+import DemoVideo from "@/components/DemoVideo";
+
+// Lazy load components below the fold
+const WhatWeDo = lazy(() => import("@/components/WhatWeDo"));
+const ScheduleWorkflowAnimation = lazy(() => import("@/components/ScheduleWorkflowAnimation"));
+const About = lazy(() => import("@/components/About"));
+const Features = lazy(() => import("@/components/Features"));
+const HowItWorks = lazy(() => import("@/components/HowItWorks"));
+const CTA = lazy(() => import("@/components/CTA"));
+const Footer = lazy(() => import("@/components/Footer"));
+// Note: WorkflowExamples, DemoSection, and BentoGrid are currently commented out in the layout, 
+// but if they are ever enabled, they should also be lazy loaded.
+
+// A minimal fallback to display while chunks are downloading
+const SectionFallback = () => <div className="w-full h-32 flex items-center justify-center text-sm text-gray-500"></div>;
 
 const Index = () => {
   return (
@@ -19,34 +25,29 @@ const Index = () => {
 
       <Hero />
 
-      {/* YOU SLEEP / VARTICAS DON'T — marquee divider */}
-      <MarkedTag />
+      {/* Demo Video Section */}
+      <DemoVideo />
 
-      {/* Integrations — Works With Your Favorite Tools */}
-      <WhatWeDo />
-      {/* Inside your landing page component: */}
-      <ScheduleWorkflowAnimation />
+      <Suspense fallback={<SectionFallback />}>
 
-      {/* Social Proof — Trusted by Early Builders */}
-      <About />
-      {/* Use Cases — 4 cards */}
-      <Features />
+        {/* Integrations — Works With Your Favorite Tools */}
+        <WhatWeDo />
+        {/* Inside your landing page component: */}
+        <ScheduleWorkflowAnimation />
 
-      {/* How It Works — 3-step explanation */}
-      <HowItWorks />
-      {/* Workflow Examples — 3 live prompt examples */}
-      {/* <WorkflowExamples /> */}
+        {/* Social Proof — Trusted by Early Builders */}
+        <About />
+        {/* Use Cases — 4 cards */}
+        <Features />
 
-      {/* Demo — Watch Varticas Execute a Workflow */}
-      {/* <DemoSection /> */}
+        {/* How It Works — 3-step explanation */}
+        <HowItWorks />
 
-      {/* Workflow Automation showcase */}
-      {/* <BentoGrid /> */}
+        {/* Final CTA */}
+        <CTA />
 
-      {/* Final CTA */}
-      <CTA />
-
-      <Footer />
+        <Footer />
+      </Suspense>
     </div>
   );
 };
