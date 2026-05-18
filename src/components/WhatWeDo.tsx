@@ -85,8 +85,10 @@ export default function WhatWeDo() {
         >
           <img
             src="/swagstore.png"
-            alt="Connect your apps — SwagStore interface"
+            alt="Varticas integrations dashboard — connect Gmail, Slack, Notion, Jira, Linear, Google Calendar and more"
             className="w-full h-auto shadow-2xl"
+            loading="lazy"
+            decoding="async"
             style={{ borderRadius: "14px" }}
           />
         </motion.div>
@@ -123,8 +125,10 @@ export default function WhatWeDo() {
         >
           <img
             src="/workflow-agents.png"
-            alt="Create Workflows Agents – As many as you want"
+            alt="Varticas natural-language workflow builder — describe a task simply and the AI coworker executes it"
             className="w-full h-auto shadow-2xl"
+            loading="lazy"
+            decoding="async"
             style={{ borderRadius: "14px" }}
           />
         </motion.div>

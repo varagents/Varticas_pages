@@ -1,26 +1,34 @@
 import { Twitter, Linkedin, Mail, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackGetStartedClick, trackPricingClick } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 
 export default function Footer() {
   const { user } = useAuth();
 
   return (
-    <footer className="py-20 px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
+    <footer role="contentinfo" aria-label="Site footer" className="py-20 px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
 
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm flex items-center justify-center">
-                <img src="/vartics.svg" alt="Varticas Logo" className="w-full h-full object-contain" />
+                <img
+                  src="/vartics.svg"
+                  alt="Varticas logo"
+                  width={40}
+                  height={40}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-display font-black text-2xl text-black">Varticas</span>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed max-w-xs font-medium">
-              Varticas is building the AI coworker for modern teams.
+              Varticas is the AI workflow automation platform powered by autonomous AI coworkers.
             </p>
           </div>
 
@@ -28,7 +36,22 @@ export default function Footer() {
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Product</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium">
               <li><a href="/#features" className="hover:text-black transition-colors">Features</a></li>
-              <li><Link to="/pricing" className="hover:text-black transition-colors">Pricing</Link></li>
+              <li><a href="/#integrations" className="hover:text-black transition-colors">Integrations</a></li>
+              <li>
+                <Link to="/pricing" onClick={() => trackPricingClick("footer")} className="hover:text-black transition-colors">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link to="/ai-workflow-automation" className="hover:text-black transition-colors">
+                  AI Workflow Automation
+                </Link>
+              </li>
+              {/* <li>
+                <Link to="/autonomous-ai-coworker" className="hover:text-black transition-colors">
+                  Autonomous AI Coworker
+                </Link>
+              </li> */}
             </ul>
           </div>
 
@@ -36,8 +59,9 @@ export default function Footer() {
             <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-4 text-sm text-gray-600 font-medium">
               <li><a href="/#about" className="hover:text-black transition-colors">About</a></li>
-              <li><Link to="/blog" className="hover:text-black transition-colors">Blogs</Link></li>
+              <li><Link to="/blog" className="hover:text-black transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="hover:text-black transition-colors">Contact</Link></li>
+              <li><a href="/#faq" className="hover:text-black transition-colors">FAQ</a></li>
             </ul>
           </div>
 
@@ -46,6 +70,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-gray-600 font-medium mb-8">
               <li>
                 <button type="button" onClick={() => {
+                  trackGetStartedClick("footer_start_now");
                   trackEvent("get_varticas_click", { source: "footer_start_now" });
                   openProductCta(!!user);
                 }} className="hover:text-black transition-colors font-semibold text-black">

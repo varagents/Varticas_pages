@@ -20,6 +20,8 @@ import HashRedirectHandler from "./components/HashRedirectHandler";
 import Redirecting from "./pages/Redirecting";
 import BlogPage from "./pages/Blog";
 import BlogPostPage from "./pages/BlogPost";
+import AiWorkflowAutomationPage from "./pages/AiWorkflowAutomation";
+import AutonomousAiCoworkerPage from "./pages/AutonomousAiCoworker";
 import SmoothScroll from "@/components/SmoothScroll";
 
 const queryClient = new QueryClient();
@@ -73,6 +75,9 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            {/* SEO landing pages */}
+            <Route path="/ai-workflow-automation" element={<AiWorkflowAutomationPage />} />
+            <Route path="/autonomous-ai-coworker" element={<AutonomousAiCoworkerPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

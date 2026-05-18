@@ -1,7 +1,28 @@
+# https://www.varticas.com/robots.txt
+# Allow search engines, social-share crawlers, and AI indexers full access
+# to public pages while protecting authenticated routes.
+
+User-agent: *
+Allow: /
+
+# Disallow authenticated / non-public surfaces
+Disallow: /dashboard
+Disallow: /onboarding
+Disallow: /auth/
+Disallow: /redirecting
+Disallow: /api/
+
+# Explicitly allow major bots (some respect per-agent blocks defined elsewhere)
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 User-agent: Twitterbot
@@ -10,5 +31,33 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI / LLM crawlers — allow public content for discoverability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Crawl politeness
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://www.varticas.com/sitemap.xml

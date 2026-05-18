@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, LogOut, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect, useRef } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { trackSignInClick, trackPricingClick } from "@/lib/analytics";
 
 
 export default function Navbar() {
@@ -39,11 +39,15 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const handleSignInClick = () => {
-    trackEvent("signin_click", { source: "navbar" });
+    trackSignInClick("navbar");
+  };
+
+  const handlePricingClick = () => {
+    trackPricingClick("navbar");
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
+    <nav aria-label="Primary" className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
       {/* The black pill navbar with translucent liquid glass effect */}
       <div className={`flex items-center justify-between rounded-full px-3 py-2 max-w-2xl w-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 ${scrolled ? 'bg-black/30 backdrop-blur-2xl border border-white/10' : 'bg-[#1C1C1E]'}`}>
 
@@ -79,6 +83,7 @@ export default function Navbar() {
           </Link>
           <Link
             to="/pricing"
+            onClick={handlePricingClick}
             className="text-sm font-body text-white/60 hover:text-white transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
           >
             Pricing
@@ -147,7 +152,10 @@ export default function Navbar() {
             </Link>
             <Link
               to="/pricing"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                handlePricingClick();
+                setMobileOpen(false);
+              }}
               className="text-lg font-body text-white/80 hover:text-white"
             >
               Pricing

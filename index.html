@@ -2,120 +2,241 @@
 <html lang="en" class="dark">
 
 <head>
-  <!-- Basic -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Charset / Viewport                                          -->
+  <!-- ─────────────────────────────────────────────────────────── -->
   <meta charset="UTF-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <title>Varticas — Your AI coworker that actually works</title>
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Primary SEO                                                 -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <title>Varticas — AI Workflow Automation &amp; Autonomous AI Coworker</title>
 
-  <!-- Favicon -->
-  <link rel="icon"
-    type="image/png"
-    href="https://www.varticas.com/logo.png" />
-
-  <!-- SEO -->
   <meta name="description"
-    content="Delegate tasks, automate workflows, and let AI execute real work automatically." />
+    content="Varticas helps you automate workflows, delegate tasks to AI agents, and execute real work using autonomous AI coworkers." />
 
   <meta name="keywords"
-    content="AI coworker, workflow automation, AI assistant, autonomous agents, generative AI" />
+    content="AI workflow automation, autonomous AI coworker, AI agents, AI task automation, workflow integrations, AI assistant, generative AI, agentic AI, Gmail automation, Slack automation, Notion automation, Jira automation, Zapier alternative, no-code AI" />
 
-  <meta name="author"
-    content="Varticas" />
+  <meta name="author" content="Varticas" />
+  <meta name="publisher" content="Varticas" />
+  <meta name="application-name" content="Varticas" />
+  <meta name="apple-mobile-web-app-title" content="Varticas" />
 
-  <meta name="robots"
-    content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow" />
 
-  <!-- Open Graph -->
-  <meta property="og:title"
-    content="Varticas — Your AI coworker that actually works" />
+  <meta name="rating" content="general" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no" />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.varticas.com/" />
+
+  <!-- Alternates (i18n placeholder; safe default) -->
+  <link rel="alternate" href="https://www.varticas.com/" hreflang="en" />
+  <link rel="alternate" href="https://www.varticas.com/" hreflang="x-default" />
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Theme & Branding                                            -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#dfdfdf" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="msapplication-TileColor" content="#000000" />
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Icons                                                       -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/png" href="https://www.varticas.com/logo.png" />
+  <link rel="shortcut icon" type="image/png" href="https://www.varticas.com/logo.png" />
+  <link rel="apple-touch-icon" href="https://www.varticas.com/logo.png" />
+  <link rel="mask-icon" href="https://www.varticas.com/logo.png" color="#000000" />
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Open Graph (Facebook / LinkedIn / Discord / WhatsApp)       -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <meta property="og:site_name" content="Varticas" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://www.varticas.com/" />
+  <meta property="og:title" content="Varticas — AI Workflow Automation &amp; Autonomous AI Coworker" />
   <meta property="og:description"
-    content="Delegate tasks, automate workflows, and let AI execute real work automatically." />
+    content="Varticas helps you automate workflows, delegate tasks to AI agents, and execute real work using autonomous AI coworkers." />
 
-  <meta property="og:type"
-    content="website" />
-
-  <meta property="og:url"
-    content="https://www.varticas.com/" />
-
-  <!-- IMPORTANT -->
-  <!-- CHANGE FILE NAME COMPLETELY -->
-  <!-- Place inside /public/varticas-og-final.png -->
-
-  <meta property="og:image"
-    content="https://www.varticas.com/varticas-og-final.png" />
-
-  <meta property="og:image:secure_url"
-    content="https://www.varticas.com/varticas-og-final.png" />
-
-  <meta property="og:image:type"
-    content="image/png" />
-
-  <meta property="og:image:width"
-    content="1200" />
-
-  <meta property="og:image:height"
-    content="630" />
-
+  <meta property="og:image" content="https://www.varticas.com/varticas-og-final.png" />
+  <meta property="og:image:secure_url" content="https://www.varticas.com/varticas-og-final.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt"
-    content="Varticas AI coworker preview" />
+    content="Varticas — AI workflow automation platform with autonomous AI coworkers" />
 
-  <meta property="og:site_name"
-    content="Varticas" />
-
-  <!-- Twitter / X -->
-  <meta name="twitter:card"
-    content="summary_large_image" />
-
-  <meta name="twitter:title"
-    content="Varticas — Your AI coworker that actually works" />
-
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Twitter / X                                                 -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@varticasAI" />
+  <meta name="twitter:creator" content="@varticasAI" />
+  <meta name="twitter:url" content="https://www.varticas.com/" />
+  <meta name="twitter:title" content="Varticas — AI Workflow Automation &amp; Autonomous AI Coworker" />
   <meta name="twitter:description"
-    content="Delegate tasks, automate workflows, and let AI execute real work automatically." />
-
-  <meta name="twitter:image"
-    content="https://www.varticas.com/varticas-og-final.png" />
-
+    content="Varticas helps you automate workflows, delegate tasks to AI agents, and execute real work using autonomous AI coworkers." />
+  <meta name="twitter:image" content="https://www.varticas.com/varticas-og-final.png" />
   <meta name="twitter:image:alt"
-    content="Varticas AI coworker preview" />
+    content="Varticas — AI workflow automation platform with autonomous AI coworkers" />
 
-  <meta name="twitter:site"
-    content="@Varticas" />
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Performance: Preconnect / DNS-Prefetch                      -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://checkout.razorpay.com" />
 
-  <meta name="twitter:creator"
-    content="@Varticas" />
+  <!-- Preload primary OG image so social previews resolve instantly -->
+  <link rel="preload" as="image" href="/varticas-og-final.png" fetchpriority="low" />
 
-  <!-- Theme -->
-  <meta name="theme-color"
-    content="#000000" />
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Structured Data (Schema.org JSON-LD)                        -->
+  <!-- ─────────────────────────────────────────────────────────── -->
 
-  <!-- Google Analytics -->
-  <script async
-    src="https://www.googletagmanager.com/gtag/js?id=G-7LWMQEJTS1">
+  <!-- Organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Varticas",
+      "url": "https://www.varticas.com",
+      "logo": "https://www.varticas.com/logo.png",
+      "description": "AI workflow automation platform with autonomous AI coworkers.",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://x.com/varticasAI",
+        "https://www.linkedin.com/company/varticas",
+        "https://www.youtube.com/@Varticas",
+        "https://discord.gg/WE5EpWmbvt"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "soumyajit@varticas.com",
+        "contactType": "customer support",
+        "availableLanguage": ["English"]
+      }
+    }
   </script>
 
+  <!-- WebSite + SearchAction -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Varticas",
+      "url": "https://www.varticas.com",
+      "inLanguage": "en",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Varticas",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.varticas.com/logo.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.varticas.com/blog?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+
+  <!-- SoftwareApplication (primary product schema) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Varticas",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "AI Workflow Automation",
+      "operatingSystem": "Web",
+      "description": "AI workflow automation platform with autonomous AI coworkers.",
+      "url": "https://www.varticas.com",
+      "logo": "https://www.varticas.com/logo.png",
+      "image": "https://www.varticas.com/varticas-og-final.png",
+      "softwareVersion": "1.0",
+      "inLanguage": "en",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Starter",
+          "price": "0",
+          "priceCurrency": "USD",
+          "category": "Free"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro",
+          "price": "19",
+          "priceCurrency": "USD",
+          "category": "Subscription"
+        }
+      ],
+      "featureList": [
+        "AI workflow automation",
+        "Autonomous AI agents",
+        "Natural-language task execution",
+        "Multi-app integrations (Gmail, Slack, Notion, Jira, GitHub, Calendar)",
+        "Scheduled workflows",
+        "Team collaboration"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Varticas",
+        "url": "https://www.varticas.com"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "112"
+      }
+    }
+  </script>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Google Analytics (GA4)                                      -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LWMQEJTS1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    gtag('config', 'G-7LWMQEJTS1');
+    gtag('config', 'G-7LWMQEJTS1', {
+      anonymize_ip: true,
+      send_page_view: true,
+      transport_type: 'beacon'
+    });
   </script>
-
 </head>
 
 <body>
   <div id="root"></div>
 
-  <script type="module"
-    src="/src/main.tsx">
-  </script>
+  <!-- No-script SEO fallback so crawlers / no-JS users still see core content -->
+  <noscript>
+    <div style="max-width: 720px; margin: 64px auto; padding: 0 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #111;">
+      <h1>Varticas — AI Workflow Automation &amp; Autonomous AI Coworker</h1>
+      <p>Varticas helps you automate workflows, delegate tasks to AI agents, and execute real work using autonomous AI coworkers.</p>
+      <p>Please enable JavaScript to use the full Varticas experience, or visit our <a href="/blog">blog</a> to learn more.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackGetStartedClick } from "@/lib/analytics";
 import { openProductCta } from "@/lib/productUrl";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -87,8 +87,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <div
+    <header
       ref={containerRef}
+      role="banner"
+      aria-label="Varticas — AI workflow automation hero"
       className={styles.heroContainer}>
 
       {/* ─── Heading + Subtitle + Buttons + Command Bar ─── */}
@@ -100,14 +102,14 @@ export default function Hero() {
           className={styles.heroContent}
         >
           <h1 className={styles.display}>
-            <span className={styles.nb}>Your boring work is now</span>
+            <span className={styles.nb}>Your boring job is now your</span>
             <br />
-            <span className={styles.em}>someone else's</span> job.
+            <span className={styles.em}>AI coworker's</span> job.
           </h1>
 
           <p className={styles.heroSub}>
             Connect Gmail, Slack, Notion, Jira, and <strong>20+ tools</strong>. Type one command.
-            Varticas executes the work — <strong>automatically </strong>
+            Varticas executes the work <strong>automatically </strong>
           </p>
 
           {/* Social proof row */}
@@ -126,20 +128,28 @@ export default function Hero() {
           {/* Command bar */}
           <form
             className={styles.cmdBar}
+            aria-label="Describe a workflow to automate with Varticas"
             onSubmit={(e) => {
               e.preventDefault();
               inputRef.current?.blur();
               trackEvent("workflow_command", { source: "hero" });
+              trackGetStartedClick("hero_command_bar");
               openProductCta(!!user);
             }}
           >
             <span className={styles.slash}>/workflow</span>
+            <label htmlFor="hero-workflow-input" className="sr-only">
+              Describe a workflow for Varticas to automate
+            </label>
             <input
               ref={inputRef}
+              id="hero-workflow-input"
+              name="workflow"
               type="text"
               autoComplete="off"
               placeholder={placeholder}
               className={styles.cmdInput}
+              aria-label="Describe a workflow"
             />
             <button type="submit" className={styles.cmdPill}>
               Start for free <span className={styles.arr}>→</span>
@@ -161,20 +171,33 @@ export default function Hero() {
       </div>
 
       {/* ─── Floating Scrolling Icons (kept as-is) ─── */}
-      <div className={styles.backgroundLayer}>
+      <div className={styles.backgroundLayer} aria-hidden="true">
         <div className={styles.slantedContainer}>
           <div ref={trackRef} className={styles.track}>
-            {scrollingTrack.map((src, i) => (
-              <div key={i} className={styles.iconBox}>
-                <div className={styles.iconInnerShadow} />
-                <img src={src} alt="App Icon" className={styles.iconImage} />
-              </div>
-            ))}
+            {scrollingTrack.map((src, i) => {
+              const name = (src.split("/").pop() || "")
+                .replace(/\.svg$/, "")
+                .replace(/-/g, " ");
+              return (
+                <div key={i} className={styles.iconBox}>
+                  <div className={styles.iconInnerShadow} />
+                  <img
+                    src={src}
+                    alt={`${name} integration icon`}
+                    loading="lazy"
+                    decoding="async"
+                    width={48}
+                    height={48}
+                    className={styles.iconImage}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
 
 
-    </div>
+    </header>
   );
 }

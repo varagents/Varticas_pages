@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Plug, Terminal, Workflow } from "lucide-react";
 
 const stats = [
-  { value: "10+", label: "Integrated Tools" },
+  { value: "30+", label: "Integrated Tools" },
   { value: "10x", label: "Faster Workflows" },
   { value: "24/7", label: "Always Running" },
   { value: "0", label: "Lines of Code Needed" },

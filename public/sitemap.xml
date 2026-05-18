@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.varticas.com/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.varticas.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.varticas.com/" />
+    <image:image>
+      <image:loc>https://www.varticas.com/varticas-og-final.png</image:loc>
+      <image:title>Varticas — AI Workflow Automation &amp; Autonomous AI Coworker</image:title>
+      <image:caption>Varticas helps you automate workflows, delegate tasks to AI agents, and execute real work using autonomous AI coworkers.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://www.varticas.com/pricing</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- SEO landing: AI workflow automation -->
+  <url>
+    <loc>https://www.varticas.com/ai-workflow-automation</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- SEO landing: Autonomous AI coworker -->
+  <url>
+    <loc>https://www.varticas.com/autonomous-ai-coworker</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Integrations (anchor on home until dedicated route ships) -->
+  <url>
+    <loc>https://www.varticas.com/#integrations</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog index -->
+  <url>
+    <loc>https://www.varticas.com/blog</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://www.varticas.com/contact</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Legal -->
+  <url>
+    <loc>https://www.varticas.com/privacy-policy</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.varticas.com/terms-and-conditions</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Login (low priority but discoverable) -->
+  <url>
+    <loc>https://www.varticas.com/login</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
