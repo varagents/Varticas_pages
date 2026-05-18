@@ -15,7 +15,7 @@ export default function DemoVideo() {
     <section
       id="demo"
       aria-labelledby="demo-heading"
-      className="relative w-full py-20 px-6 sm:px-8 bg-[#dfdfdf] flex justify-center items-center overflow-hidden"
+      className="relative w-full pt-0 pb-6 sm:py-16 md:py-20 px-4 sm:px-8 bg-[#dfdfdf] flex justify-center items-center overflow-hidden"
     >
       <h2 id="demo-heading" className="sr-only">
         Varticas product demo video

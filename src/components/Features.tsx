@@ -56,20 +56,20 @@ export default function Features() {
           {/* <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
             <span className="text-sm font-bold text-black font-body">Use Cases</span>
           </div> */}
-          <h2 className="font-display font-black text-5xl md:text-7xl tracking-tight text-black mb-5">
+          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-7xl tracking-tight text-black mb-5">
             What You Can Do
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-900">
               With Varticas
             </span>
           </h2>
-          <p className="text-gray-600 text-xl max-w-2xl mx-auto font-body leading-relaxed">
+          <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-body leading-relaxed">
             One AI coworker that handles the work across your entire stack.
           </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {useCases.map((item, index) => (
             <motion.div
               key={item.title}
@@ -77,10 +77,10 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-8 rounded-3xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              className="p-6 sm:p-8 rounded-3xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
             >
-              <div className={`w-14 h-14 rounded-2xl ${item.iconBg} flex items-center justify-center mb-6`}>
-                <item.icon className={`w-6 h-6 ${item.iconColor}`} />
+              <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl ${item.iconBg} flex items-center justify-center mb-5 sm:mb-6`}>
+                <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${item.iconColor}`} />
               </div>
               <h3 className="font-display font-bold text-xl mb-3 text-black leading-tight">
                 {item.title}

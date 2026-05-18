@@ -25,7 +25,7 @@ export default function WhatWeDo() {
     <section
       ref={sectionRef}
       id="integrations"
-      className="relative py-24 md:py-32 px-4 bg-[#dfdfdf]"
+      className="relative py-16 sm:py-20 md:py-32 px-4 bg-[#dfdfdf]"
     >
       <div className="max-w-6xl mx-auto">
 
@@ -40,7 +40,7 @@ export default function WhatWeDo() {
           {/* <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
             <span className="text-sm font-bold text-black font-body">Integrations</span>
           </div> */}
-          <h2 className="font-display font-black text-5xl md:text-7xl tracking-tight text-black mb-5">
+          <h2 className="font-display font-black text-4xl sm:text-5xl md:text-7xl tracking-tight text-black mb-5">
             Works With Your
             <br />
             Favorite Tools

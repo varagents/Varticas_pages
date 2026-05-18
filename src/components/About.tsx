@@ -24,14 +24,14 @@ export default function About() {
           {/* <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-gray-200 shadow-sm mb-6">
             <span className="text-sm font-bold text-black font-body">About Varticas</span>
           </div> */}
-          <h2 className="text-5xl md:text-7xl font-display font-black tracking-tight text-black leading-[1.05] mb-6">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-display font-black tracking-tight text-black leading-[1.05] mb-6">
             The missing operating system
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-blue-900">
               for your work.
             </span>
           </h2>
-          <p className="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed font-body">
+          <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-body">
             Varticas is an AI coworker built for modern teams. It connects to the apps you already
             use and executes real work, not just suggestions  directly inside your stack.
           </p>
@@ -43,7 +43,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -52,12 +52,12 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.1 + index * 0.08 }}
-              className="py-8 px-6 bg-white rounded-3xl border border-gray-200 shadow-sm text-center"
+              className="py-6 px-3 sm:py-8 sm:px-6 bg-white rounded-3xl border border-gray-200 shadow-sm text-center"
             >
-              <div className="text-5xl font-display font-black text-black mb-1 tracking-tighter">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-display font-black text-black mb-1 tracking-tighter">
                 {stat.value}
               </div>
-              <div className="text-xs font-bold text-gray-500 uppercase tracking-wider font-body">
+              <div className="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider font-body">
                 {stat.label}
               </div>
             </motion.div>

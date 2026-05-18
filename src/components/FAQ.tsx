@@ -62,7 +62,7 @@ export default function FAQ() {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="bg-[#dfdfdf] py-20 md:py-28 px-4 border-t border-black/5"
+      className="bg-[#dfdfdf] py-16 sm:py-20 md:py-28 px-4 border-t border-black/5"
     >
       {/* Inline FAQ schema for Google rich results */}
       <script
@@ -80,11 +80,11 @@ export default function FAQ() {
         >
           <h2
             id="faq-heading"
-            className="font-display font-black text-4xl md:text-6xl tracking-tight text-black mb-4"
+            className="font-display font-black text-3xl sm:text-4xl md:text-6xl tracking-tight text-black mb-4"
           >
             Frequently asked questions
           </h2>
-          <p className="text-gray-600 text-lg font-body leading-relaxed max-w-xl mx-auto">
+          <p className="text-gray-600 text-base sm:text-lg font-body leading-relaxed max-w-xl mx-auto">
             Everything you need to know about AI workflow automation and how
             Varticas's autonomous AI coworkers actually work.
           </p>
@@ -114,10 +114,10 @@ export default function FAQ() {
                 value={`faq-${i}`}
                 className="border-black/5 last:border-b-0"
               >
-                <AccordionTrigger className="px-4 md:px-5 py-5 text-left text-base md:text-lg font-bold font-display text-black hover:no-underline">
+                <AccordionTrigger className="px-3 sm:px-4 md:px-5 py-4 sm:py-5 text-left text-sm sm:text-base md:text-lg font-bold font-display text-black hover:no-underline gap-3">
                   {item.q}
                 </AccordionTrigger>
-                <AccordionContent className="px-4 md:px-5 pb-5 text-gray-700 font-body leading-relaxed text-[15px]">
+                <AccordionContent className="px-3 sm:px-4 md:px-5 pb-5 text-gray-700 font-body leading-relaxed text-sm sm:text-[15px]">
                   {item.a}
                 </AccordionContent>
               </AccordionItem>

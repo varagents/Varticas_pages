@@ -10,7 +10,7 @@ export default function CTA() {
     <section
       id="get-started"
       aria-labelledby="cta-heading"
-      className="py-40 px-4 relative text-center bg-[#dfdfdf] overflow-hidden"
+      className="py-20 sm:py-28 md:py-40 px-4 relative text-center bg-[#dfdfdf] overflow-hidden"
     >
       {/* Decorative large text behind */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-5">
@@ -25,14 +25,14 @@ export default function CTA() {
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
         <h2
           id="cta-heading"
-          className="text-5xl md:text-7xl font-display font-black mb-8 tracking-tight text-black"
+          className="text-4xl sm:text-5xl md:text-7xl font-display font-black mb-6 sm:mb-8 tracking-tight text-black"
         >
           Your work starts
           <br />
           automating today.
         </h2>
 
-        <p className="text-xl text-gray-600 mb-12 max-w-xl mx-auto leading-relaxed font-body">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-xl mx-auto leading-relaxed font-body">
           Join the early users saving 20+ hours a week with their autonomous AI coworker.
         </p>
 
@@ -45,7 +45,7 @@ export default function CTA() {
             trackEvent("get_varticas_click", { source: "cta_section" });
             openProductCta(!!user);
           }}
-          className="px-10 py-5 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-2xl transform hover:-translate-y-1"
+          className="px-8 sm:px-10 py-4 sm:py-5 bg-black hover:bg-gray-800 text-white rounded-full font-bold text-base sm:text-lg transition-all flex items-center justify-center gap-2 sm:gap-3 shadow-2xl transform hover:-translate-y-1"
         >
           Get Started
           <ArrowRight className="w-5 h-5" />

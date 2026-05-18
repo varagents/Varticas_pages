@@ -47,16 +47,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav aria-label="Primary" className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
+    <nav aria-label="Primary" className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-8 px-3 sm:px-4 w-full transition-all duration-300 ${scrolled ? 'pt-4' : 'pt-8'}`}>
       {/* The black pill navbar with translucent liquid glass effect */}
-      <div className={`flex items-center justify-between rounded-full px-3 py-2 max-w-2xl w-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 ${scrolled ? 'bg-black/30 backdrop-blur-2xl border border-white/10' : 'bg-[#1C1C1E]'}`}>
+      <div className={`flex items-center justify-between rounded-full px-2 sm:px-3 py-2 max-w-2xl w-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 ${scrolled ? 'bg-black/30 backdrop-blur-2xl border border-white/10' : 'bg-[#1C1C1E]'}`}>
 
         {/* Logo Left */}
-        <Link to="/" className="flex items-center gap-2 pl-4">
-          <div className="w-8 h-8 rounded-xl bg-white p-1 flex items-center justify-center">
+        <Link to="/" className="flex items-center gap-2 pl-2 sm:pl-4">
+          <div className="w-8 h-8 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
             <img src="/vartics.svg" alt="Varticas Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="font-display font-medium text-white text-lg tracking-wide">
+          <span className="font-display font-medium text-white text-base sm:text-lg tracking-wide">
             Varticas
           </span>
         </Link>
@@ -118,7 +118,9 @@ export default function Navbar() {
         {/* Mobile Toggle */}
         <button
           ref={buttonRef}
-          className="md:hidden p-2 pr-4 text-white hover:opacity-70"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          className="md:hidden p-2 pr-3 sm:pr-4 text-white hover:opacity-70 shrink-0"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -127,7 +129,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div  ref={menuRef} className="absolute top-24 left-4 right-4 bg-[#1C1C1E]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl z-50 animate-in fade-in slide-in-from-top-4">
+        <div  ref={menuRef} className="absolute top-20 sm:top-24 left-3 right-3 sm:left-4 sm:right-4 bg-[#1C1C1E]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-6 shadow-2xl z-50 animate-in fade-in slide-in-from-top-4">
           <div className="flex flex-col gap-6">
             <a
               href="/#about"

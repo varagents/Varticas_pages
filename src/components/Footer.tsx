@@ -8,13 +8,13 @@ export default function Footer() {
   const { user } = useAuth();
 
   return (
-    <footer role="contentinfo" aria-label="Site footer" className="py-20 px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
+    <footer role="contentinfo" aria-label="Site footer" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 border-t border-gray-300 bg-[#dfdfdf] font-body">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-24">
 
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm flex items-center justify-center">
+          <div className="col-span-1 sm:col-span-2 md:col-span-1">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm flex items-center justify-center shrink-0">
                 <img
                   src="/vartics.svg"
                   alt="Varticas logo"
@@ -33,8 +33,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Product</h4>
-            <ul className="space-y-4 text-sm text-gray-600 font-medium">
+            <h4 className="font-bold mb-4 sm:mb-6 text-black text-sm uppercase tracking-wider">Product</h4>
+            <ul className="space-y-3 sm:space-y-4 text-sm text-gray-600 font-medium">
               <li><a href="/#features" className="hover:text-black transition-colors">Features</a></li>
               <li><a href="/#integrations" className="hover:text-black transition-colors">Integrations</a></li>
               <li>
@@ -56,8 +56,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Company</h4>
-            <ul className="space-y-4 text-sm text-gray-600 font-medium">
+            <h4 className="font-bold mb-4 sm:mb-6 text-black text-sm uppercase tracking-wider">Company</h4>
+            <ul className="space-y-3 sm:space-y-4 text-sm text-gray-600 font-medium">
               <li><a href="/#about" className="hover:text-black transition-colors">About</a></li>
               <li><Link to="/blog" className="hover:text-black transition-colors">Blog</Link></li>
               <li><Link to="/contact" className="hover:text-black transition-colors">Contact</Link></li>
@@ -66,8 +66,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-black text-sm uppercase tracking-wider">Get Started</h4>
-            <ul className="space-y-4 text-sm text-gray-600 font-medium mb-8">
+            <h4 className="font-bold mb-4 sm:mb-6 text-black text-sm uppercase tracking-wider">Get Started</h4>
+            <ul className="space-y-3 sm:space-y-4 text-sm text-gray-600 font-medium mb-6 sm:mb-8">
               <li>
                 <button type="button" onClick={() => {
                   trackGetStartedClick("footer_start_now");
@@ -90,7 +90,7 @@ export default function Footer() {
             </ul>
 
             <h4 className="font-bold mb-4 text-black text-sm uppercase tracking-wider">Connect</h4>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               <a href="https://x.com/varticasAI" target="_blank" rel="noopener noreferrer" className="p-3 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-600 hover:text-black hover:-translate-y-1 transition-all">
                 <Twitter className="w-5 h-5" />
               </a>
@@ -107,9 +107,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-300 text-sm text-gray-500 font-semibold">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pt-8 border-t border-gray-300 text-xs sm:text-sm text-gray-500 font-semibold text-center md:text-left">
           <div>&copy; 2026 Varticas. All rights reserved.</div>
-          <div className="flex gap-8 mt-4 md:mt-0">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
             <Link to="/privacy-policy" className="hover:text-black transition-colors">Privacy Policy</Link>
             <Link to="/terms-and-conditions" className="hover:text-black transition-colors">Terms of Service</Link>
           </div>

@@ -86,7 +86,7 @@ export default function SEOContent() {
     <section
       id="what-is-varticas"
       aria-labelledby="seo-overview-heading"
-      className="bg-[#dfdfdf] py-20 md:py-28 px-4"
+      className="bg-[#dfdfdf] py-16 sm:py-20 md:py-28 px-4"
     >
       <div className="max-w-6xl mx-auto">
         {/* ─── Intro ─── */}
@@ -105,7 +105,7 @@ export default function SEOContent() {
           </div>
           <h2
             id="seo-overview-heading"
-            className="font-display font-black text-4xl md:text-6xl tracking-tight text-black leading-[1.05] mb-6"
+            className="font-display font-black text-3xl sm:text-4xl md:text-6xl tracking-tight text-black leading-[1.05] mb-6"
           >
             The AI workflow automation
             <br />
@@ -114,7 +114,7 @@ export default function SEOContent() {
               modern teams.
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-700 font-body leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 font-body leading-relaxed">
             <strong>Varticas</strong> is an AI workflow automation platform powered by
             <strong> autonomous AI coworkers</strong>. Instead of building flowcharts
             or maintaining brittle scripts, you describe what you want in plain
@@ -125,7 +125,7 @@ export default function SEOContent() {
         </motion.div>
 
         {/* ─── 4 pillars ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-16 md:mb-20">
           {pillars.map((p, i) => (
             <motion.article
               key={p.title}
@@ -133,15 +133,15 @@ export default function SEOContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="p-8 md:p-10 rounded-3xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow"
+              className="p-6 sm:p-8 md:p-10 rounded-3xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow"
             >
               <div className="w-12 h-12 rounded-2xl bg-black text-white flex items-center justify-center mb-5">
                 <p.icon className="w-5 h-5" aria-hidden="true" />
               </div>
-              <h3 className="font-display font-bold text-2xl md:text-3xl text-black mb-3 tracking-tight">
+              <h3 className="font-display font-bold text-xl sm:text-2xl md:text-3xl text-black mb-3 tracking-tight">
                 {p.title}
               </h3>
-              <p className="text-gray-700 font-body leading-relaxed">{p.body}</p>
+              <p className="text-sm sm:text-base text-gray-700 font-body leading-relaxed">{p.body}</p>
               <ul className="sr-only">
                 {p.keywords.map((k) => (
                   <li key={k}>{k}</li>
@@ -159,16 +159,16 @@ export default function SEOContent() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="font-display font-black text-3xl md:text-5xl tracking-tight text-black mb-4">
+          <h2 className="font-display font-black text-2xl sm:text-3xl md:text-5xl tracking-tight text-black mb-4">
             Use cases across your team
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto font-body leading-relaxed">
+          <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto font-body leading-relaxed">
             Real examples of work that Varticas's AI agents execute every day —
             reliably, in the background, across your full stack.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {useCases.map((u, i) => (
             <motion.article
               key={u.title}
@@ -176,7 +176,7 @@ export default function SEOContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="p-7 rounded-3xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+              className="p-5 sm:p-7 rounded-3xl bg-white border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
             >
               <h3 className="font-display font-bold text-xl text-black mb-5 tracking-tight">
                 {u.title}

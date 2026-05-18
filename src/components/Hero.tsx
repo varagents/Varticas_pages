@@ -161,11 +161,11 @@ export default function Hero() {
             <span className={styles.ck}>No credit card</span>
             <span className={styles.ck}>50 free runs / month</span>
             <span className={styles.ck}>Setup in &lt; 3 min</span>
-            <span className={styles.kbdGroup}>
+            {/* <span className={styles.kbdGroup}>
               <kbd className={styles.kbd}>⌘</kbd>
               <kbd className={styles.kbd}>K</kbd>
               {" "}to focus
-            </span>
+            </span> */}
           </div>
         </motion.div>
       </div>
